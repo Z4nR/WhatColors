@@ -15,6 +15,8 @@ import LandingPage from "./pages/LandingPage";
 import FAQPage from "./pages/FAQPage";
 import Footer from "./components/Footer";
 import MobileNav from "./components/Navigation/MobileNav";
+import AboutPage from "./pages/AboutPage";
+import ArticlePage from "./pages/ArticlePage";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 400px)");
@@ -49,6 +51,8 @@ export default function App() {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/faq" element={<FAQPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/article" element={<ArticlePage />} />
             </Routes>
           </Container>
         </Box>
@@ -71,9 +75,13 @@ export default function App() {
         position={"sticky"}
         width={"full"}
       >
-        <Container maxW={"container.xl"} p={5}>
+        <Container maxW={"container.xl"} p={{ xs: 3, sm: 5 }}>
           <Flex minWidth="max-content" alignItems="center" gap="2">
-            <Img src={desktopLogo} alt="WhatColors Website Logo" />
+            <Img
+              src={desktopLogo}
+              alt="WhatColors Website Logo"
+              width={{ xs: "150px", md: "auto" }}
+            />
             <Spacer />
             <Navbar />
           </Flex>
@@ -84,6 +92,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/article" element={<ArticlePage />} />
           </Routes>
         </Container>
       </Box>

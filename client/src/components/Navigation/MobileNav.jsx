@@ -1,8 +1,12 @@
 import { InfoOutlineIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
-import { Box, HStack, IconButton, Link } from "@chakra-ui/react";
+import { Box, HStack, IconButton } from "@chakra-ui/react";
 import { FiFileText, FiHome } from "react-icons/fi";
+import { useLocation } from "react-router-dom";
 
 export default function MobileNav() {
+  const urlLocation = useLocation();
+  const urlPath = urlLocation.pathname;
+
   return (
     <Box
       bg={"white"}
@@ -16,34 +20,62 @@ export default function MobileNav() {
       width={"full"}
     >
       <HStack p={2} gap={"5"} justifyContent={"center"}>
-        <Link href="/">
-          <IconButton
-            variant={"outline"}
-            aria-label="Home button"
-            icon={<FiHome />}
-          />
-        </Link>
-        <Link href="/">
-          <IconButton
-            variant={"outline"}
-            aria-label="Home button"
-            icon={<InfoOutlineIcon />}
-          />
-        </Link>
-        <Link href="/">
-          <IconButton
-            variant={"outline"}
-            aria-label="Home button"
-            icon={<FiFileText />}
-          />
-        </Link>
-        <Link href="/faq">
-          <IconButton
-            variant={"outline"}
-            aria-label="Home button"
-            icon={<QuestionOutlineIcon />}
-          />
-        </Link>
+        <IconButton
+          as={"a"}
+          href="/"
+          variant={"outline"}
+          aria-label="Home button"
+          aria-current={urlPath === "/" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "white",
+              bg: "teal",
+            },
+          }}
+          icon={<FiHome />}
+        />
+        <IconButton
+          as={"a"}
+          href="/about"
+          variant={"outline"}
+          aria-label="About button"
+          aria-current={urlPath === "/about" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "white",
+              bg: "teal",
+            },
+          }}
+          icon={<InfoOutlineIcon />}
+        />
+        <IconButton
+          as={"a"}
+          href="/article"
+          variant={"outline"}
+          aria-label="Article button"
+          aria-current={urlPath === "/article" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "white",
+              bg: "teal",
+            },
+          }}
+          icon={<FiFileText />}
+        />
+        <IconButton
+          as={"a"}
+          href="/faq"
+          variant={"outline"}
+          aria-label="FAQ button"
+          aria-current={urlPath === "/faq" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "white",
+              bg: "teal",
+            },
+          }}
+          icon={<QuestionOutlineIcon />}
+        />
       </HStack>
     </Box>
   );

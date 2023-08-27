@@ -15,33 +15,77 @@ import {
   QuestionOutlineIcon,
 } from "@chakra-ui/icons";
 import { FiFileText, FiHome } from "react-icons/fi";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const urlLocation = useLocation();
+  const urlPath = urlLocation.pathname;
 
   return (
     <>
       <Menu isLazy>
         <MenuButton
+          colorScheme="teal"
           size={"md"}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           display={{ sm: "none" }}
           onClick={isOpen ? onClose : onOpen}
           as={IconButton}
           aria-label="Options"
-          variant="outline"
+          variant="solid"
         />
         <MenuList>
-          <MenuItem as={"a"} href="/" icon={<FiHome />}>
+          <MenuItem
+            as={"a"}
+            href="/"
+            aria-current={urlPath === "/" ? "page" : undefined}
+            sx={{
+              "&[aria-current=page]": {
+                color: "teal",
+              },
+            }}
+            icon={<FiHome />}
+          >
             Beranda
           </MenuItem>
-          <MenuItem as={"a"} href="/" icon={<InfoOutlineIcon />}>
+          <MenuItem
+            as={"a"}
+            href="/about"
+            aria-current={urlPath === "/about" ? "page" : undefined}
+            sx={{
+              "&[aria-current=page]": {
+                color: "teal",
+              },
+            }}
+            icon={<InfoOutlineIcon />}
+          >
             Tentang
           </MenuItem>
-          <MenuItem as={"a"} href="/" icon={<FiFileText />}>
+          <MenuItem
+            as={"a"}
+            href="/article"
+            aria-current={urlPath === "/article" ? "page" : undefined}
+            sx={{
+              "&[aria-current=page]": {
+                color: "teal",
+              },
+            }}
+            icon={<FiFileText />}
+          >
             Artikel
           </MenuItem>
-          <MenuItem as={"a"} href="/faq" icon={<QuestionOutlineIcon />}>
+          <MenuItem
+            as={"a"}
+            href="/faq"
+            aria-current={urlPath === "/faq" ? "page" : undefined}
+            sx={{
+              "&[aria-current=page]": {
+                color: "teal",
+              },
+            }}
+            icon={<QuestionOutlineIcon />}
+          >
             FAQ
           </MenuItem>
         </MenuList>
@@ -53,6 +97,12 @@ export default function Navbar() {
       >
         <Link
           href="/"
+          aria-current={urlPath === "/" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "teal",
+            },
+          }}
           fontWeight="semibold"
           transition="all 0.2s"
           _hover={{ color: "gray.500" }}
@@ -60,7 +110,13 @@ export default function Navbar() {
           Beranda
         </Link>
         <Link
-          href="/"
+          href="/about"
+          aria-current={urlPath === "/about" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "teal",
+            },
+          }}
           fontWeight="semibold"
           transition="all 0.2s"
           _hover={{ color: "gray.500" }}
@@ -68,7 +124,13 @@ export default function Navbar() {
           Tentang
         </Link>
         <Link
-          href="/"
+          href="/article"
+          aria-current={urlPath === "/article" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "teal",
+            },
+          }}
           fontWeight="semibold"
           transition="all 0.2s"
           _hover={{ color: "gray.500" }}
@@ -77,6 +139,12 @@ export default function Navbar() {
         </Link>
         <Link
           href="/faq"
+          aria-current={urlPath === "/faq" ? "page" : undefined}
+          sx={{
+            "&[aria-current=page]": {
+              color: "teal",
+            },
+          }}
           fontWeight="semibold"
           transition="all 0.2s"
           _hover={{ color: "gray.500" }}
