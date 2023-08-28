@@ -1,7 +1,7 @@
 import { InfoOutlineIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
 import { Box, HStack, IconButton } from "@chakra-ui/react";
 import { FiFileText, FiHome } from "react-icons/fi";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link as ReactRouterLink } from "react-router-dom";
 
 export default function MobileNav() {
   const urlLocation = useLocation();
@@ -21,8 +21,8 @@ export default function MobileNav() {
     >
       <HStack p={2} gap={"5"} justifyContent={"center"}>
         <IconButton
-          as={"a"}
-          href="/"
+          as={ReactRouterLink}
+          to="/"
           variant={"outline"}
           aria-label="Home button"
           aria-current={urlPath === "/" ? "page" : undefined}
@@ -35,8 +35,8 @@ export default function MobileNav() {
           icon={<FiHome />}
         />
         <IconButton
-          as={"a"}
-          href="/about"
+          as={ReactRouterLink}
+          to="/about"
           variant={"outline"}
           aria-label="About button"
           aria-current={urlPath === "/about" ? "page" : undefined}
@@ -49,8 +49,8 @@ export default function MobileNav() {
           icon={<InfoOutlineIcon />}
         />
         <IconButton
-          as={"a"}
-          href="/article"
+          as={ReactRouterLink}
+          to="/article"
           variant={"outline"}
           aria-label="Article button"
           aria-current={urlPath === "/article" ? "page" : undefined}
@@ -63,8 +63,8 @@ export default function MobileNav() {
           icon={<FiFileText />}
         />
         <IconButton
-          as={"a"}
-          href="/faq"
+          as={ReactRouterLink}
+          to="/faq"
           variant={"outline"}
           aria-label="FAQ button"
           aria-current={urlPath === "/faq" ? "page" : undefined}

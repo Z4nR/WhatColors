@@ -7,8 +7,8 @@ import {
   Spacer,
   useMediaQuery,
 } from "@chakra-ui/react";
-import desktopLogo from "./assets/desktop-logo.svg";
-import mobileLogo from "./assets/mobile-logo.svg";
+import desktopLogo from "./assets/logo/desktop-logo.svg";
+import mobileLogo from "./assets//logo/mobile-logo.svg";
 import Navbar from "./components/Navigation/Navbar";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
@@ -87,7 +87,11 @@ export default function App() {
           </Flex>
         </Container>
       </Box>
-      <Box as="main" width={"full"}>
+      <Box
+        as="main"
+        width={"full"}
+        minHeight={{ base: "75vh", md: "77vh", "2xl": "80vh" }}
+      >
         <Container maxW={"container.xl"} pr={5} pl={5}>
           <Routes>
             <Route path="/" element={<LandingPage />} />

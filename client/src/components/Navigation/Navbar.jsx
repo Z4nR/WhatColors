@@ -1,7 +1,7 @@
 import {
   HStack,
   IconButton,
-  Link,
+  Link as ChakraLink,
   Menu,
   MenuButton,
   MenuItem,
@@ -9,13 +9,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import {
-  CloseIcon,
   HamburgerIcon,
   InfoOutlineIcon,
   QuestionOutlineIcon,
 } from "@chakra-ui/icons";
 import { FiFileText, FiHome } from "react-icons/fi";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link as ReactRouterLink } from "react-router-dom";
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,17 +27,17 @@ export default function Navbar() {
         <MenuButton
           colorScheme="teal"
           size={"md"}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          icon={<HamburgerIcon />}
           display={{ sm: "none" }}
           onClick={isOpen ? onClose : onOpen}
           as={IconButton}
           aria-label="Options"
-          variant="solid"
+          variant={"solid"}
         />
         <MenuList>
           <MenuItem
-            as={"a"}
-            href="/"
+            as={ReactRouterLink}
+            to="/"
             aria-current={urlPath === "/" ? "page" : undefined}
             sx={{
               "&[aria-current=page]": {
@@ -50,8 +49,8 @@ export default function Navbar() {
             Beranda
           </MenuItem>
           <MenuItem
-            as={"a"}
-            href="/about"
+            as={ReactRouterLink}
+            to="/about"
             aria-current={urlPath === "/about" ? "page" : undefined}
             sx={{
               "&[aria-current=page]": {
@@ -63,8 +62,8 @@ export default function Navbar() {
             Tentang
           </MenuItem>
           <MenuItem
-            as={"a"}
-            href="/article"
+            as={ReactRouterLink}
+            to="/article"
             aria-current={urlPath === "/article" ? "page" : undefined}
             sx={{
               "&[aria-current=page]": {
@@ -76,8 +75,8 @@ export default function Navbar() {
             Artikel
           </MenuItem>
           <MenuItem
-            as={"a"}
-            href="/faq"
+            as={ReactRouterLink}
+            to="/faq"
             aria-current={urlPath === "/faq" ? "page" : undefined}
             sx={{
               "&[aria-current=page]": {
@@ -95,8 +94,9 @@ export default function Navbar() {
         display={{ base: "none", sm: "flex" }}
         spacing={{ sm: 8, lg: 16 }}
       >
-        <Link
-          href="/"
+        <ChakraLink
+          as={ReactRouterLink}
+          to="/"
           aria-current={urlPath === "/" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
@@ -108,9 +108,10 @@ export default function Navbar() {
           _hover={{ color: "gray.500" }}
         >
           Beranda
-        </Link>
-        <Link
-          href="/about"
+        </ChakraLink>
+        <ChakraLink
+          as={ReactRouterLink}
+          to="/about"
           aria-current={urlPath === "/about" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
@@ -122,9 +123,10 @@ export default function Navbar() {
           _hover={{ color: "gray.500" }}
         >
           Tentang
-        </Link>
-        <Link
-          href="/article"
+        </ChakraLink>
+        <ChakraLink
+          as={ReactRouterLink}
+          to="/article"
           aria-current={urlPath === "/article" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
@@ -136,9 +138,10 @@ export default function Navbar() {
           _hover={{ color: "gray.500" }}
         >
           Artikel
-        </Link>
-        <Link
-          href="/faq"
+        </ChakraLink>
+        <ChakraLink
+          as={ReactRouterLink}
+          to="/faq"
           aria-current={urlPath === "/faq" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
@@ -150,7 +153,7 @@ export default function Navbar() {
           _hover={{ color: "gray.500" }}
         >
           FAQ
-        </Link>
+        </ChakraLink>
       </HStack>
     </>
   );
