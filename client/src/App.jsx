@@ -1,15 +1,9 @@
 import {
   Box,
   Container,
-  Flex,
-  Img,
   SkipNavContent,
-  Spacer,
   useMediaQuery,
 } from "@chakra-ui/react";
-import desktopLogo from "./assets/logo/desktop-logo.svg";
-import mobileLogo from "./assets//logo/mobile-logo.svg";
-import Navbar from "./components/Navigation/Navbar";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import FAQPage from "./pages/FAQPage";
@@ -17,82 +11,22 @@ import Footer from "./components/Footer";
 import MobileNav from "./components/Navigation/MobileNav";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
+import MobileHeader from "./components/Header/MobileHeader";
+import WebHeader from "./components/Header/WebHeader";
 
 export default function App() {
-  const [isMobile] = useMediaQuery("(max-width: 400px)");
-
-  if (isMobile) {
-    return (
-      <Box>
-        <SkipNavContent />
-        <Box
-          bg={"white"}
-          as="header"
-          boxShadow={"sm"}
-          zIndex={11}
-          top={0}
-          left={0}
-          right={0}
-          position={"sticky"}
-          width={"full"}
-        >
-          <Container maxW={"container.xl"} p={3}>
-            <Flex alignItems={"center"} justifyContent={"center"}>
-              <Img
-                src={mobileLogo}
-                alt="WhatColors Website Logo"
-                width={"42px"}
-              />
-            </Flex>
-          </Container>
-        </Box>
-        <Box as="main" width={"full"} minHeight={"500px"}>
-          <Container maxW={"container.xl"} pr={5} pl={5}>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/article" element={<ArticlePage />} />
-            </Routes>
-          </Container>
-        </Box>
-        <MobileNav />
-      </Box>
-    );
-  }
+  const [isMobile] = useMediaQuery("(max-width: 401px)");
 
   return (
     <Box>
       <SkipNavContent />
-      <Box
-        bg={"white"}
-        as="header"
-        boxShadow={"sm"}
-        zIndex={11}
-        top={0}
-        left={0}
-        right={0}
-        position={"sticky"}
-        width={"full"}
-      >
-        <Container maxW={"container.xl"} p={{ xs: 3, sm: 5 }}>
-          <Flex minWidth="max-content" alignItems="center" gap="2">
-            <Img
-              src={desktopLogo}
-              alt="WhatColors Website Logo"
-              width={{ xs: "150px", md: "auto" }}
-            />
-            <Spacer />
-            <Navbar />
-          </Flex>
-        </Container>
-      </Box>
+      {isMobile ? <MobileHeader /> : <WebHeader />}
       <Box
         as="main"
         width={"full"}
-        minHeight={{ base: "75vh", md: "77vh", "2xl": "80vh" }}
+        minHeight={{ base: "100vh", xs: "75vh", md: "77vh", "2xl": "80vh" }}
       >
-        <Container maxW={"container.xl"} pr={5} pl={5}>
+        <Container maxW={"container.xl"} px={5}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/faq" element={<FAQPage />} />
@@ -101,9 +35,7 @@ export default function App() {
           </Routes>
         </Container>
       </Box>
-      <Box as="footer" display={"block"} width={"full"}>
-        <Footer />
-      </Box>
+      {isMobile ? <MobileNav /> : <Footer />}
     </Box>
   );
 }

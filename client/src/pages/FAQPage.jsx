@@ -18,8 +18,7 @@ export default function FAQPage() {
       </Heading>
       <Accordion
         allowToggle
-        pt={8}
-        pb={8}
+        py={8}
         maxWidth={"3xl"}
         margin={"0 auto"}
         textAlign={"justify"}
