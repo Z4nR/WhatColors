@@ -2,6 +2,7 @@ import {
   Box,
   Container,
   SkipNavContent,
+  Text,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
@@ -33,6 +34,13 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/article" element={<ArticlePage />} />
           </Routes>
+          {isMobile ? (
+            <Text pb={4} textAlign={"center"} color={"gray"}>
+              Created by Zulham 👋 <br /> &copy; 2023
+            </Text>
+          ) : (
+            ""
+          )}
         </Container>
       </Box>
       {isMobile ? <MobileNav /> : <Footer />}

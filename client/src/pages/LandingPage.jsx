@@ -328,7 +328,7 @@ export default function LandingPage() {
           </Box>
         </Stack>
       </Box>
-      <Box pb={16}>
+      <Box pb={12}>
         <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
           <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
             Apa itu WhatColors?
