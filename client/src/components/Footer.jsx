@@ -17,7 +17,7 @@ export default function Footer() {
             >
               <FiLinkedin />
             </Link>
-            <Link href="https://github.com/Z4nR" isExternal>
+            <Link href="https://github.com/" isExternal>
               <FiGithub />
             </Link>
           </HStack>
