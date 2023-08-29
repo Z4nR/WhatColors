@@ -25,10 +25,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+
       - name: Install packages
-        run: npm ci
+        run: npm install
         working-directory: ./client
 
-      - name: Build Project
-        run: npm run build --if-present --passWithNoTests
+      - name: Deploy Project
+        run: npm run deploy --if-present --passWithNoTests
         working-directory: ./client
