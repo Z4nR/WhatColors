@@ -15,21 +15,23 @@ import {
   VStack,
   useBreakpointValue,
   useColorModeValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import colorBlindImg from "../assets/img/colourblind.webp";
 import { FaInfoCircle } from "react-icons/fa";
 import {
-  FcAbout,
-  FcAssistant,
+  FcAlarmClock,
   FcCollaboration,
-  FcDonate,
-  FcManager,
+  FcRadarPlot,
+  FcSmartphoneTablet,
+  FcViewDetails,
 } from "react-icons/fc";
 
 export default function LandingPage() {
+  const [isMobile] = useMediaQuery("(max-width: 401px)");
   return (
     <Box mt={{ base: 4, sm: 2, md: 0 }}>
-      <Stack gap={4} direction={{ base: "column", md: "row" }}>
+      <Stack as={"section"} gap={4} direction={{ base: "column", md: "row" }}>
         <Flex
           p={"0 1.5rem 1.5remm 1.5rem"}
           flex={1}
@@ -79,6 +81,8 @@ export default function LandingPage() {
                 _hover={{
                   bg: "teal.500",
                 }}
+                as={"a"}
+                href="#tes"
               >
                 Lakukan Tes
               </Button>
@@ -108,7 +112,7 @@ export default function LandingPage() {
           />
         </Flex>
       </Stack>
-      <Box pt={14}>
+      <Box as={"section"} pt={16} id="tes">
         <VStack spacing={2} textAlign="center">
           <Heading as={"h1"} fontSize={{ base: "2xl", sm: "4xl" }}>
             Pilih Menu Tes
@@ -171,7 +175,7 @@ export default function LandingPage() {
                 </ListItem>
               </List>
               <Box w="80%" pt={7}>
-                <Button w="full" colorScheme="linkedin" variant="outline">
+                <Button w="full" colorScheme="orange" variant="outline">
                   Buat Tes
                 </Button>
               </Box>
@@ -195,10 +199,10 @@ export default function LandingPage() {
               >
                 <Text
                   textTransform="uppercase"
-                  bg={useColorModeValue("linkedin.300", "linkedin.700")}
+                  bg={useColorModeValue("orange.300", "orange.700")}
                   px={3}
                   py={1}
-                  color={useColorModeValue("whiteAlpha.900", "whiteAlpha.300")}
+                  color={useColorModeValue("gray.900", "gray.300")}
                   fontSize={{ base: "xs", lg: "sm" }}
                   fontWeight="600"
                   rounded="xl"
@@ -267,7 +271,7 @@ export default function LandingPage() {
                   </ListItem>
                 </List>
                 <Box w="80%" pt={7}>
-                  <Button w="full" colorScheme="linkedin">
+                  <Button w="full" colorScheme="orange">
                     Buat Grup
                   </Button>
                 </Box>
@@ -320,7 +324,7 @@ export default function LandingPage() {
                 </ListItem>
               </List>
               <Box w="80%" pt={7}>
-                <Button w="full" colorScheme="linkedin" variant="outline">
+                <Button w="full" colorScheme="orange" variant="outline">
                   Gabung Tes
                 </Button>
               </Box>
@@ -328,7 +332,7 @@ export default function LandingPage() {
           </Box>
         </Stack>
       </Box>
-      <Box pb={12}>
+      <Box as={"section"} pb={12}>
         <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
           <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
             Apa itu WhatColors?
@@ -360,16 +364,22 @@ export default function LandingPage() {
                   rounded={"full"}
                   bg={useColorModeValue("gray.100", "gray.700")}
                 >
-                  <Icon as={FcAssistant} w={10} h={10} />
+                  <Icon as={FcSmartphoneTablet} w={10} h={10} />
                 </Flex>
                 <Box mt={2}>
-                  <Heading size="md">Heading</Heading>
+                  <Heading size="md">Responsif</Heading>
                   <Text mt={1} fontSize={"sm"}>
-                    Lorem ipsum dolor sit amet catetur, adipisicing elit.
+                    Dapat berjalan diberbagai jenis perangkat
                   </Text>
                 </Box>
-                <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-                  Learn more
+                <Button
+                  as={"a"}
+                  href="/about"
+                  variant={"link"}
+                  colorScheme={"orange"}
+                  size={"sm"}
+                >
+                  Selengkapnya
                 </Button>
               </Stack>
             </Box>
@@ -391,16 +401,59 @@ export default function LandingPage() {
                   rounded={"full"}
                   bg={useColorModeValue("gray.100", "gray.700")}
                 >
-                  <Icon as={FcManager} w={10} h={10} />
+                  <Icon as={FcViewDetails} w={10} h={10} />
                 </Flex>
                 <Box mt={2}>
-                  <Heading size="md">Heading</Heading>
+                  <Heading size="md">Detil Hasil</Heading>
                   <Text mt={1} fontSize={"sm"}>
-                    Lorem ipsum dolor sit amet catetur, adipisicing elit.
+                    Mengetahui semua informasi hasil tes.
                   </Text>
                 </Box>
-                <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-                  Learn more
+                <Button
+                  as={"a"}
+                  href="/about"
+                  variant={"link"}
+                  colorScheme={"orange"}
+                  size={"sm"}
+                >
+                  Selengkapnya
+                </Button>
+              </Stack>
+            </Box>
+            <Box
+              maxW={{ base: "full", md: "275px" }}
+              w={"full"}
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              p={5}
+            >
+              <Stack align={"start"} spacing={2}>
+                <Flex
+                  w={16}
+                  h={16}
+                  align={"center"}
+                  justify={"center"}
+                  color={"white"}
+                  rounded={"full"}
+                  bg={useColorModeValue("gray.100", "gray.700")}
+                >
+                  <Icon as={FcRadarPlot} w={10} h={10} />
+                </Flex>
+                <Box mt={2}>
+                  <Heading size="md">Visual</Heading>
+                  <Text mt={1} fontSize={"sm"}>
+                    Ketahui hasil melalui visual yang sesuai
+                  </Text>
+                </Box>
+                <Button
+                  as={"a"}
+                  href="/about"
+                  variant={"link"}
+                  colorScheme={"orange"}
+                  size={"sm"}
+                >
+                  Selengkapnya
                 </Button>
               </Stack>
             </Box>
@@ -425,13 +478,19 @@ export default function LandingPage() {
                   <Icon as={FcCollaboration} w={10} h={10} />
                 </Flex>
                 <Box mt={2}>
-                  <Heading size="md">Heading</Heading>
+                  <Heading size="md">Individu</Heading>
                   <Text mt={1} fontSize={"sm"}>
-                    Lorem ipsum dolor sit amet catetur, adipisicing elit.
+                    Meminimalisir terjadinya kecurangan dalam tes.
                   </Text>
                 </Box>
-                <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-                  Learn more
+                <Button
+                  as={"a"}
+                  href="/about"
+                  variant={"link"}
+                  colorScheme={"orange"}
+                  size={"sm"}
+                >
+                  Selengkapnya
                 </Button>
               </Stack>
             </Box>
@@ -453,53 +512,35 @@ export default function LandingPage() {
                   rounded={"full"}
                   bg={useColorModeValue("gray.100", "gray.700")}
                 >
-                  <Icon as={FcDonate} w={10} h={10} />
+                  <Icon as={FcAlarmClock} w={10} h={10} />
                 </Flex>
                 <Box mt={2}>
-                  <Heading size="md">Heading</Heading>
+                  <Heading size="md">Terbatas</Heading>
                   <Text mt={1} fontSize={"sm"}>
-                    Lorem ipsum dolor sit amet catetur, adipisicing elit.
+                    Kerjakan secepat mungkin sebelum waktu habis.
                   </Text>
                 </Box>
-                <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-                  Learn more
-                </Button>
-              </Stack>
-            </Box>
-            <Box
-              maxW={{ base: "full", md: "275px" }}
-              w={"full"}
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              p={5}
-            >
-              <Stack align={"start"} spacing={2}>
-                <Flex
-                  w={16}
-                  h={16}
-                  align={"center"}
-                  justify={"center"}
-                  color={"white"}
-                  rounded={"full"}
-                  bg={useColorModeValue("gray.100", "gray.700")}
+                <Button
+                  as={"a"}
+                  href="/about"
+                  variant={"link"}
+                  colorScheme={"orange"}
+                  size={"sm"}
                 >
-                  <Icon as={FcAbout} w={10} h={10} />
-                </Flex>
-                <Box mt={2}>
-                  <Heading size="md">Heading</Heading>
-                  <Text mt={1} fontSize={"sm"}>
-                    Lorem ipsum dolor sit amet catetur, adipisicing elit.
-                  </Text>
-                </Box>
-                <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-                  Learn more
+                  Selengkapnya
                 </Button>
               </Stack>
             </Box>
           </Flex>
         </Container>
       </Box>
+      {isMobile ? (
+        <Text pb={4} fontSize={12} textAlign={"center"} color={"gray"}>
+          Created by Zulham 👋 <br /> &copy; 2023
+        </Text>
+      ) : (
+        ""
+      )}
     </Box>
   );
 }

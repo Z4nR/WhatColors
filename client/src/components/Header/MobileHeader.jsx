@@ -16,7 +16,7 @@ export default function MobileHeader() {
     >
       <Container maxW={"container.xl"} p={3}>
         <Flex alignItems={"center"} justifyContent={"center"}>
-          <Img src={mobileLogo} alt="WhatColors Website Logo" width={"42px"} />
+          <Img src={mobileLogo} alt="WhatColors Website Logo" width={"52px"} />
         </Flex>
       </Container>
     </Box>

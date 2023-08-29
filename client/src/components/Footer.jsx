@@ -6,7 +6,7 @@ export default function Footer() {
     <Box as="footer" display={"block"} width={"full"}>
       <Box width={"full"} bg={"teal"} color={"white"}>
         <Flex direction={"column"} gap={6} pt={6} pb={8} alignItems={"center"}>
-          <Text>Created by Zulham</Text>
+          <Text>Created by Zulham 👋</Text>
           <HStack spacing={8} justifyContent={"center"}>
             <Link href="mailto: ari.comunity1@gmail.com" isExternal>
               <FiMail />
