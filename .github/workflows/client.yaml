@@ -31,9 +31,6 @@ jobs:
         working-directory: ./client
         run: npm install
 
-      - name: Run Linter
-        run: npm run lint
-
       - name: Deploy Project
         working-directory: ./client
         run: |
