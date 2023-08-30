@@ -21,6 +21,7 @@ export default function MobileNav() {
     >
       <HStack p={2} gap={"5"} justifyContent={"center"}>
         <IconButton
+          size={"lg"}
           as={ReactRouterLink}
           to="/"
           variant={"outline"}
@@ -35,6 +36,7 @@ export default function MobileNav() {
           icon={<FiHome />}
         />
         <IconButton
+          size={"lg"}
           as={ReactRouterLink}
           to="/about"
           variant={"outline"}
@@ -49,6 +51,7 @@ export default function MobileNav() {
           icon={<InfoOutlineIcon />}
         />
         <IconButton
+          size={"lg"}
           as={ReactRouterLink}
           to="/article"
           variant={"outline"}
@@ -63,6 +66,7 @@ export default function MobileNav() {
           icon={<FiFileText />}
         />
         <IconButton
+          size={"lg"}
           as={ReactRouterLink}
           to="/faq"
           variant={"outline"}
