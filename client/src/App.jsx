@@ -10,9 +10,10 @@ import Footer from "./components/Footer";
 import MobileNav from "./components/navigation/MobileNav";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
-import MobileHeader from "./components/header/MobileHeader";
-import WebHeader from "./components/header/WebHeader";
 import Home from "./pages/Home";
+import MobileHeader from "./components/header/MobileHeader";
+import WebHeader from "./components/Header/WebHeader";
+import TestPage from "./pages/TestPage";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/article" element={<ArticlePage />} />
+            <Route path="/test" element={<TestPage />} />
           </Routes>
         </Container>
       </Box>
