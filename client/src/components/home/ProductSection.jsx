@@ -16,6 +16,7 @@ import {
   FcSmartphoneTablet,
   FcViewDetails,
 } from "react-icons/fc";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 export default function ProductSection() {
   return (
@@ -59,8 +60,8 @@ export default function ProductSection() {
                 </Text>
               </Box>
               <Button
-                as={"a"}
-                href="/about"
+                as={ReactRouterLink}
+                to="/about"
                 variant={"link"}
                 colorScheme={"orange"}
                 size={"sm"}
@@ -96,8 +97,8 @@ export default function ProductSection() {
                 </Text>
               </Box>
               <Button
-                as={"a"}
-                href="/about"
+                as={ReactRouterLink}
+                to="/about"
                 variant={"link"}
                 colorScheme={"orange"}
                 size={"sm"}
@@ -133,8 +134,8 @@ export default function ProductSection() {
                 </Text>
               </Box>
               <Button
-                as={"a"}
-                href="/about"
+                as={ReactRouterLink}
+                to="/about"
                 variant={"link"}
                 colorScheme={"orange"}
                 size={"sm"}
@@ -170,8 +171,8 @@ export default function ProductSection() {
                 </Text>
               </Box>
               <Button
-                as={"a"}
-                href="/about"
+                as={ReactRouterLink}
+                to="/about"
                 variant={"link"}
                 colorScheme={"orange"}
                 size={"sm"}
@@ -207,8 +208,8 @@ export default function ProductSection() {
                 </Text>
               </Box>
               <Button
-                as={"a"}
-                href="/about"
+                as={ReactRouterLink}
+                to="/about"
                 variant={"link"}
                 colorScheme={"orange"}
                 size={"sm"}

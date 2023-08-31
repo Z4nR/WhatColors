@@ -10,8 +10,8 @@ import Footer from "./components/Footer";
 import MobileNav from "./components/navigation/MobileNav";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
-import MobileHeader from "./components/header/MobileHeader";
 import WebHeader from "./components/header/WebHeader";
+import MobileHeader from "./components/header/MobileHeader";
 import Home from "./pages/Home";
 
 export default function App() {
