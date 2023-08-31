@@ -11,9 +11,9 @@ import MobileNav from "./components/navigation/MobileNav";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
 import Home from "./pages/Home";
-import MobileHeader from "./components/header/MobileHeader";
-import WebHeader from "./components/Header/WebHeader";
 import TestPage from "./pages/TestPage";
+import WebHeader from "./components/header/WebHeader";
+import AppHeader from "./components/header/AppHeader";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
@@ -21,7 +21,7 @@ export default function App() {
   return (
     <Box>
       <SkipNavContent />
-      {isMobile ? <MobileHeader /> : <WebHeader />}
+      {isMobile ? <AppHeader /> : <WebHeader />}
       <Box
         as="main"
         width={"full"}
