@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -33,6 +34,7 @@ export default function IndividualForm({ isOpen, onClose }) {
     register,
     watch,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
@@ -51,14 +53,18 @@ export default function IndividualForm({ isOpen, onClose }) {
     setValue("value", createArray(testValue));
   }, [setValue, testValue]);
 
-  function onSubmit(data) {
+  const onSubmit = (data) => {
     console.log(data);
-    sessionStorage.setItem("data", JSON.stringify(data));
-  }
+    sessionStorage.setItem("user", JSON.stringify(data));
+  };
+
+  const resetData = () => {
+    reset();
+  };
 
   return (
     <Modal
-      size={{ base: "xs", sm: "md" }}
+      size={{ base: "xs", sm: "md", md: "2xl" }}
       closeOnOverlayClick={false}
       isOpen={isOpen}
       onClose={onClose}
@@ -75,6 +81,7 @@ export default function IndividualForm({ isOpen, onClose }) {
               <FormLabel htmlFor="fullname">Nama Anda</FormLabel>
               <Input
                 id="fullname"
+                autoComplete="off"
                 focusBorderColor="teal.400"
                 placeholder="Masukkan Nama Lengkap"
                 {...register("fullName", {
@@ -85,89 +92,105 @@ export default function IndividualForm({ isOpen, onClose }) {
                   },
                 })}
               />
+              <FormHelperText fontSize={"small"}>
+                Tuliskan Nama Lengkap Anda
+              </FormHelperText>
               <FormErrorMessage>
                 {errors.fullName && errors.fullName.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isRequired isInvalid={errors.age} mt={4}>
-              <FormLabel htmlFor="age">Umur Anda</FormLabel>
-              <NumberInput focusBorderColor="teal.400" max={50} min={10}>
-                <NumberInputField
-                  id="age"
-                  placeholder="Masukkan Umur Anda"
-                  {...register("age", {
+            <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
+              <FormControl isRequired isInvalid={errors.age}>
+                <FormLabel htmlFor="age">Umur Anda</FormLabel>
+                <NumberInput focusBorderColor="teal.400" max={50} min={10}>
+                  <NumberInputField
+                    id="age"
+                    autoComplete="off"
+                    placeholder="Masukkan Umur Anda"
+                    {...register("age", {
+                      required: "Wajib Diisi",
+                    })}
+                  />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+                <FormErrorMessage>{errors.age}</FormErrorMessage>
+                <FormHelperText fontSize={"small"}>
+                  Rentang usia 10 sampai 50 tahun
+                </FormHelperText>
+              </FormControl>
+              <FormControl isRequired isInvalid={errors.gender}>
+                <FormLabel htmlFor="gender">Jenis Kelamin</FormLabel>
+                <RadioGroup id="gender" name="gender">
+                  <HStack
+                    height={10}
+                    justifyContent={"space-around"}
+                    spacing="24px"
+                  >
+                    <Radio
+                      value="Male"
+                      {...register("gender", {
+                        required: "Wajib Diisi",
+                      })}
+                    >
+                      Pria
+                    </Radio>
+                    <Radio
+                      value="Female"
+                      {...register("gender", {
+                        required: "Wajib Diisi",
+                      })}
+                    >
+                      Wanita
+                    </Radio>
+                  </HStack>
+                </RadioGroup>
+                <FormErrorMessage>{errors.gender}</FormErrorMessage>
+                <FormHelperText textAlign={"center"} fontSize={"small"}>
+                  Hanya ada 2 jenis kelamin
+                </FormHelperText>
+              </FormControl>
+            </Flex>
+            <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
+              <FormControl isRequired isInvalid={errors.device}>
+                <FormLabel htmlFor="device">Perangkat yang digunakan</FormLabel>
+                <Input
+                  id="device"
+                  autoComplete="off"
+                  focusBorderColor="teal.400"
+                  placeholder="Masukkan Nama Lengkap"
+                  {...register("device", {
                     required: "Wajib Diisi",
                   })}
                 />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <FormErrorMessage>{errors.age}</FormErrorMessage>
-            </FormControl>
-            <FormControl isRequired isInvalid={errors.gender} mt={4}>
-              <FormLabel htmlFor="gender">Jenis Kelamin</FormLabel>
-              <RadioGroup id="gender" name="gender">
-                <HStack spacing="24px">
-                  <Radio
-                    value="Male"
-                    {...register("gender", {
-                      required: "Wajib Diisi",
-                    })}
-                  >
-                    Pria
-                  </Radio>
-                  <Radio
-                    value="Female"
-                    {...register("gender", {
-                      required: "Wajib Diisi",
-                    })}
-                  >
-                    Wanita
-                  </Radio>
-                </HStack>
-              </RadioGroup>
-              <FormHelperText fontSize={"small"}>
-                Hanya ada 2 jenis kelamin
-              </FormHelperText>
-              <FormErrorMessage>{errors.gender}</FormErrorMessage>
-            </FormControl>
-            <FormControl isRequired isInvalid={errors.device} mt={4}>
-              <FormLabel htmlFor="device">Perangkat yang digunakan</FormLabel>
-              <Input
-                id="device"
-                focusBorderColor="teal.400"
-                placeholder="Masukkan Nama Lengkap"
-                {...register("device", {
-                  required: "Wajib Diisi",
-                })}
-              />
-              <FormHelperText fontSize={"small"}>
-                Tuliskan merk atau tipe monitor atau gawai
-              </FormHelperText>
-              <FormErrorMessage>{errors.device}</FormErrorMessage>
-            </FormControl>
-            <FormControl isRequired isInvalid={errors.testType} mt={4}>
-              <FormLabel htmlFor="type">Tingkat Kesulitan</FormLabel>
-              <Select
-                id="type"
-                {...register("testType", {
-                  required: "Wajib Diisi",
-                })}
-                placeholder="Pilih Tingkat Kesulitan"
-              >
-                {testTypes.map((option) => (
-                  <option key={option.type} value={option.type}>
-                    {option.type}
-                  </option>
-                ))}
-              </Select>
-              <FormHelperText fontSize={"small"}>
-                Pilih tingkat kesulitan sesuai kemampuan
-              </FormHelperText>
-              <FormErrorMessage>{errors.testType}</FormErrorMessage>
-            </FormControl>
+                <FormErrorMessage>{errors.device}</FormErrorMessage>
+                <FormHelperText fontSize={"small"}>
+                  Tuliskan merk atau tipe monitor atau gawai
+                </FormHelperText>
+              </FormControl>
+              <FormControl isRequired isInvalid={errors.testType}>
+                <FormLabel htmlFor="type">Tingkat Kesulitan</FormLabel>
+                <Select
+                  id="type"
+                  {...register("testType", {
+                    required: "Wajib Diisi",
+                  })}
+                  placeholder="Pilih Tingkat Kesulitan"
+                >
+                  {testTypes.map((option) => (
+                    <option key={option.type} value={option.type}>
+                      {option.type}
+                    </option>
+                  ))}
+                </Select>
+                <FormErrorMessage>{errors.testType}</FormErrorMessage>
+                <FormHelperText fontSize={"small"}>
+                  Pilih tingkat kesulitan sesuai kemampuan
+                </FormHelperText>
+              </FormControl>
+            </Flex>
           </ModalBody>
 
           <ModalFooter>
@@ -179,7 +202,12 @@ export default function IndividualForm({ isOpen, onClose }) {
             >
               Save
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button mr={3} onClick={resetData}>
+              Reset
+            </Button>
+            <Button colorScheme="red" onClick={(resetData, onClose)}>
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </form>
