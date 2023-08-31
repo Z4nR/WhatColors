@@ -7,11 +7,11 @@ import {
 import { Route, Routes } from "react-router-dom";
 import FAQPage from "./pages/FAQPage";
 import Footer from "./components/Footer";
-import MobileNav from "./components/Navigation/MobileNav";
+import MobileNav from "./components/navigation/MobileNav";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
-import MobileHeader from "./components/Header/MobileHeader";
-import WebHeader from "./components/Header/WebHeader";
+import MobileHeader from "./components/header/MobileHeader";
+import WebHeader from "./components/header/WebHeader";
 import Home from "./pages/Home";
 
 export default function App() {
