@@ -7,13 +7,13 @@ import {
 import { Route, Routes } from "react-router-dom";
 import FAQPage from "./pages/FAQPage";
 import Footer from "./components/Footer";
-import MobileNav from "./components/navigation/MobileNav";
+import MobileNav from "./components/mobile/MobileNav";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
 import Home from "./pages/Home";
 import TestPage from "./pages/TestPage";
-import WebHeader from "./components/header/WebHeader";
-import AppHeader from "./components/header/AppHeader";
+import WebHeader from "./components/web/WebHeader";
+import AppHeader from "./components/mobile/AppHeader";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
