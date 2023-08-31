@@ -17,7 +17,7 @@ import {
   FcViewDetails,
 } from "react-icons/fc";
 
-export default function ThirdSection() {
+export default function ProductSection() {
   return (
     <Box as={"section"} pb={12}>
       <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>

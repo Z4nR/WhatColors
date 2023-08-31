@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import colorBlindImg from "../../assets/img/colourblind.webp";
 
-export default function FirstSection() {
+export default function HeroSection() {
   return (
     <Stack as={"section"} gap={4} direction={{ base: "column", md: "row" }}>
       <Flex

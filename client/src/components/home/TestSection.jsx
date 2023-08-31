@@ -17,7 +17,7 @@ import IndividualForm from "../Form/IndividualForm";
 import GroupForm from "../Form/GroupForm";
 import JoinForm from "../Form/JoinForm";
 
-export default function SecondSection() {
+export default function TestSection() {
   const individualModal = useDisclosure();
   const groupModal = useDisclosure();
   const joinModal = useDisclosure();
