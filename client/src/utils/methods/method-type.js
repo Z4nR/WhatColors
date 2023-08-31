@@ -290,16 +290,16 @@ const fm40 = [
 
 const testTypes = [
   {
-    type: "Sulit (85 Warna)",
-    value: fm100,
+    type: "Mudah (32 Warna)",
+    value: fm40,
   },
   {
     type: "Menengah (80 Warna)",
     value: fm85,
   },
   {
-    type: "Mudah (32 Warna)",
-    value: fm40,
+    type: "Sulit (85 Warna)",
+    value: fm100,
   },
 ];
 
