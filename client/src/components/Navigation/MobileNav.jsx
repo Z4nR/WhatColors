@@ -22,6 +22,7 @@ export default function MobileNav() {
       <HStack p={2} gap={"5"} justifyContent={"center"}>
         <IconButton
           size={"lg"}
+          fontSize="20px"
           as={ReactRouterLink}
           to="/"
           variant={"outline"}
@@ -37,6 +38,7 @@ export default function MobileNav() {
         />
         <IconButton
           size={"lg"}
+          fontSize="20px"
           as={ReactRouterLink}
           to="/about"
           variant={"outline"}
@@ -52,6 +54,7 @@ export default function MobileNav() {
         />
         <IconButton
           size={"lg"}
+          fontSize="20px"
           as={ReactRouterLink}
           to="/article"
           variant={"outline"}
@@ -67,6 +70,7 @@ export default function MobileNav() {
         />
         <IconButton
           size={"lg"}
+          fontSize="20px"
           as={ReactRouterLink}
           to="/faq"
           variant={"outline"}

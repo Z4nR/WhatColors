@@ -5,7 +5,6 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
 import FAQPage from "./pages/FAQPage";
 import Footer from "./components/Footer";
 import MobileNav from "./components/Navigation/MobileNav";
@@ -13,6 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
 import MobileHeader from "./components/Header/MobileHeader";
 import WebHeader from "./components/Header/WebHeader";
+import Home from "./pages/Home";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
@@ -28,7 +28,7 @@ export default function App() {
       >
         <Container maxW={"container.xl"} px={5}>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<Home />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/article" element={<ArticlePage />} />
