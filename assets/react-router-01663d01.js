@@ -1,4 +1,4 @@
-import{r as a}from"./react-ce22c937.js";import{i as d,j as R,g as I,r as L,p as O,m as T,A as M,s as w,a as k}from"./@remix-run-d753ad9e.js";/**
+import{r as a}from"./react-ce22c937.js";import{i as d,g as I,r as L,j as R,p as O,m as T,A as M,s as w,a as k}from"./@remix-run-d753ad9e.js";/**
  * React Router v6.15.0
  *
  * Copyright (c) Remix Software Inc.
