@@ -46,7 +46,7 @@ export default function GroupForm({ isOpen, onClose }) {
   const onSubmit = (data) => {
     console.log(data);
     sessionStorage.setItem("group", JSON.stringify(data));
-    navigate("/test");
+    navigate("/admin");
   };
 
   const resetData = () => {

@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import TestPage from "./pages/TestPage";
 import WebHeader from "./components/web/WebHeader";
 import AppHeader from "./components/mobile/AppHeader";
+import AdminPage from "./pages/AdminPage";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/article" element={<ArticlePage />} />
             <Route path="/test" element={<TestPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </Container>
       </Box>
