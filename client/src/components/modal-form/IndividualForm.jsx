@@ -88,7 +88,7 @@ export default function IndividualForm({ isOpen, onClose }) {
                   required: "Wajib Diisi",
                   minLength: {
                     value: 4,
-                    message: "Masukkan Minimal 4 Suku Kata",
+                    message: "Min. 4 Huruf",
                   },
                 })}
               />
@@ -116,10 +116,10 @@ export default function IndividualForm({ isOpen, onClose }) {
                     <NumberDecrementStepper />
                   </NumberInputStepper>
                 </NumberInput>
-                <FormErrorMessage>{errors.age}</FormErrorMessage>
                 <FormHelperText fontSize={"small"}>
                   Rentang usia 10 sampai 50 tahun
                 </FormHelperText>
+                <FormErrorMessage>{errors.age}</FormErrorMessage>
               </FormControl>
               <FormControl isRequired isInvalid={errors.gender}>
                 <FormLabel htmlFor="gender">Jenis Kelamin</FormLabel>
@@ -147,10 +147,11 @@ export default function IndividualForm({ isOpen, onClose }) {
                     </Radio>
                   </HStack>
                 </RadioGroup>
-                <FormErrorMessage>{errors.gender}</FormErrorMessage>
+
                 <FormHelperText textAlign={"center"} fontSize={"small"}>
                   Hanya ada 2 jenis kelamin
                 </FormHelperText>
+                <FormErrorMessage>{errors.gender}</FormErrorMessage>
               </FormControl>
             </Flex>
             <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
@@ -160,15 +161,16 @@ export default function IndividualForm({ isOpen, onClose }) {
                   id="device"
                   autoComplete="off"
                   focusBorderColor="teal.400"
-                  placeholder="Masukkan Nama Lengkap"
+                  placeholder="Masukkan Tipe Monitor/Gawai"
                   {...register("device", {
                     required: "Wajib Diisi",
                   })}
                 />
-                <FormErrorMessage>{errors.device}</FormErrorMessage>
+
                 <FormHelperText fontSize={"small"}>
                   Tuliskan merk atau tipe monitor atau gawai
                 </FormHelperText>
+                <FormErrorMessage>{errors.device}</FormErrorMessage>
               </FormControl>
               <FormControl isRequired isInvalid={errors.testType}>
                 <FormLabel htmlFor="type">Tingkat Kesulitan</FormLabel>
@@ -185,10 +187,11 @@ export default function IndividualForm({ isOpen, onClose }) {
                     </option>
                   ))}
                 </Select>
-                <FormErrorMessage>{errors.testType}</FormErrorMessage>
+
                 <FormHelperText fontSize={"small"}>
                   Pilih tingkat kesulitan sesuai kemampuan
                 </FormHelperText>
+                <FormErrorMessage>{errors.testType}</FormErrorMessage>
               </FormControl>
             </Flex>
           </ModalBody>
@@ -200,13 +203,13 @@ export default function IndividualForm({ isOpen, onClose }) {
               isLoading={isSubmitting}
               type="submit"
             >
-              Save
+              Buat Tes
             </Button>
             <Button mr={3} onClick={resetData}>
-              Reset
+              Hapus Data
             </Button>
             <Button colorScheme="red" onClick={(resetData, onClose)}>
-              Cancel
+              Batal
             </Button>
           </ModalFooter>
         </ModalContent>

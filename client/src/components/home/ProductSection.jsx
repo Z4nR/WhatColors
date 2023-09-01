@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import {
-  FcAlarmClock,
+  FcCalculator,
   FcCollaboration,
   FcRadarPlot,
   FcSmartphoneTablet,
@@ -199,12 +199,12 @@ export default function ProductSection() {
                 rounded={"full"}
                 bg={useColorModeValue("gray.100", "gray.700")}
               >
-                <Icon as={FcAlarmClock} w={10} h={10} />
+                <Icon as={FcCalculator} w={10} h={10} />
               </Flex>
               <Box mt={2}>
-                <Heading size="md">Terbatas</Heading>
+                <Heading size="md">Akurat</Heading>
                 <Text mt={1} fontSize={"sm"}>
-                  Kerjakan secepat mungkin sebelum waktu habis.
+                  Menggunakan Metode Farnsworth-Munsell untuk menghitung hasil
                 </Text>
               </Box>
               <Button
