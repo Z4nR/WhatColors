@@ -7,7 +7,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import colorBlindImg from "../../assets/img/colourblind.webp";
+import colorBlindImg from "@/assets/img/colourblind.webp";
 
 export default function HeroSection() {
   return (

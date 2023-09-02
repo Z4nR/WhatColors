@@ -23,12 +23,15 @@ import {
   RadioGroup,
   Select,
 } from "@chakra-ui/react";
-import testTypes from "../../utils/methods/method-type";
-import { createArray } from "../../utils/methods/method-loader";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { createArray } from "@/utils/methods/method-loader";
+import testTypes from "@/utils/methods/method-type";
 
 export default function IndividualForm({ isOpen, onClose }) {
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     register,
@@ -54,8 +57,8 @@ export default function IndividualForm({ isOpen, onClose }) {
   }, [setValue, testValue]);
 
   const onSubmit = (data) => {
-    console.log(data);
     sessionStorage.setItem("user", JSON.stringify(data));
+    navigate("/test");
   };
 
   const resetData = () => {

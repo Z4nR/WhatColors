@@ -20,7 +20,7 @@ import {
   NumberInputStepper,
   Select,
 } from "@chakra-ui/react";
-import testTypes from "../../utils/methods/method-type";
+import testTypes from "@/utils/methods/method-type";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 

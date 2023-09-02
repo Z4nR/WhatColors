@@ -1,6 +1,6 @@
 import { Box, Container, Flex, Img, Spacer } from "@chakra-ui/react";
 import Navbar from "./Navbar";
-import desktopLogo from "../../assets/logo/desktop-logo.svg";
+import desktopLogo from "@/assets/logo/desktop-logo.svg";
 
 export default function WebHeader() {
   return (

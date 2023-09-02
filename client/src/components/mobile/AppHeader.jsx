@@ -1,5 +1,5 @@
 import { Box, Container, Flex, Img } from "@chakra-ui/react";
-import mobileLogo from "../../assets/logo/mobile-logo.svg";
+import mobileLogo from "@/assets/logo/mobile-logo.svg";
 
 export default function AppHeader() {
   return (

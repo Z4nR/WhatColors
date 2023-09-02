@@ -13,9 +13,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FaInfoCircle } from "react-icons/fa";
-import IndividualForm from "../modal-form/IndividualForm";
-import GroupForm from "../modal-form/GroupForm";
-import JoinForm from "../modal-form/JoinForm";
+import IndividualForm from "@/modal-form/IndividualForm";
+import GroupForm from "@/modal-form/GroupForm";
+import JoinForm from "@/modal-form/JoinForm";
 
 export default function TestSection() {
   const individualModal = useDisclosure();

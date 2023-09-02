@@ -1,5 +1,12 @@
-import { Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import UserData from "@/components/test/UserData";
+import TestSheet from "@/components/test/TestSheet";
 
 export default function TestPage() {
-  return <Text>Test Page</Text>;
+  return (
+    <Box my={6}>
+      <UserData />
+      <TestSheet />
+    </Box>
+  );
 }
