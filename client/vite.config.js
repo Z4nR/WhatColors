@@ -3,8 +3,6 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 
-let __dirname;
-
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/WhatColors",
