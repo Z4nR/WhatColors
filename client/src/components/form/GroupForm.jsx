@@ -70,9 +70,9 @@ export default function GroupForm({ isOpen, onClose }) {
           <ModalBody pb={6}>
             <Flex direction={{ base: "column", sm: "row" }} gap={5}>
               <FormControl isRequired isInvalid={errors.roomName}>
-                <FormLabel htmlFor="roomname">Nama Grup</FormLabel>
+                <FormLabel htmlFor="roomName">Nama Grup</FormLabel>
                 <Input
-                  id="roomname"
+                  id="roomName"
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Nama Grup"
@@ -177,9 +177,13 @@ export default function GroupForm({ isOpen, onClose }) {
               </FormControl>
               <FormControl isRequired isInvalid={errors.minTest}>
                 <FormLabel htmlFor="minTest">Umur Anda</FormLabel>
-                <NumberInput focusBorderColor="teal.400" max={100} min={0}>
+                <NumberInput
+                  id="minTest"
+                  focusBorderColor="teal.400"
+                  max={100}
+                  min={0}
+                >
                   <NumberInputField
-                    id="minTest"
                     autoComplete="off"
                     placeholder="Masukkan Nilai Terendah"
                     {...register("minTest", {

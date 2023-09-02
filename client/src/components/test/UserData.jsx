@@ -1,6 +1,6 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 
-export default function UserData() {
+export default function UserData({ user }) {
   return (
     <Box as="section" margin={4} fontSize={{ base: "xs", xs: "sm", md: "md" }}>
       <Flex direction={{ base: "column", md: "row" }}>
@@ -19,17 +19,17 @@ export default function UserData() {
           <VStack ml={2} alignItems={"flex-start"}>
             <Box>
               <Text as={"span"} fontWeight={"bold"}>
-                :
+                : {user.name}
               </Text>{" "}
             </Box>
             <Box>
               <Text as={"span"} fontWeight={"bold"}>
-                :
+                : {user.age}
               </Text>{" "}
             </Box>
             <Box>
               <Text as={"span"} fontWeight={"bold"}>
-                :
+                : {user.gender}
               </Text>{" "}
             </Box>
           </VStack>
@@ -49,12 +49,12 @@ export default function UserData() {
           <VStack ml={1.5} alignItems={"flex-start"}>
             <Box>
               <Text as={"span"} fontWeight={"bold"}>
-                :
+                : {user.device}
               </Text>{" "}
             </Box>
             <Box>
               <Text as={"span"} fontWeight={"bold"}>
-                :
+                : {user.type}
               </Text>{" "}
             </Box>
             <Box>

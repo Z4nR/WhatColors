@@ -105,9 +105,13 @@ export default function IndividualForm({ isOpen, onClose }) {
             <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
               <FormControl isRequired isInvalid={errors.age}>
                 <FormLabel htmlFor="age">Umur Anda</FormLabel>
-                <NumberInput focusBorderColor="teal.400" max={50} min={10}>
+                <NumberInput
+                  id="age"
+                  focusBorderColor="teal.400"
+                  max={50}
+                  min={10}
+                >
                   <NumberInputField
-                    id="age"
                     autoComplete="off"
                     placeholder="Masukkan Umur Anda"
                     {...register("age", {

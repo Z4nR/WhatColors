@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-const useUserData = () => {
-  const [getUserData, setUserData] = useState(null);
+const useTestData = () => {
+  const [getTestData, setTestData] = useState(null);
 
   useEffect(() => {
-    const dataInput = localStorage.getItem("user");
-    setUserData(JSON.parse(dataInput));
+    const data = sessionStorage.getItem("user");
+    setTestData(JSON.parse(data));
   }, []);
 
-  return [getUserData];
+  return [getTestData];
 };
 
-export { useUserData };
+export { useTestData };
