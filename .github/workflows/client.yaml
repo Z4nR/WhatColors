@@ -31,6 +31,12 @@ jobs:
         working-directory: ./client
         run: npm install
 
+      - name: Setup environment
+        env:
+          BE_URL: ${{ secrets.BE_URL }}
+        run: |
+          echo "BE_URL=${BE_URL}" > .env.production
+
       - name: Deploy Project
         working-directory: ./client
         run: |

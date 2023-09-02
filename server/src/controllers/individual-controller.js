@@ -13,7 +13,7 @@ module.exports = {
         return res.status(409).send({ message: "Nama sudah digunakan!" });
 
       const data = await new Individual(req.body).save();
-      res.status(201).send({ data: data._id });
+      res.status(201).send({ id: data._id });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
