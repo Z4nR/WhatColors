@@ -24,6 +24,8 @@
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.0",
     "vite-plugin-pwa": "^0.16.4",
     "workbox-window": "^7.0.0"
   },

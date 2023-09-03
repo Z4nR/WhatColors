@@ -303,4 +303,25 @@ const testTypes = [
   },
 ];
 
+const colorBlindRange = {
+  type100: {
+    blue: { min: 46, max: 52 },
+    green: { min: 56, max: 61 },
+    red: { min: 62, max: 70 },
+  },
+
+  type85: {
+    blue: { min: 46, max: 51 },
+    green: { min: 56, max: 60 },
+    red: { min: 63, max: 69 },
+  },
+};
+
+const colorBlindName = {
+  blue: "Tritan",
+  green: "Deutan",
+  red: "Protan",
+};
+
 export default testTypes;
+export { colorBlindRange, colorBlindName };

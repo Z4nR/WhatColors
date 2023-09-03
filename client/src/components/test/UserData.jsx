@@ -18,19 +18,13 @@ export default function UserData({ user }) {
           </VStack>
           <VStack ml={2} alignItems={"flex-start"}>
             <Box>
-              <Text as={"span"} fontWeight={"bold"}>
-                : {user.name}
-              </Text>{" "}
+              <Text>: {user.name}</Text>{" "}
             </Box>
             <Box>
-              <Text as={"span"} fontWeight={"bold"}>
-                : {user.age}
-              </Text>{" "}
+              <Text>: {user.age}</Text>{" "}
             </Box>
             <Box>
-              <Text as={"span"} fontWeight={"bold"}>
-                : {user.gender}
-              </Text>{" "}
+              <Text>: {user.gender}</Text>{" "}
             </Box>
           </VStack>
         </Flex>
@@ -48,19 +42,13 @@ export default function UserData({ user }) {
           </VStack>
           <VStack ml={1.5} alignItems={"flex-start"}>
             <Box>
-              <Text as={"span"} fontWeight={"bold"}>
-                : {user.device}
-              </Text>{" "}
+              <Text>: {user.device}</Text>{" "}
             </Box>
             <Box>
-              <Text as={"span"} fontWeight={"bold"}>
-                : {user.type}
-              </Text>{" "}
+              <Text>: {user.type}</Text>{" "}
             </Box>
             <Box>
-              <Text as={"span"} fontWeight={"bold"}>
-                :
-              </Text>{" "}
+              <Text>:</Text>{" "}
             </Box>
           </VStack>
         </Flex>

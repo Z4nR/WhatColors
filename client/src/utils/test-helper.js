@@ -1,3 +1,5 @@
+import { colorBlindName, colorBlindRange } from "./methods/method-type";
+
 const userData = (data, isClient) => {
   const date = new Date().toLocaleString("id-ID", { hour12: false });
   const name = isClient === true ? `Inisial ${data?.fullName}` : data?.fullName;
@@ -16,4 +18,201 @@ const userData = (data, isClient) => {
   };
 };
 
-export { userData };
+const blindStatus = (totalScore) => {
+  let type;
+  if (totalScore <= 16) {
+    type = "Bagus";
+  } else if (totalScore >= 10 && totalScore <= 100) {
+    type = "Rerata";
+  } else {
+    type = "Lemah";
+  }
+
+  return type;
+};
+
+const compareValue = (result, initiate) => {
+  const compare = result?.map((item, rowIndex) => {
+    const res = [];
+    const initialRow = initiate[rowIndex];
+
+    for (let i = 0; i < item.value.length; i++) {
+      const resultValue = item.value[i];
+      if (resultValue.status !== "removable") {
+        continue;
+      }
+
+      const initialValue = initialRow.value[i];
+      res.push(resultValue === initialValue);
+    }
+
+    return res;
+  });
+
+  const comparisonResult = compare?.flat(1);
+
+  const value = [];
+  for (let i = 0; i < comparisonResult?.length; i++) {
+    const compare = `${comparisonResult[i]}`;
+    const upperCompare = compare.toUpperCase();
+    value.push({ _id: `C${i + 1}`, comparison: upperCompare });
+  }
+
+  return { value: value, result: comparisonResult };
+};
+
+const discriminantValue = (result, initiate) => {
+  const discriminant = result?.map((item, rowIndex) => {
+    const res = [];
+    const initialRow = initiate[rowIndex];
+
+    for (let i = 0; i < item.value.length; i++) {
+      const resultValue = item.value[i];
+      const resultNumber = resultValue.number;
+
+      if (resultValue.status !== "removable") {
+        continue;
+      }
+
+      const initialValue = initialRow.value[i];
+      const initialNumber = initialValue.number;
+
+      const countingDiscriminant =
+        resultNumber >= initialNumber
+          ? resultNumber - initialNumber
+          : initialNumber - resultNumber;
+
+      res.push(countingDiscriminant);
+    }
+
+    return res;
+  });
+
+  const discriminantResult = discriminant?.flat(1);
+
+  const number = [];
+  for (let i = 0; i < discriminantResult?.length; i++) {
+    number.push(i + 1);
+  }
+
+  const value = [];
+  for (let i = 0; i < discriminantResult?.length; i++) {
+    value.push({ _id: `D${number[i]}`, discriminant: discriminantResult[i] });
+  }
+
+  discriminantResult?.reverse();
+  number.reverse();
+
+  return {
+    number: number,
+    result: discriminantResult,
+    value: value,
+  };
+};
+
+const methodCalculate = (result) => {
+  const method = result?.map((item) => {
+    const res = [];
+
+    for (let i = 0; i < item.value.length; i++) {
+      const iCap = item.value[i];
+      if (iCap.status !== "removable") {
+        continue;
+      }
+      const capNumber = iCap.number;
+
+      const beforeCap = item.value[i - 1];
+      const capBefore = beforeCap.number;
+
+      const afterCap = item.value[i + 1];
+      const capAfter = afterCap.number;
+
+      const beforeCapCount = capNumber - capBefore;
+      const afterCapCount = capAfter - capNumber;
+      const totalCapError = beforeCapCount + afterCapCount;
+      const countingMethod = Math.abs(totalCapError - 2);
+
+      res.push(countingMethod);
+    }
+
+    const result = res.reduce((sum, cap) => sum + cap, 0);
+
+    return {
+      result: result,
+    };
+  });
+
+  const methodMapping = method?.map((item) => item.result);
+  const totalErrorScore = methodMapping?.reduce((sum, cap) => sum + cap, 0);
+
+  return totalErrorScore;
+};
+
+const blindType = (type, compareResult) => {
+  const testRule = colorBlindRange[type];
+  const resultColor = {};
+  Object.keys(testRule).forEach((color) => {
+    const selectedColor = testRule[color];
+    let falseValue = 0;
+    for (let i = selectedColor.min; i <= selectedColor.max; i++) {
+      if (!compareResult[i]) falseValue++;
+    }
+
+    resultColor[color] = falseValue;
+  });
+
+  let maxFalse = 0;
+  let blindType;
+  for (let prop in resultColor) {
+    if (resultColor[prop] > maxFalse) {
+      maxFalse = resultColor[prop];
+      blindType = prop;
+    }
+  }
+
+  const result = colorBlindName[blindType];
+  return result;
+};
+
+const colorBlindType = (t, compare) => {
+  let type;
+  let testResult;
+  if (t === "Semi-Standar Test (80 Hue)") {
+    type = "type85";
+    testResult = compare;
+  } else if (t === "Standar Test (85 Hue)") {
+    type = "type100";
+    testResult = compare;
+  } else {
+    return null;
+  }
+
+  const findBlindType = blindType(type, testResult);
+
+  return findBlindType;
+};
+
+const testResult = (result, initiate, user) => {
+  const comparison = compareValue(result, initiate);
+  const discriminant = discriminantValue(result, initiate);
+  const totalErrorScore = methodCalculate(result);
+  const blindType = colorBlindType(user.type, comparison.result);
+  const blindCheck = !blindType ? "Normal" : blindType;
+  const errorScoreStatus = blindStatus(totalErrorScore);
+
+  const comparisonResult = comparison.value;
+  const discriminantResult = discriminant.value;
+
+  sessionStorage.setItem("discriminant", JSON.stringify(discriminant));
+
+  return {
+    ...user,
+    totalErrorScore,
+    errorScoreStatus,
+    blindCheck,
+    comparisonResult,
+    discriminantResult,
+  };
+};
+
+export { userData, testResult };

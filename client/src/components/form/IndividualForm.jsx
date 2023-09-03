@@ -130,14 +130,14 @@ export default function IndividualForm({ isOpen, onClose }) {
               </FormControl>
               <FormControl isRequired isInvalid={errors.gender}>
                 <FormLabel htmlFor="gender">Jenis Kelamin</FormLabel>
-                <RadioGroup id="gender" name="gender">
+                <RadioGroup id="gender">
                   <HStack
                     height={10}
                     justifyContent={"space-around"}
                     spacing="24px"
                   >
                     <Radio
-                      value="Male"
+                      value="Pria"
                       {...register("gender", {
                         required: "Wajib Diisi",
                       })}
@@ -145,7 +145,7 @@ export default function IndividualForm({ isOpen, onClose }) {
                       Pria
                     </Radio>
                     <Radio
-                      value="Female"
+                      value="Wanita"
                       {...register("gender", {
                         required: "Wajib Diisi",
                       })}

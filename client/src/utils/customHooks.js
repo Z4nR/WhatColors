@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { shuffleColor } from "./methods/method-loader";
 
 const useTestData = () => {
   const [getTestData, setTestData] = useState(null);
@@ -11,4 +12,30 @@ const useTestData = () => {
   return [getTestData];
 };
 
-export { useTestData };
+const useShuffle = (data) => {
+  const [getShuffle, setShuffle] = useState(null);
+
+  useEffect(() => {
+    const shuffled = data?.value.map((item) => {
+      const arrayValue = item.value;
+      const filterRemovable = arrayValue.filter(
+        (val) => val.status === "removable"
+      );
+      const firstArray = arrayValue[0];
+      const shuffle = shuffleColor(filterRemovable);
+      const lastArray = arrayValue[arrayValue.length - 1];
+      const newArrayValue = [...shuffle];
+      return {
+        row: item.row,
+        value: newArrayValue,
+        first: firstArray,
+        last: lastArray,
+      };
+    });
+    setShuffle(shuffled);
+  }, [data]);
+
+  return [getShuffle];
+};
+
+export { useTestData, useShuffle };
