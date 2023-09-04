@@ -14,6 +14,9 @@ const newIndividual = async (userData) => {
     .catch((error) => {
       const { status, data } = error.response;
       if (status === 400) return { err: true, d: data.message };
+      if (status === 404) return { err: true, d: "Tidak Ditemukan" };
+      if (status === 409) return { err: true, d: data.message };
+      if (status === 500) return { err: true, d: data.message };
     });
 };
 
