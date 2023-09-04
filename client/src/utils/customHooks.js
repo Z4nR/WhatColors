@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { shuffleColor } from "./methods/method-loader";
+import storage from "@/utils/storage";
 
 const useTestData = () => {
   const [getTestData, setTestData] = useState(null);
 
   useEffect(() => {
-    const data = sessionStorage.getItem("user");
-    setTestData(JSON.parse(data));
+    const data = storage.getJSON("user");
+    setTestData(data);
   }, []);
 
   return [getTestData];

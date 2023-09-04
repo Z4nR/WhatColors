@@ -28,6 +28,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createArray } from "@/utils/methods/method-loader";
 import testTypes from "@/utils/methods/method-type";
+import storage from "@/utils/storage";
 
 export default function IndividualForm({ isOpen, onClose }) {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ export default function IndividualForm({ isOpen, onClose }) {
   }, [setValue, testValue]);
 
   const onSubmit = (data) => {
-    sessionStorage.setItem("user", JSON.stringify(data));
+    storage.setJSON("user", data);
     navigate("/test");
   };
 

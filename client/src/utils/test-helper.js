@@ -1,4 +1,5 @@
 import { colorBlindName, colorBlindRange } from "./methods/method-type";
+import storage from "./storage";
 
 const userData = (data, isClient) => {
   const date = new Date().toLocaleString("id-ID", { hour12: false });
@@ -203,7 +204,7 @@ const testResult = (result, initiate, user) => {
   const comparisonResult = comparison.value;
   const discriminantResult = discriminant.value;
 
-  sessionStorage.setItem("discriminant", JSON.stringify(discriminant));
+  storage.setJSON("discriminant", discriminant);
 
   return {
     ...user,
