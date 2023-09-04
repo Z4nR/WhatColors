@@ -31,12 +31,14 @@ export default function TestPage() {
   const initiate = getTestData?.value;
   const result = testResult(testData, initiate, user);
 
-  const individualUser = async () => {
-    await newIndividual(result);
+  const individualUser = async (res) => {
+    const { err, d } = await newIndividual(res);
+    console.log(err);
+    console.log(d);
   };
 
   const onSubmit = () => {
-    individualUser();
+    individualUser(result);
   };
 
   return (

@@ -1,20 +1,20 @@
 import axios from "axios";
 
-const Server_URL = import.meta.env.BE_URL;
+const Server_URL = import.meta.env.VITE_BE_URL;
 
 const newIndividual = async (userData) => {
-  try {
-    const response = await axios.post(`${Server_URL}/user/new`, userData);
-    const { data, status } = response;
-
-    if (status !== 201) {
-      return { error: true, data: data.message };
-    }
-
-    return { error: false, data: data.id };
-  } catch (errors) {
-    console.error(errors);
-  }
+  return axios
+    .post(`${Server_URL}/user/new`, userData, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((response) => {
+      const { id } = response.data;
+      return { err: false, d: id };
+    })
+    .catch((error) => {
+      const { status, data } = error.response;
+      if (status === 400) return { err: true, d: data.message };
+    });
 };
 
 const getIndividualById = async (id) => {
