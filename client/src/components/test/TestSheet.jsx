@@ -1,9 +1,10 @@
 import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
 import { ReactSortable } from "react-sortablejs";
 
-export default function TestSheet({ test, handle, submit }) {
+export default function TestSheet({ time, test, handle, submit }) {
   return (
     <Box pt={5}>
+      <Text textAlign={"center"}>{time}</Text>
       {test?.map((data) => (
         <Flex
           flexWrap={"wrap"}
@@ -78,7 +79,7 @@ export default function TestSheet({ test, handle, submit }) {
           </Box>
         </Flex>
       ))}
-      <Center mt={5} bottom={0}>
+      <Center mt={8}>
         <Button
           size={{ base: "sm", sm: "md" }}
           colorScheme="teal"

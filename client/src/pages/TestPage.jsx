@@ -1,19 +1,25 @@
-import { Box, useToast } from "@chakra-ui/react";
+import { Box, HStack, Heading, IconButton, useToast } from "@chakra-ui/react";
 import UserData from "@/components/test/UserData";
 import TestSheet from "@/components/test/TestSheet";
-import { useShuffle, useTestData } from "@/utils/customHooks";
+import { useShuffle, useStopWatch, useTestData } from "@/utils/customHooks";
 import { testResult, userData } from "@/utils/test-helper";
 import { useState } from "react";
 import { reunitedColor } from "@/utils/methods/method-loader";
 import { newIndividual } from "@/utils/call-api";
 import storage from "@/utils/storage";
+import { useNavigate } from "react-router-dom";
+import { CloseIcon } from "@chakra-ui/icons";
+
+const MAX_MINUTES = 16;
 
 export default function TestPage() {
+  const navigate = useNavigate();
   const toast = useToast();
+
   const [getTestData] = useTestData();
   const [getShuffle] = useShuffle(getTestData);
+  const [getTime] = useStopWatch(MAX_MINUTES);
   const [getTestResult, setTestResult] = useState(null);
-
   const isClient = getTestData?.isClient;
   const user = userData(getTestData, isClient);
 
@@ -48,14 +54,30 @@ export default function TestPage() {
         });
   };
 
+  const cancelTest = () => {
+    navigate("/");
+  };
+
   const onSubmit = () => {
     individualUser(result);
   };
 
   return (
     <Box my={6}>
+      <HStack mb={8}>
+        <Heading as={"h6"} fontSize={"lg"} textAlign={"center"} flex={1}>
+          Pengerjaan Tes Buta Warna <br /> Metode Farnsworth-Munsell
+        </Heading>
+        <IconButton
+          size={"sm"}
+          colorScheme="red"
+          icon={<CloseIcon />}
+          onClick={cancelTest}
+        />
+      </HStack>
       <UserData user={user} />
       <TestSheet
+        time={0}
         test={getShuffle}
         handle={handleTestResult}
         submit={onSubmit}

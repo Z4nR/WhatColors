@@ -37,7 +37,7 @@ export default function UserData({ user }) {
               Jenis Tes
             </Text>
             <Text as={"span"} fontWeight={"bold"}>
-              Waktu
+              Tanggal
             </Text>
           </VStack>
           <VStack ml={1.5} alignItems={"flex-start"}>
@@ -48,7 +48,7 @@ export default function UserData({ user }) {
               <Text>: {user.type}</Text>{" "}
             </Box>
             <Box>
-              <Text>:</Text>{" "}
+              <Text>: {user.date}</Text>{" "}
             </Box>
           </VStack>
         </Flex>

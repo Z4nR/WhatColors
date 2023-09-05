@@ -2,7 +2,12 @@ import { colorBlindName, colorBlindRange } from "./methods/method-type";
 import storage from "./storage";
 
 const userData = (data, isClient) => {
-  const date = new Date().toLocaleString("id-ID", { hour12: false });
+  const date = new Date().toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   const name = isClient === true ? `Inisial ${data?.fullName}` : data?.fullName;
   const age = data?.age;
   const gender = data?.gender;
