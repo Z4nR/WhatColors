@@ -1,10 +1,46 @@
 import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 
-export default function TestSheet({ time, test, handle, submit }) {
+const MAX_MINUTES = 16;
+const formatTime = (time) =>
+  [time.getMinutes(), time.getSeconds()]
+    .map((num) => `0${num}`.slice(-2))
+    .join(" : ");
+
+export default function TestSheet({ test, handle, submit }) {
+  const [getTimelapse, setTimelapse] = useState(new Date(0));
+  const [getStopwatch, setStopwatch] = useState(false);
+  const interval = useRef(null);
+
+  const dispatchTimer = () => {
+    if (getStopwatch) {
+      clearInterval(interval.current);
+      setStopwatch(false);
+      alert(`Time stopped at ${formatTime(getTimelapse)}`);
+      setTimelapse(new Date(0));
+      return;
+    }
+
+    setStopwatch(true);
+    interval.current = setInterval(() => {
+      if (getTimelapse.getMinutes >= MAX_MINUTES) {
+        dispatchTimer();
+      }
+      setTimelapse((prov) => new Date(prov.getTime() + 1000));
+    }, 1000);
+  };
+
+  const onData = () => {
+    submit();
+    dispatchTimer();
+  };
+
   return (
     <Box pt={5}>
-      <Text textAlign={"center"}>{time}</Text>
+      <Text textAlign={"center"} fontWeight={"medium"} mb={6} fontSize={"xl"}>
+        {formatTime(getTimelapse)}
+      </Text>
       {test?.map((data) => (
         <Flex
           flexWrap={"wrap"}
@@ -83,7 +119,7 @@ export default function TestSheet({ time, test, handle, submit }) {
         <Button
           size={{ base: "sm", sm: "md" }}
           colorScheme="teal"
-          onClick={submit}
+          onClick={onData}
         >
           Selesai
         </Button>

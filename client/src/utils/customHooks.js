@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { shuffleColor } from "./methods/method-loader";
 import storage from "@/utils/storage";
 
@@ -39,27 +39,4 @@ const useShuffle = (data) => {
   return [getShuffle];
 };
 
-const useStopWatch = (minutes) => {
-  const [getTime, setTime] = useState(null);
-  const interval = useRef(null);
-  const timeMax = useRef(null);
-
-  const timeNow = new Date();
-  timeMax.current = new Date(timeNow.getTime() + minutes * 60000);
-
-  interval.current = setInterval(() => {
-    if (timeNow >= timeMax.current) {
-      clearInterval(interval.current);
-      interval.current = null;
-      setTime("Waktu Sudah Habis");
-      return;
-    }
-
-    const startTime = new Date(timeMax.current - timeNow);
-    setTime(`${startTime.getMinutes()}:${startTime.getSeconds()}`);
-  }, 1000);
-
-  return [getTime];
-};
-
-export { useTestData, useShuffle, useStopWatch };
+export { useTestData, useShuffle };

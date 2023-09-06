@@ -66,6 +66,11 @@ export default function IndividualForm({ isOpen, onClose }) {
     reset();
   };
 
+  const cancelForm = () => {
+    reset();
+    onClose();
+  };
+
   return (
     <Modal
       size={{ base: "xs", sm: "md", md: "2xl" }}
@@ -216,7 +221,7 @@ export default function IndividualForm({ isOpen, onClose }) {
             <Button mr={3} onClick={resetData}>
               Hapus Data
             </Button>
-            <Button colorScheme="red" onClick={(resetData, onClose)}>
+            <Button colorScheme="red" onClick={cancelForm}>
               Batal
             </Button>
           </ModalFooter>
