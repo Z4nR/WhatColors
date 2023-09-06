@@ -183,10 +183,10 @@ const blindType = (type, compareResult) => {
 const colorBlindType = (t, compare) => {
   let type;
   let testResult;
-  if (t === "Semi-Standar Test (80 Hue)") {
+  if (t === "Menengah (80 Warna)") {
     type = "type85";
     testResult = compare;
-  } else if (t === "Standar Test (85 Hue)") {
+  } else if (t === "Sulit (85 Warna)") {
     type = "type100";
     testResult = compare;
   } else {
@@ -203,6 +203,7 @@ const testResult = (result, initiate, user) => {
   const discriminant = discriminantValue(result, initiate);
   const totalErrorScore = methodCalculate(result);
   const blindType = colorBlindType(user.type, comparison.result);
+  console.log(blindType);
   const blindCheck = !blindType ? "Normal" : blindType;
   const errorScoreStatus = blindStatus(totalErrorScore);
 
