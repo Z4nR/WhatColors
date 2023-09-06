@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Server_URL = import.meta.env.VITE_BE_URL;
+const Server_URL = "https://what-colors-be.cyclic.app/v1";
 
 const newIndividual = async (userData) => {
   return axios
