@@ -8,7 +8,9 @@ module.exports = {
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const fullname = await User.findOne({ fullName: req.body.fullName });
+      const fullname = await Individual.findOne({
+        fullName: req.body.fullName,
+      });
       if (fullname)
         return res.status(409).send({ message: "Nama sudah digunakan!" });
 
