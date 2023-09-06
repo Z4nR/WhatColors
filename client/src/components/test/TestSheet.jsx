@@ -56,11 +56,11 @@ export default function TestSheet({ test, handle, result }) {
   };
 
   const onSubmit = () => {
-    const endData = { ...result, time: `${formatTime(getTimelapse)}` };
-    individualUser(endData);
+    const finalData = { ...result, time: `${formatTime(getTimelapse)}` };
+    individualUser(finalData);
   };
 
-  const onEnd = () => {
+  const onFinish = () => {
     dispatchTimer(true);
   };
 
@@ -144,7 +144,7 @@ export default function TestSheet({ test, handle, result }) {
         </Flex>
       ))}
       <Center mt={8}>
-        {getStopwatch === true ? (
+        {getStopwatch ? (
           <Button
             size={{ base: "sm", sm: "md" }}
             colorScheme="teal"
@@ -156,7 +156,7 @@ export default function TestSheet({ test, handle, result }) {
           <Button
             size={{ base: "sm", sm: "md" }}
             colorScheme="teal"
-            onClick={onEnd}
+            onClick={onFinish}
           >
             Selesai
           </Button>

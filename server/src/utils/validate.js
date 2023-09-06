@@ -13,13 +13,13 @@ module.exports = {
       totalErrorScore: Joi.number().required().label("Jml Skor Kesalahan"),
       errorScoreStatus: Joi.string().required().label("Status Skor Kesalahan"),
       blindCheck: Joi.string().required().label("Jenis Buta Warna"),
-      comparisonResults: Joi.array().items(
+      comparisonResult: Joi.array().items(
         Joi.object({
           _id: Joi.string().required(),
           comparison: Joi.string().required().label("Nilai Komparasi"),
         })
       ),
-      discriminantResults: Joi.array().items(
+      discriminantResult: Joi.array().items(
         Joi.object({
           _id: Joi.string().required(),
           discriminant: Joi.number().required().label("Nilai Perbedaan"),

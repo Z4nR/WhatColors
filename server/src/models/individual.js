@@ -12,8 +12,8 @@ const IndividualSchema = new Schema({
   totalErrorScore: Number,
   errorScoreStatus: String,
   blindCheck: String,
-  comparisonResults: [{ _id: String, comparison: String }],
-  discriminantResults: [{ _id: String, discriminant: Number }],
+  comparisonResult: [{ _id: String, comparison: String }],
+  discriminantResult: [{ _id: String, discriminant: Number }],
 });
 
 const individualuser = mongoose.model(
