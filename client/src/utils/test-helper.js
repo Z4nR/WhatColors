@@ -164,6 +164,8 @@ const blindType = (type, compareResult) => {
       if (!compareResult[i]) falseValue++;
     }
 
+    console.log(falseValue);
+
     resultColor[color] = falseValue;
   });
 
@@ -182,18 +184,15 @@ const blindType = (type, compareResult) => {
 
 const colorBlindType = (t, compare) => {
   let type;
-  let testResult;
   if (t === "Menengah (80 Warna)") {
     type = "type85";
-    testResult = compare;
   } else if (t === "Sulit (85 Warna)") {
     type = "type100";
-    testResult = compare;
   } else {
     return null;
   }
 
-  const findBlindType = blindType(type, testResult);
+  const findBlindType = blindType(type, compare);
 
   return findBlindType;
 };
@@ -203,7 +202,6 @@ const testResult = (result, initiate, user) => {
   const discriminant = discriminantValue(result, initiate);
   const totalErrorScore = methodCalculate(result);
   const blindType = colorBlindType(user.type, comparison.result);
-  console.log(blindType);
   const blindCheck = !blindType ? "Normal" : blindType;
   const errorScoreStatus = blindStatus(totalErrorScore);
 

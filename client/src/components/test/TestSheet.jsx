@@ -27,9 +27,6 @@ export default function TestSheet({ test, handle, result }) {
       setStopwatch(status);
 
       interval.current = setInterval(() => {
-        if (getTimelapse.getMinutes >= MAX_MINUTES) {
-          dispatchTimer(true);
-        }
         setTimelapse((prov) => new Date(prov.getTime() + 1000));
       }, 1000);
     },
@@ -54,6 +51,10 @@ export default function TestSheet({ test, handle, result }) {
           },
         });
   };
+
+  if (getTimelapse.getMinutes >= MAX_MINUTES) {
+    dispatchTimer(true);
+  }
 
   const onSubmit = () => {
     const finalData = { ...result, time: `${formatTime(getTimelapse)}` };
