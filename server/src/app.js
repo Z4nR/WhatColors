@@ -17,6 +17,11 @@ if (env === "development") {
 app.use(bodyParser.json());
 app.use(cors({ origin: "*", methods: ["GET", "POST", "DELETE"] }));
 
+app.use((res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 //Route
 app.use("/v1", route);
 

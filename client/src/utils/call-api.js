@@ -5,7 +5,9 @@ const Server_URL = import.meta.env.VITE_BE_URL;
 const newIndividual = async (userData) => {
   return axios
     .post(`${Server_URL}/user/new`, userData, {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
     .then((response) => {
       const { id } = response.data;

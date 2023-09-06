@@ -20,7 +20,7 @@ export default function TestSheet({ test, handle, result }) {
     (status) => {
       if (getStopwatch) {
         clearInterval(interval.current);
-        getTimelapse;
+        interval.current = null;
         return;
       }
 
