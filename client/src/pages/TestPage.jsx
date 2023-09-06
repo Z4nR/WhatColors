@@ -1,18 +1,15 @@
-import { Box, HStack, Heading, IconButton, useToast } from "@chakra-ui/react";
+import { Box, HStack, Heading, IconButton } from "@chakra-ui/react";
 import UserData from "@/components/test/UserData";
 import TestSheet from "@/components/test/TestSheet";
 import { useShuffle, useTestData } from "@/utils/customHooks";
 import { testResult, userData } from "@/utils/test-helper";
 import { useState } from "react";
 import { reunitedColor } from "@/utils/methods/method-loader";
-import { newIndividual } from "@/utils/call-api";
-import storage from "@/utils/storage";
 import { useNavigate } from "react-router-dom";
 import { CloseIcon } from "@chakra-ui/icons";
 
 export default function TestPage() {
   const navigate = useNavigate();
-  const toast = useToast();
 
   const [getTestData] = useTestData();
   const [getShuffle] = useShuffle(getTestData);
@@ -37,27 +34,8 @@ export default function TestPage() {
   const initiate = getTestData?.value;
   const result = testResult(testData, initiate, user);
 
-  const individualUser = async (res) => {
-    const { err, d } = await newIndividual(res);
-    !err
-      ? storage.setJSON("id", d)
-      : toast({
-          title: `Terjadi Kesalahan`,
-          description: `${d}`,
-          status: "error",
-          isClosable: true,
-          containerStyle: {
-            padding: "15px 20px",
-          },
-        });
-  };
-
   const cancelTest = () => {
     navigate("/");
-  };
-
-  const onSubmit = () => {
-    individualUser(result);
   };
 
   return (
@@ -74,11 +52,7 @@ export default function TestPage() {
         />
       </HStack>
       <UserData user={user} />
-      <TestSheet
-        test={getShuffle}
-        handle={handleTestResult}
-        submit={onSubmit}
-      />
+      <TestSheet test={getShuffle} handle={handleTestResult} result={result} />
     </Box>
   );
 }

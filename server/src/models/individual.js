@@ -4,14 +4,14 @@ const { Schema } = mongoose;
 const IndividualSchema = new Schema({
   date: String,
   time: String,
-  fullName: String,
+  name: String,
   age: Number,
   gender: String,
   device: String,
-  testType: String,
+  type: String,
   totalErrorScore: Number,
   errorScoreStatus: String,
-  colorBlindType: String,
+  blindCheck: String,
   comparisonResults: [{ _id: String, comparison: String }],
   discriminantResults: [{ _id: String, discriminant: Number }],
 });

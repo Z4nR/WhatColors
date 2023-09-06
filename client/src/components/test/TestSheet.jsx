@@ -1,39 +1,67 @@
-import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { newIndividual } from "@/utils/call-api";
+import storage from "@/utils/storage";
+import { Box, Button, Center, Flex, Text, useToast } from "@chakra-ui/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 
 const MAX_MINUTES = 16;
 const formatTime = (time) =>
   [time.getMinutes(), time.getSeconds()]
     .map((num) => `0${num}`.slice(-2))
-    .join(" : ");
+    .join(":");
 
-export default function TestSheet({ test, handle, submit }) {
+export default function TestSheet({ test, handle, result }) {
+  const toast = useToast();
   const [getTimelapse, setTimelapse] = useState(new Date(0));
   const [getStopwatch, setStopwatch] = useState(false);
   const interval = useRef(null);
 
-  const dispatchTimer = () => {
-    if (getStopwatch) {
-      clearInterval(interval.current);
-      setStopwatch(false);
-      alert(`Time stopped at ${formatTime(getTimelapse)}`);
-      setTimelapse(new Date(0));
-      return;
-    }
-
-    setStopwatch(true);
-    interval.current = setInterval(() => {
-      if (getTimelapse.getMinutes >= MAX_MINUTES) {
-        dispatchTimer();
+  const dispatchTimer = useCallback(
+    (status) => {
+      if (getStopwatch) {
+        clearInterval(interval.current);
+        getTimelapse;
+        return;
       }
-      setTimelapse((prov) => new Date(prov.getTime() + 1000));
-    }, 1000);
+
+      setStopwatch(status);
+
+      interval.current = setInterval(() => {
+        if (getTimelapse.getMinutes >= MAX_MINUTES) {
+          dispatchTimer(true);
+        }
+        setTimelapse((prov) => new Date(prov.getTime() + 1000));
+      }, 1000);
+    },
+    [getStopwatch]
+  );
+
+  useEffect(() => {
+    dispatchTimer(false);
+  }, [dispatchTimer]);
+
+  const individualUser = async (res) => {
+    const { err, d } = await newIndividual(res);
+    !err
+      ? storage.setJSON("id", d)
+      : toast({
+          title: `Terjadi Kesalahan`,
+          description: `${d}`,
+          status: "error",
+          isClosable: true,
+          containerStyle: {
+            padding: "15px 20px",
+          },
+        });
   };
 
-  const onData = () => {
-    submit();
-    dispatchTimer();
+  const onSubmit = () => {
+    const endData = { ...result, time: `${formatTime(getTimelapse)}` };
+    individualUser(endData);
+  };
+
+  const onEnd = () => {
+    dispatchTimer(true);
   };
 
   return (
@@ -116,13 +144,23 @@ export default function TestSheet({ test, handle, submit }) {
         </Flex>
       ))}
       <Center mt={8}>
-        <Button
-          size={{ base: "sm", sm: "md" }}
-          colorScheme="teal"
-          onClick={onData}
-        >
-          Selesai
-        </Button>
+        {getStopwatch === true ? (
+          <Button
+            size={{ base: "sm", sm: "md" }}
+            colorScheme="teal"
+            onClick={onSubmit}
+          >
+            Kirim Data
+          </Button>
+        ) : (
+          <Button
+            size={{ base: "sm", sm: "md" }}
+            colorScheme="teal"
+            onClick={onEnd}
+          >
+            Selesai
+          </Button>
+        )}
       </Center>
     </Box>
   );

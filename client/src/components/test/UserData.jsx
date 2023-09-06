@@ -18,7 +18,7 @@ export default function UserData({ user }) {
           </VStack>
           <VStack ml={2} alignItems={"flex-start"}>
             <Box>
-              <Text>: {user.name}</Text>{" "}
+              <Text>: {user.fullName}</Text>{" "}
             </Box>
             <Box>
               <Text>: {user.age}</Text>{" "}
