@@ -155,16 +155,14 @@ const methodCalculate = (result) => {
 };
 
 const blindType = (type, compareResult) => {
-  const testRule = colorBlindRange[type];
+  const blindRange = colorBlindRange[type];
   const resultColor = {};
-  Object.keys(testRule).forEach((color) => {
-    const selectedColor = testRule[color];
+  Object.keys(blindRange).forEach((color) => {
+    const selectedColor = blindRange[color];
     let falseValue = 0;
     for (let i = selectedColor.min; i <= selectedColor.max; i++) {
       if (!compareResult[i]) falseValue++;
     }
-
-    console.log(falseValue);
 
     resultColor[color] = falseValue;
   });
@@ -197,7 +195,7 @@ const colorBlindType = (t, compare) => {
   return findBlindType;
 };
 
-const testResult = (result, initiate, user) => {
+const testResult = (result, initiate, user, time) => {
   const comparison = compareValue(result, initiate);
   const discriminant = discriminantValue(result, initiate);
   const totalErrorScore = methodCalculate(result);
@@ -217,6 +215,7 @@ const testResult = (result, initiate, user) => {
     blindCheck,
     comparisonResult,
     discriminantResult,
+    time,
   };
 };
 

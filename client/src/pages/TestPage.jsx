@@ -2,9 +2,7 @@ import { Box, HStack, Heading, IconButton } from "@chakra-ui/react";
 import UserData from "@/components/test/UserData";
 import TestSheet from "@/components/test/TestSheet";
 import { useShuffle, useTestData } from "@/utils/customHooks";
-import { testResult, userData } from "@/utils/test-helper";
-import { useState } from "react";
-import { reunitedColor } from "@/utils/methods/method-loader";
+import { userData } from "@/utils/test-helper";
 import { useNavigate } from "react-router-dom";
 import { CloseIcon } from "@chakra-ui/icons";
 
@@ -13,26 +11,11 @@ export default function TestPage() {
 
   const [getTestData] = useTestData();
   const [getShuffle] = useShuffle(getTestData);
-  const [getTestResult, setTestResult] = useState(null);
 
   const isClient = getTestData?.isClient;
   const user = userData(getTestData, isClient);
 
-  const handleTestResult = (row, newState) => {
-    const newRemovable = getShuffle.map((removable) => {
-      if (removable.row === row) {
-        removable.value = newState;
-      }
-
-      return removable;
-    });
-
-    setTestResult(newRemovable);
-  };
-
-  const testData = reunitedColor(getTestResult);
   const initiate = getTestData?.value;
-  const result = testResult(testData, initiate, user);
 
   const cancelTest = () => {
     navigate("/");
@@ -52,7 +35,7 @@ export default function TestPage() {
         />
       </HStack>
       <UserData user={user} />
-      <TestSheet test={getShuffle} handle={handleTestResult} result={result} />
+      <TestSheet test={getShuffle} user={user} init={initiate} />
     </Box>
   );
 }

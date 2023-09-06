@@ -1,5 +1,7 @@
 import { newIndividual } from "@/utils/call-api";
+import { reunitedColor } from "@/utils/methods/method-loader";
 import storage from "@/utils/storage";
+import { testResult } from "@/utils/test-helper";
 import { Box, Button, Center, Flex, Text, useToast } from "@chakra-ui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
@@ -10,11 +12,25 @@ const formatTime = (time) =>
     .map((num) => `0${num}`.slice(-2))
     .join(":");
 
-export default function TestSheet({ test, handle, result }) {
+export default function TestSheet({ test, user, init }) {
   const toast = useToast();
+  const [getTestResult, setTestResult] = useState(null);
   const [getTimelapse, setTimelapse] = useState(new Date(0));
   const [getStopwatch, setStopwatch] = useState(false);
+  const [getFinalData, setFinaldata] = useState({});
   const interval = useRef(null);
+
+  const handleTestResult = (row, newState) => {
+    const newRemovable = test.map((removable) => {
+      if (removable.row === row) {
+        removable.value = newState;
+      }
+
+      return removable;
+    });
+
+    setTestResult(newRemovable);
+  };
 
   const dispatchTimer = useCallback(
     (status) => {
@@ -27,6 +43,10 @@ export default function TestSheet({ test, handle, result }) {
       setStopwatch(status);
 
       interval.current = setInterval(() => {
+        if (getTimelapse.getMinutes >= MAX_MINUTES) {
+          dispatchTimer(true);
+        }
+
         setTimelapse((prov) => new Date(prov.getTime() + 1000));
       }, 1000);
     },
@@ -36,6 +56,8 @@ export default function TestSheet({ test, handle, result }) {
   useEffect(() => {
     dispatchTimer(false);
   }, [dispatchTimer]);
+
+  const testData = reunitedColor(getTestResult);
 
   const individualUser = async (res) => {
     const { err, d } = await newIndividual(res);
@@ -52,17 +74,19 @@ export default function TestSheet({ test, handle, result }) {
         });
   };
 
-  if (getTimelapse.getMinutes >= MAX_MINUTES) {
-    dispatchTimer(true);
-  }
-
-  const onSubmit = () => {
-    const finalData = { ...result, time: `${formatTime(getTimelapse)}` };
-    individualUser(finalData);
-  };
-
   const onFinish = () => {
     dispatchTimer(true);
+    const result = testResult(
+      testData,
+      init,
+      user,
+      `${formatTime(getTimelapse)}`
+    );
+    setFinaldata(result);
+  };
+
+  const onSubmit = () => {
+    individualUser(getFinalData);
   };
 
   return (
@@ -106,7 +130,7 @@ export default function TestSheet({ test, handle, result }) {
             animation={200}
             ghostClass="ghostbox"
             list={data.value}
-            setList={(newState) => handle(data.row, newState)}
+            setList={(newState) => handleTestResult(data.row, newState)}
           >
             {data.value.map((item) => (
               <Box
