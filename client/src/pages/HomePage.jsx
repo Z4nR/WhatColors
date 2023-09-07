@@ -3,7 +3,7 @@ import HeroSection from "@/components/home/HeroSection";
 import TestSection from "@/components/home/TestSection";
 import ProductSection from "@/components/home/ProductSection";
 
-export default function Home() {
+export default function HomePage() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
   return (
     <Box mt={{ base: 4, sm: 2, md: 0 }}>

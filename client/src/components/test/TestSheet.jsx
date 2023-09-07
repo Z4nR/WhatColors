@@ -4,21 +4,42 @@ import storage from "@/utils/storage";
 import { testResult } from "@/utils/test-helper";
 import { Box, Button, Center, Flex, Text, useToast } from "@chakra-ui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ReactSortable } from "react-sortablejs";
+import Sortable from "./Sortable";
+import { useNavigate } from "react-router-dom";
 
-const MAX_MINUTES = 16;
+const MAX_MINUTES = 12;
 const formatTime = (time) =>
   [time.getMinutes(), time.getSeconds()]
     .map((num) => `0${num}`.slice(-2))
     .join(":");
 
 export default function TestSheet({ test, user, init }) {
+  const navigate = useNavigate();
   const toast = useToast();
   const [getTestResult, setTestResult] = useState(null);
   const [getTimelapse, setTimelapse] = useState(new Date(0));
-  const [getStopwatch, setStopwatch] = useState(false);
+  const [getTestDone, setTestDone] = useState(false);
   const [getFinalData, setFinaldata] = useState({});
   const interval = useRef(null);
+  const timeTest = `${formatTime(getTimelapse)}`;
+
+  const individualUser = async (res) => {
+    const { err, d } = await newIndividual(res);
+    if (!err) {
+      storage.setJSON("id", d);
+      navigate("/result");
+    } else {
+      toast({
+        title: `Terjadi Kesalahan`,
+        description: `${d}`,
+        status: "error",
+        isClosable: true,
+        containerStyle: {
+          padding: "15px 20px",
+        },
+      });
+    }
+  };
 
   const handleTestResult = (row, newState) => {
     const newRemovable = test.map((removable) => {
@@ -32,62 +53,37 @@ export default function TestSheet({ test, user, init }) {
     setTestResult(newRemovable);
   };
 
-  const dispatchTimer = useCallback(
-    (status) => {
-      if (getStopwatch) {
-        clearInterval(interval.current);
-        interval.current = null;
-        return;
-      }
-
-      setStopwatch(status);
-
-      interval.current = setInterval(() => {
-        if (getTimelapse.getMinutes >= MAX_MINUTES) {
-          dispatchTimer(true);
-        }
-
-        setTimelapse((prov) => new Date(prov.getTime() + 1000));
-      }, 1000);
-    },
-    [getStopwatch]
-  );
-
-  useEffect(() => {
-    dispatchTimer(false);
-  }, [dispatchTimer]);
-
   const testData = reunitedColor(getTestResult);
 
-  const individualUser = async (res) => {
-    const { err, d } = await newIndividual(res);
-    !err
-      ? storage.setJSON("id", d)
-      : toast({
-          title: `Terjadi Kesalahan`,
-          description: `${d}`,
-          status: "error",
-          isClosable: true,
-          containerStyle: {
-            padding: "15px 20px",
-          },
-        });
-  };
-
   const onFinish = () => {
-    dispatchTimer(true);
-    const result = testResult(
-      testData,
-      init,
-      user,
-      `${formatTime(getTimelapse)}`
-    );
+    setTestDone(true);
+    stopTime();
+    const result = testResult(testData, init, user, timeTest);
     setFinaldata(result);
   };
 
   const onSubmit = () => {
     individualUser(getFinalData);
   };
+
+  const stopTime = useCallback(() => {
+    clearTimeout(interval.current);
+    interval.current = null;
+  }, []);
+
+  const updateTimer = useCallback(() => {
+    if (getTimelapse.getMinutes() >= MAX_MINUTES) {
+      onFinish();
+      return;
+    }
+
+    setTimelapse((prev) => new Date(prev.getTime() + 1000));
+  }, [getTimelapse, setTimelapse]);
+
+  useEffect(() => {
+    interval.current = setTimeout(updateTimer, 1000);
+    return () => clearTimeout(interval.current);
+  }, [getTimelapse, updateTimer]);
 
   return (
     <Box pt={5}>
@@ -124,26 +120,11 @@ export default function TestSheet({ test, user, init }) {
               </Text>
             </Box>
           </Box>
-          <ReactSortable
-            className="row-box"
-            group={{ name: "valueByRow", put: false }}
-            animation={200}
-            ghostClass="ghostbox"
-            list={data.value}
-            setList={(newState) => handleTestResult(data.row, newState)}
-          >
-            {data.value.map((item) => (
-              <Box
-                key={item.color}
-                backgroundColor={item.color}
-                margin={"4px 1px"}
-                border={"1px solid #252525"}
-                cursor={"pointer"}
-                width={{ base: 6, xs: 8, lg: 10 }}
-                height={{ base: 6, xs: 8, lg: 10 }}
-              />
-            ))}
-          </ReactSortable>
+          <Sortable
+            handle={handleTestResult}
+            data={data}
+            testDone={getTestDone}
+          />
           <Box
             flex={1}
             display={"flex"}
@@ -169,7 +150,7 @@ export default function TestSheet({ test, user, init }) {
         </Flex>
       ))}
       <Center mt={8}>
-        {getStopwatch ? (
+        {getTestDone ? (
           <Button
             size={{ base: "sm", sm: "md" }}
             colorScheme="teal"

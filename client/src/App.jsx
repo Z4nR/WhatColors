@@ -10,11 +10,12 @@ import Footer from "@/components/Footer";
 import MobileNav from "@/components/mobile/MobileNav";
 import AboutPage from "@/pages/AboutPage";
 import ArticlePage from "@/pages/ArticlePage";
-import Home from "@/pages/Home";
 import TestPage from "@/pages/TestPage";
 import WebHeader from "@/components/web/WebHeader";
 import AppHeader from "@/components/mobile/AppHeader";
 import AdminPage from "@/pages/AdminPage";
+import HomePage from "@/pages/HomePage";
+import ResultPage from "./pages/ResultPage";
 
 export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
@@ -30,11 +31,12 @@ export default function App() {
       >
         <Container maxW={"container.xl"} px={5}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/article" element={<ArticlePage />} />
             <Route path="/test" element={<TestPage />} />
+            <Route path="/result" element={<ResultPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </Container>
