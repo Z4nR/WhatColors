@@ -36,6 +36,7 @@ jobs:
           VITE_BE_URL: ${{ secrets.VITE_BE_URL }}
         run: |
           echo "VITE_BE_URL=${VITE_BE_URL}" > .env.production
+          echo "${VITE_BE_URL}"
 
       - name: Deploy Project
         working-directory: ./client
