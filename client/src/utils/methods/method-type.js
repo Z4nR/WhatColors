@@ -323,5 +323,11 @@ const colorBlindName = {
   red: "Protan",
 };
 
-export default testTypes;
-export { colorBlindRange, colorBlindName };
+const infoBlind = {
+  Normal: `Memiliki kemampuan penglihatan normal terhadap warna merah, biru, hijau dan kombinasi ketiga warna tersebut`,
+  Protan: `Kemungkinan kamu menderita buta warna merah, segera periksakan ke dokter untuk informasi lebih lanjut.`,
+  Deutan: `Kemungkinan kamu menderita buta warna hijau, segera periksakan ke dokter untuk informasi lebih lanjut.`,
+  Tritan: `Kemungkinan kamu menderita buta warna biru, segera periksakan ke dokter untuk informasi lebih lanjut.`,
+};
+
+export { testTypes, colorBlindRange, colorBlindName, infoBlind };

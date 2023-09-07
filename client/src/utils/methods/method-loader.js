@@ -1,4 +1,4 @@
-import testTypes from "./method-type";
+import { testTypes } from "./method-type";
 
 const createArray = (type) => {
   const test = testTypes.find((test) => test.type === type);

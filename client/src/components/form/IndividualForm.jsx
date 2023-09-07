@@ -27,8 +27,8 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createArray } from "@/utils/methods/method-loader";
-import testTypes from "@/utils/methods/method-type";
 import storage from "@/utils/storage";
+import { testTypes } from "@/utils/methods/method-type";
 
 export default function IndividualForm({ isOpen, onClose }) {
   const navigate = useNavigate();
