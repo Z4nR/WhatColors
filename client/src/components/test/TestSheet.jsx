@@ -21,7 +21,7 @@ export default function TestSheet({ test, user, init }) {
   const [getTestDone, setTestDone] = useState(false);
   const [getFinalData, setFinaldata] = useState({});
   const interval = useRef(null);
-  const timeTest = `${formatTime(getTimelapse)}`;
+  const time = `${formatTime(getTimelapse)}`;
 
   const individualUser = async (res) => {
     const { err, d } = await newIndividual(res);
@@ -53,12 +53,12 @@ export default function TestSheet({ test, user, init }) {
     setTestResult(newRemovable);
   };
 
-  const testData = reunitedColor(getTestResult);
+  const reunited = reunitedColor(getTestResult);
 
   const onFinish = () => {
     setTestDone(true);
     stopTime();
-    const result = testResult(testData, init, user, timeTest);
+    const result = testResult(reunited, init, user, time);
     setFinaldata(result);
   };
 
