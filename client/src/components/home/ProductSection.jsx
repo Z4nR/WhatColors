@@ -91,7 +91,7 @@ export default function ProductSection() {
                 <Icon as={FcViewDetails} w={10} h={10} />
               </Flex>
               <Box mt={2}>
-                <Heading size="md">Detil Hasil</Heading>
+                <Heading size="md">Rincian Hasil</Heading>
                 <Text mt={1} fontSize={"sm"}>
                   Mengetahui semua informasi hasil tes.
                 </Text>
