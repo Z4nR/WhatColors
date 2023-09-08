@@ -4,16 +4,16 @@ const { Schema } = mongoose;
 const ClientSchema = new Schema({
   date: String,
   time: String,
-  fullName: String,
+  name: String,
   age: Number,
   gender: String,
   device: String,
-  testType: String,
+  type: String,
   totalErrorScore: Number,
   errorScoreStatus: String,
-  colorBlindType: String,
-  comparisonResults: [{ _id: String, comparison: String }],
-  discriminantResults: [{ _id: String, discriminant: Number }],
+  blindCheck: String,
+  comparisonResult: [{ _id: String, comparison: String }],
+  discriminantResult: [{ _id: String, discriminant: Number }],
   status: String,
 });
 

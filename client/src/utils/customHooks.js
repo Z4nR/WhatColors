@@ -69,15 +69,32 @@ const useLoadUser = () => {
   return [getResultData];
 };
 
-const useDiagram = () => {
-  const [getDiagram, setDiagram] = useState(null);
+const useDiagramDiscriminant = () => {
+  const [getDiscriminant, setDiscriminant] = useState(null);
 
   useEffect(() => {
     const discriminant = storage.getJSON("discriminant");
-    setDiagram(discriminant);
+    setDiscriminant(discriminant);
   }, []);
 
-  return [getDiagram];
+  return [getDiscriminant];
 };
 
-export { useTestData, useShuffle, useLoadUser, useDiagram };
+const useDiagramComparison = () => {
+  const [getComparison, setComparison] = useState(null);
+
+  useEffect(() => {
+    const comparison = storage.getJSON("comparison");
+    setComparison(comparison);
+  }, []);
+
+  return [getComparison];
+};
+
+export {
+  useTestData,
+  useShuffle,
+  useLoadUser,
+  useDiagramDiscriminant,
+  useDiagramComparison,
+};

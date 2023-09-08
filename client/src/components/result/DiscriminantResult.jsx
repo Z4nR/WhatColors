@@ -1,4 +1,4 @@
-import { useDiagram } from "@/utils/customHooks";
+import { useDiagramDiscriminant } from "@/utils/customHooks";
 import {
   Box,
   Flex,
@@ -17,18 +17,18 @@ import Chart from "chart.js/auto";
 import { useEffect, useMemo } from "react";
 
 export default function DiscriminantResult({ data }) {
-  const [getDiagram] = useDiagram();
+  const [getDiscriminant] = useDiagramDiscriminant();
   const [isDesktop] = useMediaQuery("(min-width: 550px)");
 
   const maxResult = useMemo(() => {
-    if (getDiagram !== null) {
-      Math.max(...getDiagram.result);
+    if (getDiscriminant !== null) {
+      Math.max(...getDiscriminant.result);
     }
-  }, [getDiagram]);
+  }, [getDiscriminant]);
 
   useEffect(() => {
-    const label = getDiagram?.number;
-    const data = getDiagram?.result;
+    const label = getDiscriminant?.number;
+    const data = getDiscriminant?.result;
 
     const chartData = {
       labels: label,
@@ -74,10 +74,10 @@ export default function DiscriminantResult({ data }) {
       },
     };
 
-    if (getDiagram && isDesktop) {
+    if (getDiscriminant && isDesktop) {
       new Chart("radar-chart", config);
     }
-  }, [getDiagram, maxResult, isDesktop]);
+  }, [getDiscriminant, maxResult, isDesktop]);
 
   return (
     <Box textAlign={"center"} py={{ lg: 4 }}>

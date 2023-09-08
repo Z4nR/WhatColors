@@ -207,6 +207,7 @@ const testResult = (result, initiate, user, time) => {
   const discriminantResult = discriminant.value;
 
   storage.setJSON("discriminant", discriminant);
+  storage.setJSON("comparison", comparison.result);
 
   return {
     ...user,
