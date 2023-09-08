@@ -32,6 +32,7 @@ jobs:
         run: npm install
 
       - name: Setup environment
+        working-directory: ./client
         env:
           VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
         run: |
