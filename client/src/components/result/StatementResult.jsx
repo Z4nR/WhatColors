@@ -1,5 +1,12 @@
 import { infoBlind } from "@/utils/methods/method-type";
-import { Box, Center, Divider, Text, VStack } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Box,
+  Center,
+  Divider,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 
 export default function StatementResult({ data }) {
   const infoResult = {
@@ -44,7 +51,7 @@ export default function StatementResult({ data }) {
         </Text>
         . Dengan rincian data sebagai berikut:
       </Text>
-      <Center my={4}>
+      <Center my={{ base: 4, md: 8 }}>
         <VStack alignItems={"flex-start"}>
           <Text fontWeight={"medium"}>Nama : {data?.name}</Text>
           <Text fontWeight={"medium"}>Umur : {data?.age}</Text>
@@ -52,11 +59,20 @@ export default function StatementResult({ data }) {
           <Text fontWeight={"medium"}>Waktu Tes : {data?.time}</Text>
         </VStack>
       </Center>
-      <Divider
-        mb={2}
-        borderBottomWidth={{ base: "medium", md: "thick" }}
-        borderColor={`${selectedInfo.bgColor}`}
-      ></Divider>
+      <Box position={"relative"} my={6}>
+        <Divider
+          borderBottomWidth={{ base: "medium", md: "thick" }}
+          borderColor={`${selectedInfo.bgColor}`}
+        />
+        <AbsoluteCenter
+          bg="white"
+          px="6"
+          fontWeight={"bold"}
+          fontSize={{ base: "xs", xs: "md", md: "lg" }}
+        >
+          Hasil
+        </AbsoluteCenter>
+      </Box>
       <Text textAlign={{ base: "justify", sm: "center" }}>
         Setelah melalui proses perhitungan yang cukup kompleks dan panjang,
         menunjukkan bahwa pengguna:{" "}
@@ -73,6 +89,11 @@ export default function StatementResult({ data }) {
       >
         {selectedInfo.footerText}
       </Text>
+      <Divider
+        mt={4}
+        borderBottomWidth={{ base: "medium", md: "thick" }}
+        borderColor={`${selectedInfo.bgColor}`}
+      />
     </Box>
   );
 }

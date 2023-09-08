@@ -325,9 +325,9 @@ const colorBlindName = {
 
 const infoBlind = {
   Normal: `Memiliki kemampuan penglihatan normal terhadap warna merah, biru, hijau dan kombinasi ketiga warna tersebut`,
-  Protan: `Kemungkinan kamu menderita buta warna merah, segera periksakan ke dokter untuk informasi lebih lanjut.`,
-  Deutan: `Kemungkinan kamu menderita buta warna hijau, segera periksakan ke dokter untuk informasi lebih lanjut.`,
-  Tritan: `Kemungkinan kamu menderita buta warna biru, segera periksakan ke dokter untuk informasi lebih lanjut.`,
+  Protan: `Kemungkinan memiliki gangguan dalam melihat warna merah dan kombinasi yang mengandung warna tersebut`,
+  Deutan: `Kemungkinan memiliki gangguan dalam melihat warna hijau dan kombinasi yang mengandung warna tersebut`,
+  Tritan: `Kemungkinan memiliki gangguan dalam melihat warna biru dan kombinasi yang mengandung warna tersebut`,
 };
 
 export { testTypes, colorBlindRange, colorBlindName, infoBlind };
