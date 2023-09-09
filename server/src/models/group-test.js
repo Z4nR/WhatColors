@@ -3,9 +3,9 @@ const { Schema } = mongoose;
 
 const TestGroupSchema = new Schema({
   date: String,
-  roomName: String,
+  groupName: String,
+  groupInitial: String,
   maxTES: Number,
-  roomInitial: String,
   testType: String,
   device: String,
   code: [{ _id: String, key: String }],

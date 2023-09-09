@@ -49,7 +49,11 @@ const compareValue = (result, initiate) => {
       }
 
       const initialValue = initialRow.value[i];
-      res.push(resultValue === initialValue);
+      if (resultValue === initialValue) {
+        res.push("Benar");
+      } else {
+        res.push("Salah");
+      }
     }
 
     return res;

@@ -25,7 +25,7 @@ export default function ComparisonResult({ data }) {
     let falseCount = 0;
 
     for (let i = 0; i < getComparison?.length; i++) {
-      if (getComparison[i] === true) {
+      if (getComparison[i] === "Benar") {
         trueCount++;
       } else {
         falseCount++;
@@ -34,7 +34,7 @@ export default function ComparisonResult({ data }) {
 
     const count = [trueCount, falseCount];
 
-    const label = ["True", "False"];
+    const label = ["Benar", "Salah"];
     const pieData = {
       labels: label,
       datasets: [
