@@ -6,6 +6,7 @@ import { Box, Button, Center, Flex, Text, useToast } from "@chakra-ui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sortable from "./Sortable";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 const MAX_MINUTES = 12;
 const formatTime = (time) =>
@@ -23,23 +24,25 @@ export default function TestSheet({ test, user, init }) {
   const interval = useRef(null);
   const time = `${formatTime(getTimelapse)}`;
 
-  const individualUser = async (res) => {
-    const { err, d } = await newIndividual(res);
-    if (!err) {
-      storage.setJSON("id", d);
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: newIndividual,
+    onSuccess: (data) => {
+      storage.setJSON("id", data);
       navigate("/result");
-    } else {
+    },
+    onError: (error) => {
+      setTestDone(false);
       toast({
         title: `Terjadi Kesalahan`,
-        description: `${d}`,
+        description: `${error.response.data.message}`,
         status: "error",
         isClosable: true,
         containerStyle: {
           padding: "15px 20px",
         },
       });
-    }
-  };
+    },
+  });
 
   const handleTestResult = (row, newState) => {
     const newRemovable = test.map((removable) => {
@@ -63,7 +66,7 @@ export default function TestSheet({ test, user, init }) {
   };
 
   const onSubmit = () => {
-    individualUser(getFinalData);
+    mutateAsync(getFinalData);
   };
 
   const stopTime = useCallback(() => {
@@ -155,6 +158,8 @@ export default function TestSheet({ test, user, init }) {
             size={{ base: "sm", sm: "md" }}
             colorScheme="teal"
             onClick={onSubmit}
+            loadingText="Mengirim Hasil"
+            isLoading={isLoading}
           >
             Kirim Data
           </Button>

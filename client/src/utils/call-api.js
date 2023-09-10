@@ -11,25 +11,15 @@ const newIndividual = async (userData) => {
     })
     .then((response) => {
       const { id } = response.data;
-      return { err: false, d: id };
-    })
-    .catch((error) => {
-      const { status, data } = error.response;
-      if (status !== 201) return { err: true, d: data.message };
+      return id;
     });
 };
 
 const getIndividualById = async (id) => {
-  return axios
-    .get(`${Server_URL}/user/${id}`)
-    .then((response) => {
-      const data = response.data;
-      return { err: false, d: data };
-    })
-    .catch((error) => {
-      const { status, data } = error.response;
-      if (status !== 201) return { err: true, d: data.message };
-    });
+  return axios.get(`${Server_URL}/user/${id}`).then((response) => {
+    const data = response.data;
+    return data;
+  });
 };
 
 export { newIndividual, getIndividualById };

@@ -1,14 +1,22 @@
 import ClientResult from "@/components/result/ClientResult";
 import StatementResult from "@/components/result/StatementResult";
-import { useLoadUser } from "@/utils/customHooks";
 import storage from "@/utils/storage";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import DiscriminantResult from "@/components/result/DiscriminantResult";
 import ComparisonResult from "@/components/result/ComparisonResult";
+import { useQuery } from "@tanstack/react-query";
+import { getIndividualById } from "@/utils/call-api";
 
 export default function ResultPage() {
   const client = storage.getJSON("user");
-  const [getResultData] = useLoadUser();
+  const id = storage.getJSON("id");
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["individual", id],
+    queryFn: () => getIndividualById(id),
+  });
+
+  console.log(data);
 
   if (client.isClient) return <ClientResult />;
 
@@ -27,13 +35,13 @@ export default function ResultPage() {
 
       <TabPanels>
         <TabPanel>
-          <StatementResult data={getResultData} />
+          <StatementResult data={data} />
         </TabPanel>
         <TabPanel>
-          <ComparisonResult data={getResultData} />
+          <ComparisonResult data={data} />
         </TabPanel>
         <TabPanel>
-          <DiscriminantResult data={getResultData} />
+          <DiscriminantResult data={data} />
         </TabPanel>
       </TabPanels>
     </Tabs>
