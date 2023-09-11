@@ -15,18 +15,37 @@ module.exports = {
       blindCheck: Joi.string().required().label("Jenis Buta Warna"),
       comparisonResult: Joi.array().items(
         Joi.object({
-          _id: Joi.string().required(),
+          id: Joi.string().required(),
           comparison: Joi.string().required().label("Nilai Komparasi"),
         })
       ),
       discriminantResult: Joi.array().items(
         Joi.object({
-          _id: Joi.string().required(),
+          id: Joi.string().required(),
           discriminant: Joi.number().required().label("Nilai Perbedaan"),
         })
       ),
     });
 
     return individualSchema.validate(data);
+  },
+
+  groupValidate: (data) => {
+    const groupSchema = Joi.object().keys({
+      date: Joi.string().required().label("Tanggal Pembuatan"),
+      email: Joi.string().required().label("Email Pembuat"),
+      groupName: Joi.string().required().label("Nama Grup"),
+      groupInitial: Joi.string().required().label("Initial Grup"),
+      maxScore: Joi.string().required().label("Skor Maksimal"),
+      type: Joi.string().required().label("Tingkat Kesulitan"),
+      code: Joi.array().items(
+        Joi.object({
+          id: Joi.string().required(),
+          key: Joi.string().required(),
+        })
+      ),
+    });
+
+    return groupSchema.validate(data);
   },
 };

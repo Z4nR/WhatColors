@@ -3,12 +3,13 @@ const { Schema } = mongoose;
 
 const TestGroupSchema = new Schema({
   date: String,
+  email: String,
   groupName: String,
   groupInitial: String,
-  maxTES: Number,
-  testType: String,
+  maxScore: Number,
+  type: String,
   device: String,
-  code: [{ _id: String, key: String }],
+  code: [{ id: String, key: String }],
   clients: [
     {
       type: Schema.Types.ObjectId,
