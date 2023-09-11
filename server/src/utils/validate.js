@@ -41,7 +41,7 @@ module.exports = {
       device: Joi.string().allow(""),
       code: Joi.array().items(
         Joi.object({
-          id: Joi.string().required(),
+          _id: Joi.string().required(),
           key: Joi.string().required(),
         })
       ),

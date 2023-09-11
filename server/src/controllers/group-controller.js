@@ -63,17 +63,11 @@ module.exports = {
       const mailOptions = {
         from: process.env.EMAIL,
         to: group.email,
-        subject: group.groupInitial + " Code Verification",
-        html: htmlMsg,
+        subject: group.groupInitial + " Kode Verifikasi",
+        html: "Testing",
       };
-      smtpTransport.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          res.status(400).send({ message: error });
-        } else {
-          console.log(info);
-        }
-      });
+      smtpTransport.sendMail(mailOptions);
+
       res.status(200).send({ message: "Kode Email Berhasil Dikirim" });
     } catch (error) {
       console.log(error);
@@ -89,11 +83,11 @@ module.exports = {
         $or: [
           {
             code: {
-              id: "01",
+              _id: "01",
               key: codeVerify,
             },
             code: {
-              id: "11",
+              _id: "11",
               key: codeVerify,
             },
           },

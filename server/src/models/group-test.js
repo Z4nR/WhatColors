@@ -9,7 +9,7 @@ const TestGroupSchema = new Schema({
   maxScore: Number,
   type: String,
   device: String,
-  code: [{ id: String, key: String }],
+  code: [{ _id: String, key: String }],
   clients: [
     {
       type: Schema.Types.ObjectId,
