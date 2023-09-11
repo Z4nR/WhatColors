@@ -23,30 +23,58 @@ import {
 import { testTypes } from "@/utils/methods/method-type";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { date } from "@/utils/test-helper";
+import { useMutation } from "@tanstack/react-query";
+import { newGroup, sendEmail } from "@/utils/call-api";
+import storage from "@/utils/storage";
+import { useToastMsg } from "@/utils/customHooks";
 
 export default function GroupForm({ isOpen, onClose }) {
   const navigate = useNavigate();
+  const toast = useToastMsg();
+
+  const emailMutation = useMutation({
+    mutationFn: sendEmail,
+    onSuccess: (data) => {
+      toast("Email Berhasil Dikirim", `${data}`, "info");
+    },
+    onError: (error) => {
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+    },
+  });
+
+  const groupMutation = useMutation({
+    mutationFn: newGroup,
+    onSuccess: (data) => {
+      storage.setJSON("id", data);
+      emailMutation.mutateAsync(data);
+      navigate("/verify-code");
+      toast("Grup Berhasil Dibuat", "Masukan Kode Verifikasi", "success");
+    },
+    onError: (error) => {
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+    },
+  });
 
   const {
     handleSubmit,
     register,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     defaultValues: {
-      date: new Date().toLocaleString(),
-      roomName: "",
-      roomInitial: "",
-      adminEmail: "",
-      testType: "Mudah (32 Warna)",
+      groupName: "",
+      groupInitial: "",
+      email: "",
+      type: "Mudah (32 Warna)",
       device: "",
     },
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    sessionStorage.setItem("group", JSON.stringify(data));
-    navigate("/admin");
+    const score = parseInt(data.maxScore);
+    const groupData = { ...data, maxScore: score, date: date };
+    groupMutation.mutateAsync(groupData);
   };
 
   const resetData = () => {
@@ -69,14 +97,14 @@ export default function GroupForm({ isOpen, onClose }) {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Flex direction={{ base: "column", sm: "row" }} gap={5}>
-              <FormControl isRequired isInvalid={errors.roomName}>
+              <FormControl isRequired isInvalid={errors.groupName}>
                 <FormLabel htmlFor="roomName">Nama Grup</FormLabel>
                 <Input
                   id="roomName"
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Nama Grup"
-                  {...register("roomName", {
+                  {...register("groupName", {
                     required: "Wajib Diisi",
                     minLength: {
                       value: 4,
@@ -92,12 +120,12 @@ export default function GroupForm({ isOpen, onClose }) {
                   Masukkan Nama Grup
                 </FormHelperText>
                 <FormErrorMessage>
-                  {errors.roomName && errors.roomName.message}
+                  {errors.groupName && errors.groupName.message}
                 </FormErrorMessage>
               </FormControl>
               <FormControl
                 isRequired
-                isInvalid={errors.roomInitial}
+                isInvalid={errors.groupInitial}
                 width={{ base: "auto", sm: "12em" }}
               >
                 <FormLabel htmlFor="roomInitial">Inisial Grup</FormLabel>
@@ -106,7 +134,7 @@ export default function GroupForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Inisial Grup"
-                  {...register("roomInitial", {
+                  {...register("groupInitial", {
                     required: "Wajib Diisi",
                     maxLength: {
                       value: 5,
@@ -118,12 +146,12 @@ export default function GroupForm({ isOpen, onClose }) {
                   Beri Inisial Grup
                 </FormHelperText>
                 <FormErrorMessage>
-                  {errors.roomInitial && errors.roomInitial.message}
+                  {errors.groupInitial && errors.groupInitial.message}
                 </FormErrorMessage>
               </FormControl>
             </Flex>
             <Flex direction={{ base: "column", md: "row" }} gap={5} mt={4}>
-              <FormControl isRequired isInvalid={errors.adminEmail}>
+              <FormControl isRequired isInvalid={errors.email}>
                 <FormLabel htmlFor="adminEmail">Email Admin</FormLabel>
                 <Input
                   id="adminEmail"
@@ -131,14 +159,14 @@ export default function GroupForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Email Admin"
-                  {...register("adminEmail", {
+                  {...register("email", {
                     required: "Wajib Diisi",
                   })}
                 />
                 <FormHelperText fontSize={"small"}>
                   Masukkan Email Admin Grup
                 </FormHelperText>
-                <FormErrorMessage>{errors.adminEmail}</FormErrorMessage>
+                <FormErrorMessage>{errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="device">Perangkat Yang Digunakan</FormLabel>
@@ -155,11 +183,11 @@ export default function GroupForm({ isOpen, onClose }) {
               </FormControl>
             </Flex>
             <Flex direction={{ base: "column", md: "row" }} gap={5} mt={4}>
-              <FormControl isRequired isInvalid={errors.testType}>
+              <FormControl isRequired isInvalid={errors.type}>
                 <FormLabel htmlFor="type">Tingkat Kesulitan</FormLabel>
                 <Select
                   id="type"
-                  {...register("testType", {
+                  {...register("type", {
                     required: "Wajib Diisi",
                   })}
                   placeholder="Pilih Tingkat Kesulitan"
@@ -173,22 +201,23 @@ export default function GroupForm({ isOpen, onClose }) {
                 <FormHelperText fontSize={"small"}>
                   Pilih tingkat kesulitan sesuai kemampuan
                 </FormHelperText>
-                <FormErrorMessage>{errors.testType}</FormErrorMessage>
+                <FormErrorMessage>{errors.type}</FormErrorMessage>
               </FormControl>
-              <FormControl isRequired isInvalid={errors.minTest}>
-                <FormLabel htmlFor="minTest">Umur Anda</FormLabel>
+              <FormControl isRequired isInvalid={errors.maxScore}>
+                <FormLabel htmlFor="maxTest">Skor Error Maksimal</FormLabel>
                 <NumberInput
-                  id="minTest"
+                  allowMouseWheel
+                  id="maxTest"
                   focusBorderColor="teal.400"
                   max={100}
                   min={0}
+                  {...register("maxScore", {
+                    required: "Wajib Diisi",
+                  })}
                 >
                   <NumberInputField
                     autoComplete="off"
                     placeholder="Masukkan Nilai Terendah"
-                    {...register("minTest", {
-                      required: "Wajib Diisi",
-                    })}
                   />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
@@ -199,7 +228,7 @@ export default function GroupForm({ isOpen, onClose }) {
                 <FormHelperText fontSize={"small"}>
                   Rentang nilai terendah 0 - 100
                 </FormHelperText>
-                <FormErrorMessage>{errors.minTest}</FormErrorMessage>
+                <FormErrorMessage>{errors.maxScore}</FormErrorMessage>
               </FormControl>
             </Flex>
           </ModalBody>
@@ -208,7 +237,8 @@ export default function GroupForm({ isOpen, onClose }) {
             <Button
               colorScheme="teal"
               mr={3}
-              isLoading={isSubmitting}
+              loadingText="Proses"
+              isLoading={groupMutation.isLoading}
               type="submit"
             >
               Buat Grup

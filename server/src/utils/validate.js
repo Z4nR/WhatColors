@@ -36,7 +36,7 @@ module.exports = {
       email: Joi.string().required().label("Email Pembuat"),
       groupName: Joi.string().required().label("Nama Grup"),
       groupInitial: Joi.string().required().label("Initial Grup"),
-      maxScore: Joi.string().required().label("Skor Maksimal"),
+      maxScore: Joi.number().required().label("Skor Maksimal"),
       type: Joi.string().required().label("Tingkat Kesulitan"),
       code: Joi.array().items(
         Joi.object({

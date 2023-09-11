@@ -39,7 +39,7 @@ export default function IndividualForm({ isOpen, onClose }) {
     watch,
     setValue,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       fullName: "",
@@ -210,12 +210,7 @@ export default function IndividualForm({ isOpen, onClose }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              colorScheme="teal"
-              mr={3}
-              isLoading={isSubmitting}
-              type="submit"
-            >
+            <Button colorScheme="teal" mr={3} type="submit">
               Buat Tes
             </Button>
             <Button mr={3} onClick={resetData}>

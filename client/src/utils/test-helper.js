@@ -1,13 +1,14 @@
 import { colorBlindName, colorBlindRange } from "./methods/method-type";
 import storage from "./storage";
 
+const date = new Date().toLocaleDateString("id-ID", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
 const userData = (data, isClient) => {
-  const date = new Date().toLocaleDateString("id-ID", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
   const name = isClient ? `Inisial ${data?.fullName}` : data?.fullName;
   const age = data?.age;
   const gender = data?.gender;
@@ -238,4 +239,4 @@ const testResult = (result, initiate, user, time, isClient) => {
   }
 };
 
-export { userData, testResult };
+export { userData, testResult, date };
