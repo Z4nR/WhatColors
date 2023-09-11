@@ -22,4 +22,31 @@ const getIndividualById = async (id) => {
   });
 };
 
-export { newIndividual, getIndividualById };
+const newGroup = async (groupData) => {
+  return axios
+    .post(`${Server_URL}/group/new`, groupData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      const { id } = response.data;
+      return id;
+    });
+};
+
+const sendEmail = async (id) => {
+  return axios.get(`${Server_URL}/group/code/${id}`).then((response) => {
+    const { message } = response.data;
+    return message;
+  });
+};
+
+const verifyRole = async (code) => {
+  return axios.get(`${Server_URL}/group/verify/${code}`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
+export { newIndividual, getIndividualById, newGroup, sendEmail, verifyRole };

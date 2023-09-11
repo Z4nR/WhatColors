@@ -1,18 +1,11 @@
-import { Box, Heading, Text, Button, useToast, Flex } from "@chakra-ui/react";
+import { useToastMsg } from "@/utils/customHooks";
+import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export default function NotFoundPage({ error }) {
-  const toast = useToast();
+  const toast = useToastMsg();
 
-  toast({
-    title: `Terjadi Kesalahan`,
-    description: `${error.response.data.message}`,
-    status: "error",
-    isClosable: true,
-    containerStyle: {
-      padding: "15px 20px",
-    },
-  });
+  toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
 
   return (
     <Flex minHeight={"80vh"} justifyContent={"center"} alignItems={"center"}>
@@ -40,6 +33,7 @@ export default function NotFoundPage({ error }) {
           bgGradient="linear(to-r, teal.400, teal.500, teal.600)"
           color="white"
           variant="solid"
+          size={{ base: "xs", xs: "sm", md: "md" }}
         >
           Kembali Ke Beranda
         </Button>

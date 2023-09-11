@@ -2,11 +2,12 @@ import { newIndividual } from "@/utils/call-api";
 import { reunitedColor } from "@/utils/methods/method-loader";
 import storage from "@/utils/storage";
 import { testResult } from "@/utils/test-helper";
-import { Box, Button, Center, Flex, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sortable from "./Sortable";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { useToastMsg } from "@/utils/customHooks";
 
 const MAX_MINUTES = 12;
 const formatTime = (time) =>
@@ -16,7 +17,7 @@ const formatTime = (time) =>
 
 export default function TestSheet({ test, user, init, isClient }) {
   const navigate = useNavigate();
-  const toast = useToast();
+  const toast = useToastMsg();
   const [getTestResult, setTestResult] = useState(null);
   const [getTimelapse, setTimelapse] = useState(new Date(0));
   const [getTestDone, setTestDone] = useState(false);
@@ -60,30 +61,18 @@ export default function TestSheet({ test, user, init, isClient }) {
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: newIndividual,
     onSuccess: (data) => {
-      toast({
-        title: "Data Berhasil Ditambahkan",
-        description: "Berikut hasil perhitungan data yang telah ditambahkan",
-        status: "success",
-        isClosable: true,
-        containerStyle: {
-          padding: "15px 20px",
-        },
-      });
       storage.setJSON("id", data);
       navigate("/result");
+      toast(
+        "Data Berhasil Ditambahkan",
+        "Berikut hasil perhitungan data yang telah ditambahkan",
+        "success"
+      );
     },
     onError: (error) => {
       setTimelapse(new Date(0));
       setTestDone(false);
-      toast({
-        title: "Terjadi Kesalahan",
-        description: `${error.response.data.message}`,
-        status: "error",
-        isClosable: true,
-        containerStyle: {
-          padding: "15px 20px",
-        },
-      });
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
     },
   });
 

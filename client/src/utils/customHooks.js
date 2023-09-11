@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { shuffleColor } from "./methods/method-loader";
 import storage from "@/utils/storage";
+import { useToast } from "@chakra-ui/react";
 
 const useTestData = () => {
   const [getTestData, setTestData] = useState(null);
@@ -61,9 +62,25 @@ const useDiagramComparison = () => {
   return [getComparison];
 };
 
+const useToastMsg = () => {
+  const toast = useToast();
+
+  return (title, desc, status) =>
+    toast({
+      title: title,
+      description: desc,
+      status: status,
+      isClosable: true,
+      containerStyle: {
+        padding: "15px 20px",
+      },
+    });
+};
+
 export {
   useTestData,
   useShuffle,
   useDiagramDiscriminant,
   useDiagramComparison,
+  useToastMsg,
 };
