@@ -38,6 +38,7 @@ module.exports = {
       groupInitial: Joi.string().required().label("Initial Grup"),
       maxScore: Joi.number().required().label("Skor Maksimal"),
       type: Joi.string().required().label("Tingkat Kesulitan"),
+      device: Joi.string().required(),
       code: Joi.array().items(
         Joi.object({
           id: Joi.string().required(),
