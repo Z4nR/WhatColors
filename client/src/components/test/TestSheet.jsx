@@ -14,7 +14,7 @@ const formatTime = (time) =>
     .map((num) => `0${num}`.slice(-2))
     .join(":");
 
-export default function TestSheet({ test, user, init }) {
+export default function TestSheet({ test, user, init, isClient }) {
   const navigate = useNavigate();
   const toast = useToast();
   const [getTestResult, setTestResult] = useState(null);
@@ -60,6 +60,15 @@ export default function TestSheet({ test, user, init }) {
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: newIndividual,
     onSuccess: (data) => {
+      toast({
+        title: "Data Berhasil Ditambahkan",
+        description: "Berikut hasil perhitungan data yang telah ditambahkan",
+        status: "success",
+        isClosable: true,
+        containerStyle: {
+          padding: "15px 20px",
+        },
+      });
       storage.setJSON("id", data);
       navigate("/result");
     },
@@ -67,7 +76,7 @@ export default function TestSheet({ test, user, init }) {
       setTimelapse(new Date(0));
       setTestDone(false);
       toast({
-        title: `Terjadi Kesalahan`,
+        title: "Terjadi Kesalahan",
         description: `${error.response.data.message}`,
         status: "error",
         isClosable: true,
@@ -81,7 +90,7 @@ export default function TestSheet({ test, user, init }) {
   const onFinish = () => {
     setTestDone(true);
     stopTime();
-    const result = testResult(reunited, init, user, time);
+    const result = testResult(reunited, init, user, time, isClient);
     setFinaldata(result);
   };
 

@@ -8,7 +8,7 @@ const userData = (data, isClient) => {
     month: "long",
     day: "numeric",
   });
-  const name = isClient === true ? `Inisial ${data?.fullName}` : data?.fullName;
+  const name = isClient ? `Inisial ${data?.fullName}` : data?.fullName;
   const age = data?.age;
   const gender = data?.gender;
   const device = data?.device;
@@ -199,13 +199,14 @@ const colorBlindType = (t, compare) => {
   return findBlindType;
 };
 
-const testResult = (result, initiate, user, time) => {
+const testResult = (result, initiate, user, time, isClient) => {
   const comparison = compareValue(result, initiate);
   const discriminant = discriminantValue(result, initiate);
   const totalErrorScore = methodCalculate(result);
   const blindType = colorBlindType(user.type, comparison.result);
   const blindCheck = !blindType ? "Normal" : blindType;
   const errorScoreStatus = blindStatus(totalErrorScore);
+  const status = blindCheck === "Normal" ? "Lolos" : "Tidak Lolos";
 
   const comparisonResult = comparison.value;
   const discriminantResult = discriminant.value;
@@ -213,15 +214,28 @@ const testResult = (result, initiate, user, time) => {
   storage.setJSON("discriminant", discriminant);
   storage.setJSON("comparison", comparison.result);
 
-  return {
-    ...user,
-    totalErrorScore,
-    errorScoreStatus,
-    blindCheck,
-    comparisonResult,
-    discriminantResult,
-    time,
-  };
+  if (!isClient) {
+    return {
+      ...user,
+      totalErrorScore,
+      errorScoreStatus,
+      blindCheck,
+      comparisonResult,
+      discriminantResult,
+      time,
+    };
+  } else {
+    return {
+      ...user,
+      totalErrorScore,
+      errorScoreStatus,
+      blindCheck,
+      comparisonResult,
+      discriminantResult,
+      time,
+      status,
+    };
+  }
 };
 
 export { userData, testResult };

@@ -35,7 +35,12 @@ export default function TestPage() {
         />
       </HStack>
       <UserData user={user} />
-      <TestSheet test={getShuffle} user={user} init={initiate} />
+      <TestSheet
+        test={getShuffle}
+        user={user}
+        init={initiate}
+        isClient={isClient}
+      />
     </Box>
   );
 }
