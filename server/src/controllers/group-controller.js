@@ -6,6 +6,7 @@ const handlebars = require("handlebars");
 const smtp = require("nodemailer-smtp-transport");
 const path = require("path");
 const fs = require("fs");
+const { log } = require("console");
 
 module.exports = {
   newGroup: async (req, res) => {
@@ -44,6 +45,12 @@ module.exports = {
       const { id } = req.params;
       const group = await Group.findById(id);
 
+      const username = process.env.SMTP_USERNAME || null;
+      const password = process.env.SMTP_PASSWORD || null;
+      if (!username || !password) {
+        throw new Error("SMTP_USERNAME and SMTP_PASSWORD must be set");
+      }
+
       const filePath = path.join(__dirname, "../utils/email-template.html");
       const source = fs.readFileSync(filePath, "utf-8").toString();
 
@@ -58,8 +65,8 @@ module.exports = {
         smtp({
           service: "gmail",
           auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASS,
+            user: username,
+            pass: password,
           },
         })
       );
@@ -67,9 +74,11 @@ module.exports = {
         from: process.env.EMAIL,
         to: group.email,
         subject: group.groupInitial + " Kode Verifikasi",
-        html: htmlMsg,
+        html: "Testing",
       };
-      await smtpTransport.sendMail(mailOptions);
+      const response = await smtpTransport.sendMail(mailOptions);
+
+      console.log(response);
 
       res.status(200).send({ message: "Kode Email Berhasil Dikirim" });
     } catch (error) {
