@@ -28,6 +28,9 @@ module.exports = {
 
       const data = await Individual.findById(id);
 
+      if (!data)
+        return res.status(404).send({ message: "Data tidak ditemukan" });
+
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
