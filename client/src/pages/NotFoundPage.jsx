@@ -1,6 +1,18 @@
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, useToast } from "@chakra-ui/react";
 
-export default function NotFound() {
+export default function NotFoundPage({ error }) {
+  const toast = useToast();
+
+  toast({
+    title: `Terjadi Kesalahan`,
+    description: `${error.response.data.message}`,
+    status: "error",
+    isClosable: true,
+    containerStyle: {
+      padding: "15px 20px",
+    },
+  });
+
   return (
     <Box textAlign="center" py={10} px={6}>
       <Heading

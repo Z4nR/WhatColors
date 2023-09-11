@@ -6,18 +6,20 @@ import DiscriminantResult from "@/components/result/DiscriminantResult";
 import ComparisonResult from "@/components/result/ComparisonResult";
 import { useQuery } from "@tanstack/react-query";
 import { getIndividualById } from "@/utils/call-api";
+import NotFoundPage from "./NotFoundPage";
+import Loading from "@/components/utils/Loading";
 
 export default function ResultPage() {
   const client = storage.getJSON("user");
   const id = storage.getJSON("id");
 
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading, isError } = useQuery({
     queryKey: ["individual", id],
     queryFn: () => getIndividualById(id),
   });
 
-  console.log(data);
-
+  if (isLoading) return <Loading />;
+  if (isError) return <NotFoundPage error={error} />;
   if (client.isClient) return <ClientResult />;
 
   return (

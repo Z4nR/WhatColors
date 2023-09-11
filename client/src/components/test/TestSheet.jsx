@@ -24,25 +24,7 @@ export default function TestSheet({ test, user, init }) {
   const interval = useRef(null);
   const time = `${formatTime(getTimelapse)}`;
 
-  const { mutateAsync, isLoading } = useMutation({
-    mutationFn: newIndividual,
-    onSuccess: (data) => {
-      storage.setJSON("id", data);
-      navigate("/result");
-    },
-    onError: (error) => {
-      setTestDone(false);
-      toast({
-        title: `Terjadi Kesalahan`,
-        description: `${error.response.data.message}`,
-        status: "error",
-        isClosable: true,
-        containerStyle: {
-          padding: "15px 20px",
-        },
-      });
-    },
-  });
+  const reunited = reunitedColor(getTestResult);
 
   const handleTestResult = (row, newState) => {
     const newRemovable = test.map((removable) => {
@@ -54,19 +36,6 @@ export default function TestSheet({ test, user, init }) {
     });
 
     setTestResult(newRemovable);
-  };
-
-  const reunited = reunitedColor(getTestResult);
-
-  const onFinish = () => {
-    setTestDone(true);
-    stopTime();
-    const result = testResult(reunited, init, user, time);
-    setFinaldata(result);
-  };
-
-  const onSubmit = () => {
-    mutateAsync(getFinalData);
   };
 
   const stopTime = useCallback(() => {
@@ -87,6 +56,38 @@ export default function TestSheet({ test, user, init }) {
     interval.current = setTimeout(updateTimer, 1000);
     return () => clearTimeout(interval.current);
   }, [getTimelapse, updateTimer]);
+
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: newIndividual,
+    onSuccess: (data) => {
+      storage.setJSON("id", data);
+      navigate("/result");
+    },
+    onError: (error) => {
+      setTimelapse(new Date(0));
+      setTestDone(false);
+      toast({
+        title: `Terjadi Kesalahan`,
+        description: `${error.response.data.message}`,
+        status: "error",
+        isClosable: true,
+        containerStyle: {
+          padding: "15px 20px",
+        },
+      });
+    },
+  });
+
+  const onFinish = () => {
+    setTestDone(true);
+    stopTime();
+    const result = testResult(reunited, init, user, time);
+    setFinaldata(result);
+  };
+
+  const onSubmit = () => {
+    mutateAsync(getFinalData);
+  };
 
   return (
     <Box pt={5}>
