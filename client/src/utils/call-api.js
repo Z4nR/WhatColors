@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//const Server_URL = import.meta.env.VITE_BASE_URL;
-const Server_URL = "http://localhost:5000/v1";
+const Server_URL = import.meta.env.VITE_BASE_URL;
+//const Server_URL = "http://localhost:5000/v1";
 
 const newIndividual = async (userData) => {
   return axios

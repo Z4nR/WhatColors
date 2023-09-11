@@ -3,6 +3,7 @@ const { generateCode } = require("../utils/group-helper");
 const { groupValidate } = require("../utils/validate");
 const mailer = require("nodemailer");
 const handlebars = require("handlebars");
+const smtp = require("nodemailer-smtp-transport");
 const path = require("path");
 const fs = require("fs");
 
@@ -53,20 +54,22 @@ module.exports = {
       };
       const htmlMsg = template(replacements);
 
-      const smtpTransport = mailer.createTransport({
-        service: "Gmail",
-        auth: {
-          user: process.env.EMAIL,
-          pass: process.env.PASS,
-        },
-      });
+      const smtpTransport = mailer.createTransport(
+        smtp({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASS,
+          },
+        })
+      );
       const mailOptions = {
         from: process.env.EMAIL,
         to: group.email,
         subject: group.groupInitial + " Kode Verifikasi",
-        html: "Testing",
+        html: htmlMsg,
       };
-      smtpTransport.sendMail(mailOptions);
+      await smtpTransport.sendMail(mailOptions);
 
       res.status(200).send({ message: "Kode Email Berhasil Dikirim" });
     } catch (error) {
