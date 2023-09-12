@@ -22,7 +22,7 @@ module.exports = {
     }
   },
 
-  getUserbyId: async (req, res) => {
+  getUserById: async (req, res) => {
     try {
       const { id } = req.params;
 

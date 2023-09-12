@@ -49,4 +49,18 @@ const verifyRole = async (code) => {
   });
 };
 
-export { newIndividual, getIndividualById, newGroup, sendEmail, verifyRole };
+const getGroupById = async (id) => {
+  return axios.get(`${Server_URL}/group/${id}`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
+export {
+  newIndividual,
+  getIndividualById,
+  newGroup,
+  sendEmail,
+  verifyRole,
+  getGroupById,
+};

@@ -48,7 +48,7 @@ export default function GroupForm({ isOpen, onClose }) {
     onSuccess: (data) => {
       storage.setJSON("id", data);
       emailMutation.mutateAsync(data);
-      navigate("/verify-code");
+      navigate("/verify-admin");
       toast("Grup Berhasil Dibuat", "Masukan Kode Verifikasi", "success");
     },
     onError: (error) => {

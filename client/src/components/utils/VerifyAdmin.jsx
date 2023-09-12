@@ -18,7 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export default function VerifyCode() {
+export default function VerifyAdmin() {
   const navigate = useNavigate();
   const toast = useToastMsg();
   const id = storage.getJSON("id");
@@ -109,6 +109,7 @@ export default function VerifyCode() {
             colorScheme="teal"
             mt={4}
             loadingText="Verifikasi Kode"
+            isLoading={verifyMutation.isLoading}
             type="submit"
           >
             Verifikasi

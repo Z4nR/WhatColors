@@ -17,7 +17,7 @@ import AdminPage from "@/pages/AdminPage";
 import HomePage from "@/pages/HomePage";
 import ResultPage from "./pages/ResultPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import VerifyCode from "./components/utils/VerifyCode";
+import VerifyAdmin from "./components/utils/VerifyAdmin";
 
 const queryClient = new QueryClient();
 
@@ -43,7 +43,7 @@ export default function App() {
               <Route path="/test" element={<TestPage />} />
               <Route path="/result" element={<ResultPage />} />
               <Route path="/admin" element={<AdminPage />} />
-              <Route path="/verify-code" element={<VerifyCode />} />
+              <Route path="/verify-admin" element={<VerifyAdmin />} />
             </Routes>
           </QueryClientProvider>
         </Container>

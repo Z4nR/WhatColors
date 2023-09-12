@@ -113,4 +113,20 @@ module.exports = {
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
     }
   },
+
+  getGroupById: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const group = await Group.findById(id);
+
+      if (!group)
+        return res.status(404).send({ message: "Data tidak ditemukan" });
+
+      res.status(202).send(group);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+    }
+  },
 };

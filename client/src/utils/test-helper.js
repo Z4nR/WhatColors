@@ -8,8 +8,10 @@ const date = new Date().toLocaleDateString("id-ID", {
   day: "numeric",
 });
 
+const inisial = storage.getJSON("inisial");
+
 const userData = (data, isClient) => {
-  const name = isClient ? `Inisial ${data?.fullName}` : data?.fullName;
+  const name = isClient ? `${inisial} ${data?.fullName}` : data?.fullName;
   const age = data?.age;
   const gender = data?.gender;
   const device = data?.device;
