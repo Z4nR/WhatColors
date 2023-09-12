@@ -2,7 +2,7 @@ import { useToastMsg } from "@/utils/customHooks";
 import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
-export default function NotFoundPage({ error }) {
+export default function NotFound({ error }) {
   const toast = useToastMsg();
 
   toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");

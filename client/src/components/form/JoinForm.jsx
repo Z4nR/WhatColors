@@ -37,8 +37,6 @@ export default function JoinForm({ isOpen, onClose }) {
                 <PinInputField />
                 <PinInputField />
                 <PinInputField />
-                <PinInputField />
-                <PinInputField />
               </PinInput>
             </HStack>
             <FormHelperText fontSize={"small"}>

@@ -77,10 +77,31 @@ const useToastMsg = () => {
     });
 };
 
+const useCountDown = () => {
+  const [countDown, setCountDown] = useState(0);
+
+  useEffect(() => {
+    if (countDown <= 0) return;
+
+    const timeout = setTimeout(() => {
+      setCountDown(countDown - 1);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [countDown]);
+
+  const start = (time) => {
+    setCountDown(time);
+  };
+
+  return { countDown, start };
+};
+
 export {
   useTestData,
   useShuffle,
   useDiagramDiscriminant,
   useDiagramComparison,
   useToastMsg,
+  useCountDown,
 };

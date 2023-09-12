@@ -31,7 +31,7 @@ export default function App() {
       <Box
         as="main"
         width={"full"}
-        minHeight={{ base: "100vh", xs: "75vh", md: "77vh", "2xl": "80vh" }}
+        minHeight={{ base: "100vh", xs: "70vh", md: "75vh", "2xl": "80vh" }}
       >
         <Container maxW={"container.xl"} px={5}>
           <QueryClientProvider client={queryClient}>

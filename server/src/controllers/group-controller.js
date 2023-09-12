@@ -3,10 +3,8 @@ const { generateCode } = require("../utils/group-helper");
 const { groupValidate } = require("../utils/validate");
 const mailer = require("nodemailer");
 const handlebars = require("handlebars");
-const smtp = require("nodemailer-smtp-transport");
 const path = require("path");
 const fs = require("fs");
-const { log } = require("console");
 
 module.exports = {
   newGroup: async (req, res) => {
@@ -15,21 +13,15 @@ module.exports = {
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const name = await Group.findOne({
-        groupName: req.body.name,
-      });
-      if (name)
-        return res.status(409).send({ message: "Nama Grup sudah digunakan!" });
-
       const initial = await Group.findOne({
-        groupInitial: req.body.initial,
+        groupInitial: req.body.groupInitial,
       });
       if (initial)
         return res
           .status(409)
           .send({ message: "Inisial Nama sudah digunakan!" });
 
-      const generate = generateCode(7);
+      const generate = generateCode(5);
       const group = { ...req.body, code: generate };
 
       const data = await new Group(group).save();
@@ -45,12 +37,6 @@ module.exports = {
       const { id } = req.params;
       const group = await Group.findById(id);
 
-      const username = process.env.SMTP_USERNAME || null;
-      const password = process.env.SMTP_PASSWORD || null;
-      if (!username || !password) {
-        throw new Error("SMTP_USERNAME and SMTP_PASSWORD must be set");
-      }
-
       const filePath = path.join(__dirname, "../utils/email-template.html");
       const source = fs.readFileSync(filePath, "utf-8").toString();
 
@@ -61,24 +47,27 @@ module.exports = {
       };
       const htmlMsg = template(replacements);
 
-      const smtpTransport = mailer.createTransport(
-        smtp({
-          service: "gmail",
-          auth: {
-            user: username,
-            pass: password,
-          },
-        })
-      );
+      const smtpTransport = mailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASS,
+        },
+      });
       const mailOptions = {
         from: process.env.EMAIL,
         to: group.email,
-        subject: group.groupInitial + " Kode Verifikasi",
-        html: "Testing",
+        subject: group.groupInitial + " Code Verification",
+        html: htmlMsg,
       };
-      const response = await smtpTransport.sendMail(mailOptions);
-
-      console.log(response);
+      smtpTransport.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.status(400).send({ message: error });
+        } else {
+          console.log(info);
+        }
+      });
 
       res.status(200).send({ message: "Kode Email Berhasil Dikirim" });
     } catch (error) {
@@ -98,6 +87,8 @@ module.exports = {
               _id: "01",
               key: codeVerify,
             },
+          },
+          {
             code: {
               _id: "11",
               key: codeVerify,
@@ -106,11 +97,12 @@ module.exports = {
         ],
       });
 
-      if (!findCode)
+      if (findCode.length === 0)
         return res.status(409).send({ message: "Kode Tidak Ditemukan" });
 
-      const admin = findCode[0].code[0].key;
-      const id = findCode[0]._id;
+      const data = { ...findCode };
+      const admin = data[0].code[0].key;
+      const id = data[0]._id;
 
       let isAdmin;
       admin === codeVerify ? (isAdmin = true) : (isAdmin = false);
