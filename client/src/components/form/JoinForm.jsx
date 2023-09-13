@@ -1,7 +1,7 @@
 import { Modal, ModalOverlay } from "@chakra-ui/react";
 import { useState } from "react";
-import VerifyCode from "./join/VerifyCode";
 import ClientForm from "./join/ClientForm";
+import VerifyForm from "./join/VerifyForm";
 
 export default function JoinForm({ isOpen, onClose }) {
   const [getPage, setPage] = useState(false);
@@ -18,7 +18,7 @@ export default function JoinForm({ isOpen, onClose }) {
       {getPage === true ? (
         <ClientForm setPage={setPage} onClose={onClose} />
       ) : (
-        <VerifyCode setPage={setPage} onClose={onClose} />
+        <VerifyForm setPage={setPage} onClose={onClose} />
       )}
     </Modal>
   );

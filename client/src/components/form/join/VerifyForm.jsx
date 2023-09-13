@@ -20,7 +20,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export default function VerifyCode({ setPage, onClose }) {
+export default function VerifyForm({ setPage, onClose }) {
   const navigate = useNavigate();
   const toast = useToastMsg();
 
