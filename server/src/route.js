@@ -16,5 +16,6 @@ router.route("/group/:id").get(groupController.getGroupById); //get group data b
 
 //Client
 router.route("/client/:id/new").post(clientConntroller.newClient); //add new client by group Id
+router.route("/client/:id").get(clientConntroller.getClientById); //get client data by Id
 
 module.exports = router;

@@ -39,8 +39,6 @@ export default function ClientForm({ setPage, onClose }) {
     queryFn: () => getGroupById(id),
   });
 
-  storage.setJSON("inisial", data.groupInitial);
-
   const {
     handleSubmit,
     register,
@@ -57,6 +55,8 @@ export default function ClientForm({ setPage, onClose }) {
       isClient: true,
     },
   });
+
+  storage.setJSON("inisial", data.groupInitial);
 
   useEffect(() => {
     setValue("device", data.device);

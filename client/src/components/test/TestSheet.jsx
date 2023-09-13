@@ -104,7 +104,7 @@ export default function TestSheet({ test, user, init, isClient }) {
 
   const onSubmit = () => {
     isClient
-      ? client.mutateAsync(id, getFinalData)
+      ? client.mutateAsync({ id, clientData: getFinalData })
       : individual.mutateAsync(getFinalData);
   };
 

@@ -15,12 +15,8 @@ module.exports = {
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const name = await Group.find({
-        clients: {
-          $elemMatch: {
-            name: req.body.name,
-          },
-        },
+      const name = await Client.findOne({
+        name: req.body.name,
       });
       if (name)
         return res.status(409).send({ message: "Nama sudah digunakan!" });
@@ -32,6 +28,22 @@ module.exports = {
       await group.save();
 
       res.status(200).send({ id: data._id });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+    }
+  },
+
+  getClientById: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const data = await Client.findById(id);
+
+      if (!data)
+        return res.status(404).send({ message: "Data tidak ditemukan" });
+
+      res.status(202).send(data);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
