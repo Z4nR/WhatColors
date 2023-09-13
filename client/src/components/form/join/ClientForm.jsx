@@ -34,7 +34,7 @@ export default function ClientForm({ setPage, onClose }) {
   const navigate = useNavigate();
   const id = storage.getJSON("id");
 
-  const { data, error, isLoading, isError } = useQuery({
+  const { data, error, isSuccess, isLoading, isError } = useQuery({
     queryKey: ["group", id],
     queryFn: () => getGroupById(id),
   });
@@ -57,7 +57,7 @@ export default function ClientForm({ setPage, onClose }) {
   });
 
   useEffect(() => {
-    if (data !== null) {
+    if (isSuccess) {
       storage.setJSON("inisial", data.groupInitial);
       setValue("device", data.device);
       setValue("testType", data.type);
