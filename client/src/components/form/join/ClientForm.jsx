@@ -56,12 +56,13 @@ export default function ClientForm({ setPage, onClose }) {
     },
   });
 
-  storage.setJSON("inisial", data.groupInitial);
-
   useEffect(() => {
-    setValue("device", data.device);
-    setValue("testType", data.type);
-    setValue("value", createArray(data.type));
+    if (data !== null) {
+      storage.setJSON("inisial", data.groupInitial);
+      setValue("device", data.device);
+      setValue("testType", data.type);
+      setValue("value", createArray(data.type));
+    }
   }, [setValue]);
 
   if (isLoading) return <Loading />;
