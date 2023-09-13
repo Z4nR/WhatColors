@@ -202,7 +202,7 @@ const colorBlindType = (t, compare) => {
   return findBlindType;
 };
 
-const testResult = (result, initiate, user, time, isClient) => {
+const testResult = (result, initiate, user, isClient) => {
   const comparison = compareValue(result, initiate);
   const discriminant = discriminantValue(result, initiate);
   const totalErrorScore = methodCalculate(result);
@@ -217,7 +217,7 @@ const testResult = (result, initiate, user, time, isClient) => {
   storage.setJSON("discriminant", discriminant);
   storage.setJSON("comparison", comparison.result);
 
-  if (!isClient) {
+  if (isClient) {
     return {
       ...user,
       totalErrorScore,
@@ -225,7 +225,7 @@ const testResult = (result, initiate, user, time, isClient) => {
       blindCheck,
       comparisonResult,
       discriminantResult,
-      time,
+      status,
     };
   } else {
     return {
@@ -235,8 +235,6 @@ const testResult = (result, initiate, user, time, isClient) => {
       blindCheck,
       comparisonResult,
       discriminantResult,
-      time,
-      status,
     };
   }
 };

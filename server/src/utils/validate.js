@@ -51,7 +51,7 @@ module.exports = {
   },
 
   clientValidate: (data) => {
-    const individualSchema = Joi.object().keys({
+    const clientSchema = Joi.object().keys({
       date: Joi.string().required().label("Tanggal Mengerjakan"),
       time: Joi.string().required().label("Waktu Pengerjaan"),
       name: Joi.string().required().label("Nama"),
@@ -77,6 +77,6 @@ module.exports = {
       status: Joi.string().required().label("Status"),
     });
 
-    return individualSchema.validate(data);
+    return clientSchema.validate(data);
   },
 };

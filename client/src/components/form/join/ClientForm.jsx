@@ -34,6 +34,13 @@ export default function ClientForm({ setPage, onClose }) {
   const navigate = useNavigate();
   const id = storage.getJSON("id");
 
+  const { data, error, isLoading, isError } = useQuery({
+    queryKey: ["group", id],
+    queryFn: () => getGroupById(id),
+  });
+
+  storage.setJSON("inisial", data.groupInitial);
+
   const {
     handleSubmit,
     register,
@@ -51,24 +58,10 @@ export default function ClientForm({ setPage, onClose }) {
     },
   });
 
-  const { data, error, isLoading, isError } = useQuery({
-    queryKey: ["group", id],
-    queryFn: () => getGroupById(id),
-  });
-
-  let device;
-  let type;
-
-  if (data !== null) {
-    storage.setJSON("inisial", data.groupInitial);
-    device = data.device;
-    type = data.type;
-  }
-
   useEffect(() => {
-    setValue("device", device);
-    setValue("testType", type);
-    setValue("value", createArray(type));
+    setValue("device", data.device);
+    setValue("testType", data.type);
+    setValue("value", createArray(data.type));
   }, [setValue]);
 
   if (isLoading) return <Loading />;

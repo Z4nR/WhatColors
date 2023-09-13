@@ -1,4 +1,4 @@
-const clientConntroller = require("./controllers/client-conntroller");
+const clientConntroller = require("./controllers/client-controller");
 const groupController = require("./controllers/group-controller");
 const individualController = require("./controllers/individual-controller");
 

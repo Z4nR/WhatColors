@@ -24,7 +24,7 @@ export default function VerifyForm({ setPage, onClose }) {
   const navigate = useNavigate();
   const toast = useToastMsg();
 
-  const verifyMutation = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationFn: verifyRole,
     onSuccess: (data) => {
       storage.setJSON("id", data.id);
@@ -46,7 +46,7 @@ export default function VerifyForm({ setPage, onClose }) {
   });
 
   const onVerify = (data) => {
-    verifyMutation.mutateAsync(data.code);
+    mutateAsync(data.code);
   };
 
   return (
@@ -84,7 +84,13 @@ export default function VerifyForm({ setPage, onClose }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="teal" mr={3} type="submit">
+          <Button
+            colorScheme="teal"
+            mr={3}
+            type="submit"
+            loadingText="Memverifikasi"
+            isLoading={isLoading}
+          >
             Verifikasi
           </Button>
           <Button onClick={onClose}>Cancel</Button>

@@ -1,4 +1,4 @@
-import { newIndividual } from "@/utils/call-api";
+import { newClient, newIndividual } from "@/utils/call-api";
 import { reunitedColor } from "@/utils/methods/method-loader";
 import storage from "@/utils/storage";
 import { testResult } from "@/utils/test-helper";
@@ -18,6 +18,7 @@ const formatTime = (time) =>
 export default function TestSheet({ test, user, init, isClient }) {
   const navigate = useNavigate();
   const toast = useToastMsg();
+  const id = storage.getJSON("id");
   const [getTestResult, setTestResult] = useState(null);
   const [getTimelapse, setTimelapse] = useState(new Date(0));
   const [getTestDone, setTestDone] = useState(false);
@@ -58,8 +59,26 @@ export default function TestSheet({ test, user, init, isClient }) {
     return () => clearTimeout(interval.current);
   }, [getTimelapse, updateTimer]);
 
-  const { mutateAsync, isLoading } = useMutation({
+  const individual = useMutation({
     mutationFn: newIndividual,
+    onSuccess: (data) => {
+      storage.setJSON("id", data);
+      navigate("/result");
+      toast(
+        "Data Berhasil Ditambahkan",
+        "Berikut hasil perhitungan data yang telah ditambahkan",
+        "success"
+      );
+    },
+    onError: (error) => {
+      setTimelapse(new Date(0));
+      setTestDone(false);
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+    },
+  });
+
+  const client = useMutation({
+    mutationFn: newClient,
     onSuccess: (data) => {
       storage.setJSON("id", data);
       navigate("/result");
@@ -79,12 +98,14 @@ export default function TestSheet({ test, user, init, isClient }) {
   const onFinish = () => {
     setTestDone(true);
     stopTime();
-    const result = testResult(reunited, init, user, time, isClient);
-    setFinaldata(result);
+    const result = testResult(reunited, init, user, isClient);
+    setFinaldata({ ...result, time });
   };
 
   const onSubmit = () => {
-    mutateAsync(getFinalData);
+    isClient
+      ? client.mutateAsync(id, getFinalData)
+      : individual.mutateAsync(getFinalData);
   };
 
   return (
@@ -158,7 +179,7 @@ export default function TestSheet({ test, user, init, isClient }) {
             colorScheme="teal"
             onClick={onSubmit}
             loadingText="Mengirim Hasil"
-            isLoading={isLoading}
+            isLoading={individual.isLoading || client.isLoading}
           >
             Kirim Data
           </Button>
