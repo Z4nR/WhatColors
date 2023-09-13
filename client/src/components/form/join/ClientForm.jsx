@@ -33,8 +33,10 @@ import { useNavigate } from "react-router-dom";
 export default function ClientForm({ setPage, onClose }) {
   const navigate = useNavigate();
   const id = storage.getJSON("id");
+  let device;
+  let type;
 
-  const { data, error, isSuccess, isLoading, isError } = useQuery({
+  const { data, error, isLoading, isError } = useQuery({
     queryKey: ["group", id],
     queryFn: () => getGroupById(id),
   });
@@ -56,13 +58,16 @@ export default function ClientForm({ setPage, onClose }) {
     },
   });
 
+  if (data) {
+    storage.setJSON("inisial", data.groupInitial);
+    device = data.device;
+    type = data.type;
+  }
+
   useEffect(() => {
-    if (isSuccess) {
-      storage.setJSON("inisial", data.groupInitial);
-      setValue("device", data.device);
-      setValue("testType", data.type);
-      setValue("value", createArray(data.type));
-    }
+    setValue("device", device);
+    setValue("testType", type);
+    setValue("value", createArray(type));
   }, [setValue]);
 
   if (isLoading) return <Loading />;
