@@ -9,7 +9,7 @@ export default function ClientResult() {
   const id = storage.getJSON("id");
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["individual", id],
-    queryFn: () => getClientById(id),
+    queryFn: async () => await getClientById(id),
   });
 
   if (isLoading) return <Loading />;

@@ -12,7 +12,7 @@ export default function ResultPage() {
   const id = storage.getJSON("id");
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["individual", id],
-    queryFn: () => getIndividualById(id),
+    queryFn: async () => await getIndividualById(id),
   });
 
   if (isLoading) return <Loading />;

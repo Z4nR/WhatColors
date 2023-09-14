@@ -123,7 +123,15 @@ module.exports = {
       if (!group)
         return res.status(404).send({ message: "Data tidak ditemukan" });
 
-      res.status(202).send(group);
+      const data = {
+        name: group.groupName,
+        initial: group.groupInitial,
+        date: group.date,
+        type: group.type,
+        device: group.device,
+      };
+
+      res.status(202).send(data);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
