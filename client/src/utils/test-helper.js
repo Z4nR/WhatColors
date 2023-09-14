@@ -9,6 +9,7 @@ const date = new Date().toLocaleDateString("id-ID", {
 });
 
 const inisial = storage.getJSON("inisial");
+const max = storage.getJSON("max");
 
 const userData = (data, isClient) => {
   const name = isClient ? `${inisial} ${data?.fullName}` : data?.fullName;
@@ -209,7 +210,7 @@ const testResult = (result, initiate, user, isClient) => {
   const blindType = colorBlindType(user.type, comparison.result);
   const blindCheck = !blindType ? "Normal" : blindType;
   const errorScoreStatus = blindStatus(totalErrorScore);
-  const status = blindCheck === "Normal" ? "Lolos" : "Tidak Lolos";
+  const status = totalErrorScore < max ? "Lolos" : "Tidak Lolos";
 
   const comparisonResult = comparison.value;
   const discriminantResult = discriminant.value;

@@ -1,5 +1,3 @@
-import Loading from "@/components/utils/Loading";
-import NotFound from "@/components/utils/NotFound";
 import { getGroupById } from "@/utils/call-api";
 import { createArray } from "@/utils/methods/method-loader";
 import storage from "@/utils/storage";
@@ -25,21 +23,12 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 export default function ClientForm({ setPage, onClose }) {
   const navigate = useNavigate();
-  const id = storage.getJSON("id");
-  let device;
-  let type;
-
-  const { data, error, isLoading, isError } = useQuery({
-    queryKey: ["group", id],
-    queryFn: () => getGroupById(id),
-  });
 
   const {
     handleSubmit,
@@ -58,20 +47,16 @@ export default function ClientForm({ setPage, onClose }) {
     },
   });
 
-  if (data) {
-    storage.setJSON("inisial", data.groupInitial);
-    device = data.device;
-    type = data.type;
-  }
-
   useEffect(() => {
-    setValue("device", device);
-    setValue("testType", type);
-    setValue("value", createArray(type));
+    const id = storage.getJSON("id");
+    getGroupById(id).then((data) => {
+      storage.setJSON("inisial", data.initial);
+      storage.setJSON("score", data.max);
+      setValue("device", data.device);
+      setValue("testType", data.type);
+      setValue("value", createArray(data.type));
+    });
   }, [setValue]);
-
-  if (isLoading) return <Loading />;
-  if (isError) return <NotFound error={error} />;
 
   const onSubmit = (data) => {
     storage.setJSON("user", data);

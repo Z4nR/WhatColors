@@ -129,6 +129,7 @@ module.exports = {
         date: group.date,
         type: group.type,
         device: group.device,
+        max: group.maxScore,
       };
 
       res.status(202).send(data);
