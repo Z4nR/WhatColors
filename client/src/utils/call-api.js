@@ -56,6 +56,13 @@ const getGroupById = async (id) => {
   });
 };
 
+const getClientData = async (id) => {
+  return axios.get(`${Server_URL}/group/${id}/clients`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
 const newClient = async ({ id, clientData }) => {
   return axios
     .post(`${Server_URL}/client/${id}/new`, clientData, {
@@ -83,6 +90,7 @@ export {
   sendEmail,
   verifyRole,
   getGroupById,
+  getClientData,
   newClient,
   getClientById,
 };

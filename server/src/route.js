@@ -13,6 +13,7 @@ router.route("/group/new").post(groupController.newGroup); //create group
 router.route("/group/code/:id").get(groupController.sendEmailCode); //send email
 router.route("/group/verify/:codeVerify").get(groupController.verifyRole); //verification code
 router.route("/group/:id").get(groupController.getGroupById); //get group data by Id
+router.route("/group/:id/clients").get(groupController.getClientByGroup); //get daat client for group using group Id
 
 //Client
 router.route("/client/:id/new").post(clientConntroller.newClient); //add new client by group Id
