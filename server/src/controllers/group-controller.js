@@ -143,7 +143,12 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const group = await Group.findById(id).populate("clients");
+      const group = await Group.findById(id).populate({
+        path: "clients",
+        options: {
+          sort: { totalErrorScore: 1, time: 1 },
+        },
+      });
       if (!group)
         return res.status(404).send({ message: "Data tidak ditemukan" });
 

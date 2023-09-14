@@ -41,27 +41,27 @@ export default function AdminPage() {
         </Heading>
         <Text>Dibuat pada {group.data.date}</Text>
       </Box>
-      <TableContainer my={4}>
+      <TableContainer my={6}>
         <Table size={"sm"}>
           <Thead>
             <Tr>
-              <Th>#</Th>
-              <Th>Nama</Th>
-              <Th>Status</Th>
-              <Th>Skor Tes</Th>
-              <Th>Waktu</Th>
-              <Th>Perangkat</Th>
+              <Th textAlign={"center"}>#</Th>
+              <Th textAlign={"center"}>Nama</Th>
+              <Th textAlign={"center"}>Waktu</Th>
+              <Th textAlign={"center"}>Skor Tes</Th>
+              <Th textAlign={"center"}>Status</Th>
+              <Th textAlign={"center"}>Perangkat</Th>
             </Tr>
           </Thead>
           <Tbody>
             {client.data.map((data, index) => (
               <Tr key={data._id}>
-                <Td>{index + 1}</Td>
-                <Td>{data.name}</Td>
-                <Td>{data.status}</Td>
-                <Td>{data.totalErrorScore}</Td>
-                <Td>{data.time}</Td>
-                <Td>{data.device}</Td>
+                <Td textAlign={"center"}>{index + 1}</Td>
+                <Td textAlign={"center"}>{data.name}</Td>
+                <Td textAlign={"center"}>{data.time}</Td>
+                <Td textAlign={"center"}>{data.totalErrorScore}</Td>
+                <Td textAlign={"center"}>{data.status}</Td>
+                <Td textAlign={"center"}>{data.device}</Td>
               </Tr>
             ))}
           </Tbody>
