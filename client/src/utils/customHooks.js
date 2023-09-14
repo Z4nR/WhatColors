@@ -97,6 +97,70 @@ const useCountDown = () => {
   return { countDown, start };
 };
 
+const useDownloadData = (data) => {
+  const [csv, setCsv] = useState(null);
+
+  useEffect(() => {
+    if (data && !!data.length) {
+      const comparisonId = Array(data[0].comparisonResult.length)
+        .fill(null)
+        .map((_, id) => `C${id + 1}`);
+
+      const discriminantId = Array(data[0].discriminantResult.length)
+        .fill(null)
+        .map((_, id) => `D${id + 1}`);
+
+      const header = [
+        "Tanggal",
+        "Nama",
+        "Usia",
+        "Jumlah Nilai Kesalahan",
+        "Waktu Pengerjaan",
+        "Status",
+        "Perangkat",
+        ...comparisonId,
+        ...discriminantId,
+      ];
+
+      const csvData = data?.map((c) => {
+        const date = c.date;
+        const name = c.name;
+        const age = c.age;
+        const score = c.totalErrorScore;
+        const time = c.time;
+        const status = c.status;
+        const device = c.device;
+        const comparisonKey = c?.comparisonResult.map(
+          (item) => item.comparison
+        );
+        const discriminantKey = c?.discriminantResult.map(
+          (item) => item.discriminant
+        );
+
+        const newArray = [
+          date,
+          name,
+          age,
+          score,
+          time,
+          status,
+          device,
+          ...comparisonKey,
+          ...discriminantKey,
+        ];
+
+        return newArray;
+      });
+
+      const finalData = [header, ...csvData];
+
+      setCsv(finalData);
+    }
+  }, [data]);
+
+  return [csv];
+};
+
 export {
   useTestData,
   useShuffle,
@@ -104,4 +168,5 @@ export {
   useDiagramComparison,
   useToastMsg,
   useCountDown,
+  useDownloadData,
 };
