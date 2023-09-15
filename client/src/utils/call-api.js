@@ -36,21 +36,21 @@ const newGroup = async (groupData) => {
 };
 
 const sendEmail = async (id) => {
-  return axios.get(`${Server_URL}/group/code/${id}`).then((response) => {
+  return axios.get(`${Server_URL}/group/${id}/code`).then((response) => {
     const { message } = response.data;
     return message;
   });
 };
 
 const verifyRole = async (code) => {
-  return axios.get(`${Server_URL}/group/verify/${code}`).then((response) => {
+  return axios.get(`${Server_URL}/group/${code}/verify`).then((response) => {
     const data = response.data;
     return data;
   });
 };
 
 const getGroupById = async (id) => {
-  return axios.get(`${Server_URL}/group/${id}`).then((response) => {
+  return axios.get(`${Server_URL}/group/${id}/data`).then((response) => {
     const data = response.data;
     return data;
   });
@@ -77,7 +77,7 @@ const newClient = async ({ id, clientData }) => {
 };
 
 const getClientById = async (id) => {
-  return axios.get(`${Server_URL}/client/${id}`).then((response) => {
+  return axios.get(`${Server_URL}/client/${id}/data`).then((response) => {
     const data = response.data;
     return data;
   });

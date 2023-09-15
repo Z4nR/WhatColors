@@ -93,7 +93,7 @@ export default function VerifyForm({ setPage, onClose }) {
           >
             Verifikasi
           </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onClose}>Batal</Button>
         </ModalFooter>
       </ModalContent>
     </form>

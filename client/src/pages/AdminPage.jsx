@@ -5,7 +5,15 @@ import { useDownloadData } from "@/utils/customHooks";
 import storage from "@/utils/storage";
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Box,
+  Button,
   Heading,
   IconButton,
   Table,
@@ -17,12 +25,16 @@ import {
   Thead,
   Tr,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { useRef } from "react";
 import { CSVLink } from "react-csv";
 
 export default function AdminPage() {
   const id = storage.getJSON("id");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
 
   const group = useQuery({
     queryKey: ["group", id],
@@ -44,6 +56,31 @@ export default function AdminPage() {
 
   return (
     <Box py={{ lg: 4 }}>
+      <AlertDialog
+        motionPreset="slideInBottom"
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
+        <AlertDialogOverlay />
+        <AlertDialogContent>
+          <AlertDialogHeader>Hapus Grup?</AlertDialogHeader>
+          <AlertDialogCloseButton />
+          <AlertDialogBody>
+            Apakah anda yakin ingin menghapus grup ini? <br /> Pastikan anda
+            telah mengunduh data yang telah diperlukan.
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              Tidak
+            </Button>
+            <Button colorScheme="red" ml={3}>
+              Hapus Grup
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       <Box textAlign={"center"} fontSize={{ base: "xs", xs: "sm", md: "md" }}>
         <Heading mt={{ base: 4, md: 2 }} size={{ base: "sm", md: "md" }}>
           {group.data.name} ({group.data.initial})
@@ -125,6 +162,7 @@ export default function AdminPage() {
             },
           }}
           icon={<DeleteIcon />}
+          onClick={onOpen}
         />
       </VStack>
     </Box>

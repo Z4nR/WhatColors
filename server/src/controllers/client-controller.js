@@ -9,7 +9,7 @@ module.exports = {
 
       const group = await Group.findById(id);
       if (!group)
-        return res.status(404).send({ message: "Data tidak ditemukan" });
+        return res.status(404).send({ message: "Grup tidak ditemukan" });
 
       const { error } = clientValidate(req.body);
       if (error)
@@ -19,7 +19,9 @@ module.exports = {
         name: req.body.name,
       });
       if (name)
-        return res.status(409).send({ message: "Nama sudah digunakan!" });
+        return res
+          .status(409)
+          .send({ message: "Nama Peserta sudah digunakan!" });
 
       const client = new Client(req.body);
       const data = await client.save();

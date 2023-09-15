@@ -19,7 +19,7 @@ module.exports = {
       if (initial)
         return res
           .status(409)
-          .send({ message: "Inisial Nama sudah digunakan!" });
+          .send({ message: "Inisial Grup sudah digunakan!" });
 
       const generate = generateCode(5);
       const group = { ...req.body, code: generate };
@@ -57,7 +57,7 @@ module.exports = {
       const mailOptions = {
         from: process.env.EMAIL,
         to: group.email,
-        subject: group.groupInitial + " Code Verification",
+        subject: "Verifikasi Kode " + group.groupInitial,
         html: htmlMsg,
       };
       smtpTransport.sendMail(mailOptions, function (error, info) {
@@ -121,7 +121,7 @@ module.exports = {
       const group = await Group.findById(id);
 
       if (!group)
-        return res.status(404).send({ message: "Data tidak ditemukan" });
+        return res.status(404).send({ message: "Grup tidak ditemukan" });
 
       const data = {
         name: group.groupName,
@@ -150,11 +150,26 @@ module.exports = {
         },
       });
       if (!group)
-        return res.status(404).send({ message: "Data tidak ditemukan" });
+        return res.status(404).send({ message: "Grup tidak ditemukan" });
 
       const data = group.clients;
 
       res.status(202).send(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+    }
+  },
+
+  deleteGroup: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      if (!id) return res.status(404).send({ message: "Grup tidak ditemukan" });
+
+      await Group.findByIdAndDelete(id);
+
+      res.status(200).send({ message: "Data berhasil dihapus" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });

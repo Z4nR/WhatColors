@@ -10,13 +10,14 @@ router.route("/user/:id").get(individualController.getUserById); //get individua
 
 //Group Tes
 router.route("/group/new").post(groupController.newGroup); //create group
-router.route("/group/code/:id").get(groupController.sendEmailCode); //send email
-router.route("/group/verify/:codeVerify").get(groupController.verifyRole); //verification code
-router.route("/group/:id").get(groupController.getGroupById); //get group data by Id
+router.route("/group/:id/code").get(groupController.sendEmailCode); //send email
+router.route("/group/:codeVerify/verify").get(groupController.verifyRole); //verification code
+router.route("/group/:id/data").get(groupController.getGroupById); //get group data by Id
 router.route("/group/:id/clients").get(groupController.getClientByGroup); //get daat client for group using group Id
+router.route("/group/:id/delete").delete(groupController.deleteGroup);
 
 //Client
 router.route("/client/:id/new").post(clientConntroller.newClient); //add new client by group Id
-router.route("/client/:id").get(clientConntroller.getClientById); //get client data by Id
+router.route("/client/:id/data").get(clientConntroller.getClientById); //get client data by Id
 
 module.exports = router;
