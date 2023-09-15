@@ -169,7 +169,7 @@ module.exports = {
 
       await Group.findByIdAndDelete(id);
 
-      res.status(200).send({ message: "Data berhasil dihapus" });
+      res.status(200).send({ message: "Grup berhasil dihapus" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });

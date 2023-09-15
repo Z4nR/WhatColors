@@ -1,7 +1,7 @@
 import Loading from "@/components/utils/Loading";
 import NotFound from "@/components/utils/NotFound";
-import { getClientData, getGroupById } from "@/utils/call-api";
-import { useDownloadData } from "@/utils/customHooks";
+import { deleteGroupById, getClientData, getGroupById } from "@/utils/call-api";
+import { useDownloadData, useToastMsg } from "@/utils/customHooks";
 import storage from "@/utils/storage";
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import {
@@ -27,14 +27,32 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
 import { CSVLink } from "react-csv";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
+  const navigate = useNavigate();
+  const toast = useToastMsg();
   const id = storage.getJSON("id");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
+
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: deleteGroupById,
+    onSuccess: (data) => {
+      navigate("/");
+      toast("Berhasil Dihapus", `${data.message}`, "info");
+    },
+    onError: (error) => {
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+    },
+  });
+
+  const deleteGroup = () => {
+    mutateAsync(id);
+  };
 
   const group = useQuery({
     queryKey: ["group", id],
@@ -47,8 +65,6 @@ export default function AdminPage() {
   });
 
   const [csv] = useDownloadData(client.data);
-
-  console.log(csv);
 
   if (group.isLoading || client.isLoading) return <Loading />;
   if (group.isError || client.isError)
@@ -75,7 +91,13 @@ export default function AdminPage() {
             <Button ref={cancelRef} onClick={onClose}>
               Tidak
             </Button>
-            <Button colorScheme="red" ml={3}>
+            <Button
+              colorScheme="red"
+              ml={3}
+              loadingText="Menghapus"
+              isLoading={isLoading}
+              onClick={deleteGroup}
+            >
               Hapus Grup
             </Button>
           </AlertDialogFooter>
