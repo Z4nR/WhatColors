@@ -161,7 +161,7 @@ module.exports = {
     }
   },
 
-  deleteGroup: async (req, res) => {
+  deleteGroupById: async (req, res) => {
     try {
       const { id } = req.params;
 

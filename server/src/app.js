@@ -1,6 +1,8 @@
+const { deleteAllTestData } = require("./controllers/other-controller");
 const express = require("express"),
   cors = require("cors"),
-  bodyParser = require("body-parser");
+  bodyParser = require("body-parser"),
+  cron = require("node-cron");
 (app = express()), ((db = require("./db")), (route = require("./route")));
 
 require("dotenv").config();
@@ -16,6 +18,20 @@ if (env === "development") {
 //Middleware
 app.use(bodyParser.json());
 app.use(cors({ origin: "*" }));
+
+//Delete Daily Schedule
+const cronConfig = {
+  scheduled: true,
+  timezone: "Asia/Jakarta",
+};
+
+const deleteSchedule = cron.schedule(
+  "0 0 * * 6",
+  deleteAllTestData,
+  cronConfig
+);
+
+deleteSchedule.start();
 
 //Route
 app.use("/v1", route);
