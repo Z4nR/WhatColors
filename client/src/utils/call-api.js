@@ -90,6 +90,13 @@ const getClientById = async (id) => {
   });
 };
 
+const getTestSearch = async (name) => {
+  return axios.get(`${Server_URL}/search?name=${name}`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
 export {
   newIndividual,
   getIndividualById,
@@ -101,4 +108,5 @@ export {
   getClientData,
   newClient,
   getClientById,
+  getTestSearch,
 };

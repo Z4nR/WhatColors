@@ -5,20 +5,20 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import FAQPage from "@/pages/FAQPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import WebHeader from "@/components/web/WebHeader";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/mobile/MobileNav";
+import AppHeader from "@/components/mobile/AppHeader";
+import VerifyAdmin from "@/components/utils/VerifyAdmin";
+import HomePage from "@/pages/HomePage";
+import TestPage from "@/pages/TestPage";
 import AboutPage from "@/pages/AboutPage";
 import ArticlePage from "@/pages/ArticlePage";
-import TestPage from "@/pages/TestPage";
-import WebHeader from "@/components/web/WebHeader";
-import AppHeader from "@/components/mobile/AppHeader";
 import AdminPage from "@/pages/AdminPage";
-import HomePage from "@/pages/HomePage";
-import ResultPage from "./pages/ResultPage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import VerifyAdmin from "./components/utils/VerifyAdmin";
-import SearchPage from "./pages/SearchPage";
+import FAQPage from "@/pages/FAQPage";
+import ResultPage from "@/pages/ResultPage";
+import SearchPage from "@/pages/SearchPage";
 
 const queryClient = new QueryClient();
 
