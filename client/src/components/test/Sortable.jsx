@@ -20,8 +20,8 @@ export default function Sortable({ handle, data, testDone }) {
             margin={"4px 1px"}
             border={"1px solid #252525"}
             cursor={"pointer"}
-            width={{ base: 7, xs: 8, lg: 10 }}
-            height={{ base: 7, xs: 8, lg: 10 }}
+            width={{ base: 8, xs: 9, lg: 10 }}
+            height={{ base: 8, xs: 9, lg: 10 }}
           />
         ))}
       </ReactSortable>
@@ -44,8 +44,8 @@ export default function Sortable({ handle, data, testDone }) {
           margin={"4px 1px"}
           border={"1px solid #252525"}
           cursor={"pointer"}
-          width={{ base: 7, xs: 8, lg: 10 }}
-          height={{ base: 7, xs: 8, lg: 10 }}
+          width={{ base: 8, xs: 9, lg: 10 }}
+          height={{ base: 8, xs: 9, lg: 10 }}
         />
       ))}
     </ReactSortable>
