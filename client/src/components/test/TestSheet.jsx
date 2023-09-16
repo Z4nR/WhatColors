@@ -130,8 +130,8 @@ export default function TestSheet({ test, user, init, isClient }) {
             <Box
               key={data.first}
               backgroundColor={data.first.color}
-              width={{ base: 8, xs: 9, lg: 10 }}
-              height={{ base: 8, xs: 9, lg: 10 }}
+              width={10}
+              height={10}
             >
               <Text
                 textAlign={"center"}
@@ -157,8 +157,8 @@ export default function TestSheet({ test, user, init, isClient }) {
             <Box
               key={data.last}
               backgroundColor={data.last.color}
-              width={{ base: 8, xs: 9, lg: 10 }}
-              height={{ base: 8, xs: 9, lg: 10 }}
+              width={10}
+              height={10}
             >
               <Text
                 textAlign={"center"}
