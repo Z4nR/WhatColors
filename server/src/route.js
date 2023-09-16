@@ -26,7 +26,7 @@ router.route("/client/:id/new").post(clientConntroller.newClient); //add new cli
 router.route("/client/:id/data").get(clientConntroller.getClientById); //get client data by Id
 
 //Search
-router.route("/search").get(searchAllTestData);
+router.route("/search").post(searchAllTestData);
 
 //Article
 router.route("/article/new").post(newArticle);

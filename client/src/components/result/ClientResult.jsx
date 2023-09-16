@@ -88,7 +88,7 @@ export default function ClientResult() {
       <Text textAlign={{ base: "justify", sm: "center" }}>
         Setelah melalui proses perhitungan yang cukup kompleks dan panjang,
         menghasilkan skor kesalahan sebesar <b>{data?.totalErrorScore}</b>.
-        Sehingga dengan hasil skor tersebut menunjukkan bahwa pengguna:
+        Sehingga dengan hasil skor tersebut menyatakan bahwa pengguna dianggap:
       </Text>
       <Heading
         mt={4}
@@ -96,7 +96,7 @@ export default function ClientResult() {
         size={{ base: "md", md: "lg" }}
         fontWeight={"bold"}
       >
-        {data.status}
+        {data.status} Tes Buta Warna
       </Heading>
       <Divider
         my={4}

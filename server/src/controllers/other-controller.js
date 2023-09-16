@@ -47,11 +47,6 @@ module.exports = {
         time: 1,
       });
 
-      if (!client)
-        return res
-          .status(404)
-          .send({ message: "Data Peserta tidak ditemukan" });
-
       const clientSearchResult = client.map((key) => {
         const name = key.name;
         const date = key.date;
@@ -76,11 +71,6 @@ module.exports = {
         time: 1,
       });
 
-      if (!individual)
-        return res
-          .status(404)
-          .send({ message: "Data Pengguna tidak ditemukan" });
-
       const individualSearchResult = individual.map((key) => {
         const name = key.name;
         const date = key.date;
@@ -97,12 +87,8 @@ module.exports = {
       });
 
       const group = await Group.find({ groupName: { $regex: name } }).sort({
-        totalErrorScore: 1,
-        time: 1,
+        date: 1,
       });
-
-      if (!group)
-        return res.status(404).send({ message: "Grup tidak ditemukan" });
 
       const groupSearchResult = group.map((key) => {
         const name = key.groupName;

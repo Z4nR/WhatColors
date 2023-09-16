@@ -91,7 +91,7 @@ const getClientById = async (id) => {
 };
 
 const getTestSearch = async (name) => {
-  return axios.get(`${Server_URL}/search?name=${name}`).then((response) => {
+  return axios.post(`${Server_URL}/search?name=${name}`).then((response) => {
     const data = response.data;
     return data;
   });

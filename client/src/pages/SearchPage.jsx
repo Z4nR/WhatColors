@@ -1,7 +1,13 @@
+import ClientSearch from "@/components/search/ClientSearch";
+import GroupSearch from "@/components/search/GroupSearch";
+import IndividualSearch from "@/components/search/IndividualSearch";
+import { getTestSearch } from "@/utils/call-api";
+import { useToastMsg } from "@/utils/customHooks";
 import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   HStack,
   Input,
   Tab,
@@ -10,16 +16,56 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 
 export default function SearchPage() {
+  const toast = useToastMsg();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const { mutateAsync, isLoading, data } = useMutation({
+    mutationFn: getTestSearch,
+    onSuccess: () => {
+      toast("Pencarian Berhasil", "Data berhasil ditampilkan", "success");
+    },
+    onError: (error) => {
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+    },
+  });
+
+  const onSearch = (data) => {
+    mutateAsync(data.name);
+  };
+
   return (
     <Box mt={{ base: 4, lg: 8 }}>
-      <HStack gap={15} justifyContent={"center"} alignItems={"center"}>
-        <FormControl maxWidth={"400px"}>
-          <Input placeholder="Masukan Data Yang Ingin Dicari" />
-        </FormControl>
-        <Button>Cari</Button>
-      </HStack>
+      <form onSubmit={handleSubmit(onSearch)}>
+        <HStack gap={15} justifyContent={"center"} alignItems={"center"}>
+          <FormControl maxWidth={"400px"}>
+            <Input
+              id="name"
+              autoComplete="off"
+              focusBorderColor="teal.400"
+              placeholder="Masukan Data Yang Ingin Dicari"
+              {...register("name")}
+            />
+          </FormControl>
+          <FormErrorMessage>
+            {errors.name && errors.name.message}
+          </FormErrorMessage>
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            loadingText="Mencari Data"
+          >
+            Cari
+          </Button>
+        </HStack>
+      </form>
       <Tabs
         mt={{ base: 4, lg: 8 }}
         isFitted
@@ -34,13 +80,13 @@ export default function SearchPage() {
 
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            <IndividualSearch data={data?.individual} />
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            <ClientSearch data={data?.client} />
           </TabPanel>
           <TabPanel>
-            <p>three!</p>
+            <GroupSearch data={data?.room} />
           </TabPanel>
         </TabPanels>
       </Tabs>
