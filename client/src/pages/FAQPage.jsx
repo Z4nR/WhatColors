@@ -32,7 +32,7 @@ export default function FAQPage() {
                 flex="1"
                 textAlign="left"
                 fontWeight={"medium"}
-                fontSize={{ base: "xs", xs: "sm", sm: "md" }}
+                fontSize={{ base: "sm", sm: "md" }}
               >
                 Bagaimana cara mengerjakan tes di website ini?
               </Box>
@@ -53,7 +53,7 @@ export default function FAQPage() {
                 flex="1"
                 textAlign="left"
                 fontWeight={"medium"}
-                fontSize={{ base: "xs", xs: "sm", sm: "md" }}
+                fontSize={{ base: "sm", sm: "md" }}
               >
                 Berapa jenis metode yang digunakan?
               </Box>
@@ -87,7 +87,7 @@ export default function FAQPage() {
                 flex="1"
                 textAlign="left"
                 fontWeight={"medium"}
-                fontSize={{ base: "xs", xs: "sm", sm: "md" }}
+                fontSize={{ base: "sm", sm: "md" }}
               >
                 Peran apa saja yang dapat saya lakukan dalam website ini?
               </Box>
@@ -137,7 +137,7 @@ export default function FAQPage() {
                 flex="1"
                 textAlign="left"
                 fontWeight={"medium"}
-                fontSize={{ base: "xs", xs: "sm", sm: "md" }}
+                fontSize={{ base: "sm", sm: "md" }}
               >
                 Apa saja langkah-langkah yang dilakukan setiap peran dalam
                 website ini?
