@@ -135,7 +135,7 @@ export default function TestSheet({ test, user, init, isClient }) {
             >
               <Text
                 textAlign={"center"}
-                fontSize={{ base: "7px", xs: "10px", lg: "small" }}
+                fontSize={"small"}
                 fontWeight={"bold"}
                 color={"white"}
               >
@@ -162,7 +162,7 @@ export default function TestSheet({ test, user, init, isClient }) {
             >
               <Text
                 textAlign={"center"}
-                fontSize={{ base: "7px", xs: "10px", lg: "small" }}
+                fontSize={"small"}
                 fontWeight={"bold"}
                 color={"white"}
               >
