@@ -26,9 +26,9 @@ export default function ResultPage() {
       colorScheme="orange"
     >
       <TabList>
-        <Tab fontSize={{ base: "xs", xs: "sm", lg: "md" }}>Pernyataan</Tab>
-        <Tab fontSize={{ base: "xs", xs: "sm", lg: "md" }}>Komparasi</Tab>
-        <Tab fontSize={{ base: "xs", xs: "sm", lg: "md" }}>Diskriminan</Tab>
+        <Tab fontSize={{ base: "sm", lg: "md" }}>Pernyataan</Tab>
+        <Tab fontSize={{ base: "sm", lg: "md" }}>Komparasi</Tab>
+        <Tab fontSize={{ base: "sm", lg: "md" }}>Diskriminan</Tab>
       </TabList>
 
       <TabPanels>
