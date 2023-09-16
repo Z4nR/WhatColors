@@ -73,9 +73,9 @@ export default function SearchPage() {
         colorScheme="orange"
       >
         <TabList>
-          <Tab fontSize={{ base: "xs", xs: "sm", lg: "md" }}>Individu</Tab>
-          <Tab fontSize={{ base: "xs", xs: "sm", lg: "md" }}>Peserta</Tab>
-          <Tab fontSize={{ base: "xs", xs: "sm", lg: "md" }}>Grup Tes</Tab>
+          <Tab fontSize={{ base: "sm", lg: "md" }}>Individu</Tab>
+          <Tab fontSize={{ base: "sm", lg: "md" }}>Peserta</Tab>
+          <Tab fontSize={{ base: "sm", lg: "md" }}>Grup Tes</Tab>
         </TabList>
 
         <TabPanels>
