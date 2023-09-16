@@ -17,7 +17,7 @@ export default function ClientSearch({ data }) {
   if (!data)
     return (
       <Flex minHeight={"50vh"} justifyContent={"center"} alignItems={"center"}>
-        <Heading size={"lg"} textAlign={"center"}>
+        <Heading color={"gray.300"} size={"lg"} textAlign={"center"}>
           Masukan Data Yang Ingin Dicari
         </Heading>
       </Flex>

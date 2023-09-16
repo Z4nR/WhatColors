@@ -8,16 +8,20 @@ module.exports = {
   newArticle: async (req, res) => {
     try {
       await new Article(req.body).save();
-      res.status(201).json({ message: "Artikel Baru Berhasil Ditambahkan" });
+      res.status(201).send({ message: "Artikel Baru Berhasil Ditambahkan" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
     }
   },
 
-  getAllArticle: async (res) => {
+  getAllArticle: async (req, res) => {
     try {
-      const article = await Article.find();
+      const article = await Article.find().sort({
+        year: -1,
+        author: 1,
+        title: 1,
+      });
       res.status(200).send(article);
     } catch (error) {
       console.log(error);
@@ -26,7 +30,7 @@ module.exports = {
   },
 
   //Delete All Data Controller
-  deleteAllTestData: async (res) => {
+  deleteAllTestData: async (req, res) => {
     try {
       await Group.deleteMany({});
       await Client.deleteMany({});

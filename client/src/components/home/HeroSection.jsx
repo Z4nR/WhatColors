@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import colorBlindImg from "@/assets/img/colourblind.webp";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 export default function HeroSection() {
   return (
@@ -77,8 +78,10 @@ export default function HeroSection() {
                 color: "white",
                 bg: "gray.500",
               }}
+              as={ReactRouterLink}
+              to="/search"
             >
-              Cara Kerja
+              Cari Data Tes
             </Button>
           </Stack>
         </Stack>
