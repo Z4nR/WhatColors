@@ -1,0 +1,6 @@
+services:
+  app:
+    build: .
+    container_name: whatcolors-backend
+    ports:
+      - 5500:5000
