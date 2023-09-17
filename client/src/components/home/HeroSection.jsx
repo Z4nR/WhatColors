@@ -88,6 +88,7 @@ export default function HeroSection() {
       </Flex>
       <Flex flex={1}>
         <Image
+          loading="lazy"
           alt={"Login Image"}
           objectFit={"cover"}
           src={colorBlindImg}
