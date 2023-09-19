@@ -9,7 +9,7 @@ import {
 
 export default function ResultExplaining() {
   return (
-    <Box py={{ base: 5, xs: 8, sm: 16 }} bg={"gray.800"}>
+    <Box py={{ base: 5, xs: 8, sm: 16 }} bg={"teal.800"}>
       <Container maxW={"7xl"} zIndex={10}>
         <Stack direction={{ base: "column", lg: "row" }}>
           <Stack flex={1} color={"gray.400"} justify={{ lg: "center" }} py={4}>
@@ -71,6 +71,7 @@ const stats = [
         <Text as={"span"} fontWeight={700} color={"white"}>
           Software modules
         </Text>
+        <br />
         for detailed monitoring and real-time analytics
       </>
     ),
@@ -82,6 +83,7 @@ const stats = [
         <Text as={"span"} fontWeight={700} color={"white"}>
           Analytics
         </Text>
+        <br />
         enabled right in your dashboard without history limitations
       </>
     ),
@@ -93,6 +95,7 @@ const stats = [
         <Text as={"span"} fontWeight={700} color={"white"}>
           Farms
         </Text>
+        <br />
         in North America has chosen NewLife™ as their management solution
       </>
     ),
@@ -104,6 +107,7 @@ const stats = [
         <Text as={"span"} fontWeight={700} color={"white"}>
           Plants
         </Text>
+        <br />
         currently connected and monitored by the NewLife™ software
       </>
     ),
