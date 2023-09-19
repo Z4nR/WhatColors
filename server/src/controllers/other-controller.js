@@ -2,11 +2,16 @@ const Group = require("../models/group-test");
 const Client = require("../models/client");
 const Individual = require("../models/individual");
 const Article = require("../models/article");
+const { articleValidate } = require("../utils/validate");
 
 module.exports = {
   //Article Controller
   newArticle: async (req, res) => {
     try {
+      const { error } = articleValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
       await new Article(req.body).save();
       res.status(201).send({ message: "Artikel Baru Berhasil Ditambahkan" });
     } catch (error) {

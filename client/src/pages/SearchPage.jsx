@@ -57,11 +57,7 @@ export default function SearchPage() {
           <FormErrorMessage>
             {errors.name && errors.name.message}
           </FormErrorMessage>
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            loadingText="Mencari Data"
-          >
+          <Button type="submit" isLoading={isLoading}>
             Cari
           </Button>
         </HStack>
