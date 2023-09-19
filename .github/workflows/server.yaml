@@ -22,5 +22,6 @@ jobs:
             git clone https://github.com/Z4nR/WhatColors
             cd ~/WhatColors/server
             git pull origin main
+            cd server
             docker compose down --remove-orphans
             docker compose up --build -d
