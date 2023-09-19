@@ -20,7 +20,7 @@ jobs:
           port: 22
           command: |
             git clone https://github.com/Z4nR/WhatColors
-            cd ~/WhatColors/server
+            cd ~/WhatColors
             git pull origin main
             cd server
             docker compose down --remove-orphans
