@@ -1,3 +1,4 @@
+import QuoteMunsell from "@/components/about/QuoteMunsell";
 import ResponsiveExplaining from "@/components/about/ResponsiveExplaining";
 import ResultExplaining from "@/components/about/ResultExplaining";
 import WebExplaining from "@/components/about/WebExplaining";
@@ -9,6 +10,7 @@ export default function AboutPage() {
       <WebExplaining />
       <ResponsiveExplaining />
       <ResultExplaining />
+      <QuoteMunsell />
     </Box>
   );
 }

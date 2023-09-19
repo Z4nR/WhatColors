@@ -7,7 +7,6 @@ const newIndividual = async (userData) => {
     .post(`${Server_URL}/user/new`, userData, {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
     })
     .then((response) => {

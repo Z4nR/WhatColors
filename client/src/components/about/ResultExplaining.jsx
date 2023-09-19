@@ -9,106 +9,143 @@ import {
 
 export default function ResultExplaining() {
   return (
-    <Box py={{ base: 5, xs: 8, sm: 16 }} bg={"teal.800"}>
-      <Container maxW={"7xl"} zIndex={10}>
-        <Stack direction={{ base: "column", lg: "row" }}>
-          <Stack flex={1} color={"gray.400"} justify={{ lg: "center" }} py={4}>
-            <Box mb={{ base: 8, md: 20 }}>
-              <Text
-                fontFamily={"heading"}
-                fontWeight={700}
-                textTransform={"uppercase"}
-                mb={3}
-                fontSize={"xl"}
-                color={"gray.500"}
-              >
-                Technology
-              </Text>
-              <Heading
-                color={"white"}
-                mb={5}
-                fontSize={{ base: "3xl", md: "5xl" }}
-              >
-                21st century agriculture
-              </Heading>
-              <Text fontSize={"xl"} color={"gray.400"}>
-                The NewLife™ technology allows you to monitor your crops and get
-                complete insights at real time. The proprietary
-                software/hardware ecosystem prevents your plants from getting
-                neglected.
-              </Text>
-            </Box>
+    <Box py={{ base: 5, xs: 16, sm: 20 }} textAlign={"justify"}>
+      <Box py={{ base: 5, xs: 8, sm: 16 }} bg={"teal"}>
+        <Container maxW={"7xl"} paddingInline={10}>
+          <Stack direction={{ base: "column", lg: "row" }}>
+            <Stack flex={1} justify={{ lg: "center" }} py={4}>
+              <Box mb={{ base: 8, md: 20 }}>
+                <Text
+                  fontFamily={"heading"}
+                  fontWeight={700}
+                  textTransform={"uppercase"}
+                  mb={3}
+                  fontSize={{ base: "md", md: "xl" }}
+                  color={"orange.300"}
+                >
+                  Rincian Hasil
+                </Text>
+                <Heading
+                  color={"white"}
+                  mb={5}
+                  fontSize={{ base: "md", sm: "xl", md: "5xl" }}
+                >
+                  Tampilan Data Terperinci dan Mudah Dipahami
+                </Heading>
+                <Text fontSize={{ base: "md", md: "xl" }} color={"gray.200"}>
+                  WhatColors menampilkan data dengan rinci dan memiliki
+                  penyampaian yang mudah dipahami, membantu pengguna dalam
+                  memahami hasil dari tes yang telah dikerjakan serta daftar
+                  data peserta tes bagi para admin grup tes.
+                </Text>
+              </Box>
 
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-              {stats.map((stat) => (
-                <Box key={stat.title}>
-                  <Text
-                    fontFamily={"heading"}
-                    fontSize={"3xl"}
-                    color={"white"}
-                    mb={3}
-                  >
-                    {stat.title}
-                  </Text>
-                  <Text fontSize={"xl"} color={"gray.400"}>
-                    {stat.content}
-                  </Text>
-                </Box>
-              ))}
-            </SimpleGrid>
+              <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                {stats.map((stat) => (
+                  <Box key={stat.title}>
+                    <Text
+                      fontFamily={"heading"}
+                      fontSize={{ base: "xl", md: "3xl" }}
+                      color={"orange.300"}
+                      mb={3}
+                    >
+                      {stat.title}
+                    </Text>
+                    <Text
+                      fontSize={{ base: "md", md: "xl" }}
+                      color={"gray.200"}
+                    >
+                      {stat.content}
+                    </Text>
+                  </Box>
+                ))}
+              </SimpleGrid>
+            </Stack>
           </Stack>
-        </Stack>
-      </Container>
+        </Container>
+      </Box>
     </Box>
   );
 }
 
 const stats = [
   {
-    title: "10+",
+    title: "Pernyataan",
     content: (
       <>
         <Text as={"span"} fontWeight={700} color={"white"}>
-          Software modules
+          Ringkasan Hasil
         </Text>
         <br />
-        for detailed monitoring and real-time analytics
+        Pada bagian ini pengguna akan mendapatkan penjelasan singkat terkait
+        ringkasan hasil akhir yang didapatkan setelah melalui perhitungan dan
+        penerapan metode Farnsworth Munsell yang cukup kompleks.
       </>
     ),
   },
   {
-    title: "24/7",
+    title: "Komparasi",
     content: (
       <>
         <Text as={"span"} fontWeight={700} color={"white"}>
-          Analytics
+          Nilai Perbandingan
         </Text>
         <br />
-        enabled right in your dashboard without history limitations
+        Pada bagian ini pengguna akan mendapatkan tampilan nilai perbandingan
+        terkait jawaban pengguna dengan nilai asli dari susunan warna pada
+        Metode Farnsworth Munsell. Hasil nilai berbandingan yang ditampilkan
+        akan berupa tabel ataupun diagram pada ukuran perangkat tertentu.
+        Tampilan hasil akan berupa nomor urutan blok warna serta nilai jawaban
+        berupa &quot;Benar&quot; atau &quot;Salah&quot;.
       </>
     ),
   },
   {
-    title: "13%",
+    title: "Diskriminan",
     content: (
       <>
         <Text as={"span"} fontWeight={700} color={"white"}>
-          Farms
+          Nilai Perpindahan
         </Text>
         <br />
-        in North America has chosen NewLife™ as their management solution
+        Pada bagian ini pengguna akan mendapatkan tampilan nilai terkait
+        seberapa jauh perpindahan blok warna dari seharusnya. Untuk menentukan
+        nilai ini perlu menggunakan Metode Farnsworth Munsell untuk mengetahui
+        nilai suatu blok warna. Jawaban pengguna dapat diperkirakan benar
+        apabila perbandingan nilai pada suatu blok terhadapat blok warna sebelum
+        dan sesudahnya bernilai satu.
       </>
     ),
   },
   {
-    title: "250M+",
+    title: "Data Grup",
     content: (
       <>
         <Text as={"span"} fontWeight={700} color={"white"}>
-          Plants
+          Informasi Peserta
         </Text>
         <br />
-        currently connected and monitored by the NewLife™ software
+        Data yang terdapat dalam grup dibuat sesederhana mungkin untuk dapat
+        membantu admin dalam mengelompokkan data peserta, dalam tampilan data
+        peserta pada sebuah grup hanya berisikan sedikit informasi. Untuk
+        informasi yang lebih lengkap, admin dapat mengunduh data grup apabila
+        diperlukan.
+      </>
+    ),
+  },
+  {
+    title: "7 x 24",
+    content: (
+      <>
+        <Text as={"span"} fontWeight={700} color={"white"}>
+          Akses Data
+        </Text>
+        <br />
+        Seluruh data yang merupakan data hasil tes dan data grup tersimpan
+        didalam penyimpanan kami hanya dalam kurun waktu tujuh hari saja dan
+        akan terhapus otomatis pada hari Sabtu setiap minggunya. Kalian dapat
+        langsung mengunduh data hasil tes kalian atau mencarinya melalui fitur
+        pencarian selama data belum terhapus dari penyimmpanan kami.
       </>
     ),
   },
