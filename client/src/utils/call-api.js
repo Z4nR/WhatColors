@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Server_URL = import.meta.env.VITE_BASE_URL;
+const Server_URL = import.meta.env.VITE_SERVER_URL;
 
 const newIndividual = async (userData) => {
   return axios
