@@ -3,4 +3,4 @@ services:
     build: .
     container_name: whatcolors-backend
     ports:
-      - 80:5000
+      - 5000:5000
