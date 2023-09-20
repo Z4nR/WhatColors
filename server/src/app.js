@@ -17,7 +17,7 @@ if (env === "development") {
 
 //Middleware
 app.use(bodyParser.json());
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "*", methods: ["GET", "POST", "DELETE"] }));
 
 //Delete Daily Schedule
 const cronConfig = {
