@@ -6,10 +6,18 @@ import {
   Icon,
   Stack,
   Text,
+  chakra,
   createIcon,
+  shouldForwardProp,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { isValidMotionProp, motion } from "framer-motion";
 import { Link as ReactRouterLink } from "react-router-dom";
+
+const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+});
 
 export default function WebExplaining() {
   return (
@@ -20,30 +28,72 @@ export default function WebExplaining() {
         spacing={{ base: 8, md: 10 }}
         py={{ base: 5, xs: 16, sm: 20 }}
       >
-        <Heading
-          fontWeight={600}
-          fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-          lineHeight={"110%"}
+        <ChakraBox
+          initial="offscreen"
+          whileInView="onscreen"
+          variants={{
+            offscreen: {
+              y: 20,
+              scale: 0,
+              opacity: 0,
+            },
+            onscreen: {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              transition: {
+                ease: "easeInOut",
+                delayChildren: 0.3,
+                staggerChildren: 0.2,
+              },
+            },
+          }}
         >
-          Tentang <br />
-          <Text as={"span"} color={"green.400"}>
-            WhatColors
+          <Heading
+            fontWeight={600}
+            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+            lineHeight={"110%"}
+          >
+            Tentang <br />
+            <Text as={"span"} color={"green.400"}>
+              WhatColors
+            </Text>
+          </Heading>
+        </ChakraBox>
+        <ChakraBox
+          initial="offscreen"
+          whileInView="onscreen"
+          variants={{
+            offscreen: {
+              x: 200,
+              opacity: 0,
+            },
+            onscreen: {
+              x: 0,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                bounce: 0.4,
+                duration: 1,
+              },
+            },
+          }}
+        >
+          <Text
+            textAlign={{ base: "justify", sm: "center" }}
+            fontSize={{ base: "sm", sm: "md" }}
+            color={"gray.500"}
+          >
+            Website ini ditunjukkan bagi masyarakat secara luas dapat melakukan
+            simulasi tes buta warna secara virtual dan gratis. Pada website ini
+            menggunakan Metode Farnsworth Munsell sebagai tolak ukur perhitungan
+            untuk memperkiraan kondisi mata seseorang. Metode ini memiliki
+            keunggulan yang lebih baik untuk mengurangi indikasi kecurangan
+            dalam pelaksanaan tes buta warna secara bersama-sama. Untuk memulai
+            simulasi tes atau mengetahui cara kerja metode ini kalian dapat
+            mengeklik salah satu tombol dibawah ini
           </Text>
-        </Heading>
-        <Text
-          textAlign={{ base: "justify", sm: "center" }}
-          fontSize={{ base: "sm", sm: "md" }}
-          color={"gray.500"}
-        >
-          Website ini ditunjukkan bagi masyarakat secara luas dapat melakukan
-          simulasi tes buta warna secara virtual dan gratis. Pada website ini
-          menggunakan Metode Farnsworth Munsell sebagai tolak ukur perhitungan
-          untuk memperkiraan kondisi mata seseorang. Metode ini memiliki
-          keunggulan yang lebih baik untuk mengurangi indikasi kecurangan dalam
-          pelaksanaan tes buta warna secara bersama-sama. Untuk memulai simulasi
-          tes atau mengetahui cara kerja metode ini kalian dapat mengeklik salah
-          satu tombol dibawah ini
-        </Text>
+        </ChakraBox>
         <Stack
           direction={"column"}
           spacing={3}
@@ -51,23 +101,63 @@ export default function WebExplaining() {
           alignSelf={"center"}
           position={"relative"}
         >
-          <Button
-            size={{ base: "sm", sm: "md" }}
-            colorScheme={"green"}
-            bg={"green.400"}
-            rounded={"full"}
-            px={6}
-            _hover={{
-              bg: "green.500",
+          <ChakraBox
+            initial="offscreen"
+            whileInView="onscreen"
+            variants={{
+              offscreen: {
+                x: -100,
+                opacity: 0,
+              },
+              onscreen: {
+                x: 0,
+                opacity: 1,
+                transition: {
+                  ease: "easeInOut",
+                  delayChildren: 0.3,
+                  staggerChildren: 0.2,
+                },
+              },
             }}
-            as={ReactRouterLink}
-            to="/"
           >
-            Lakukan Tes
-          </Button>
-          <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-            Cara Kerja
-          </Button>
+            <Button
+              size={{ base: "sm", sm: "md" }}
+              colorScheme={"green"}
+              bg={"green.400"}
+              rounded={"full"}
+              px={6}
+              _hover={{
+                bg: "green.500",
+              }}
+              as={ReactRouterLink}
+              to="/"
+            >
+              Lakukan Tes
+            </Button>
+          </ChakraBox>
+          <ChakraBox
+            initial="offscreen"
+            whileInView="onscreen"
+            variants={{
+              offscreen: {
+                x: -100,
+                opacity: 0,
+              },
+              onscreen: {
+                x: 0,
+                opacity: 1,
+                transition: {
+                  ease: "easeInOut",
+                  delayChildren: 0.3,
+                  staggerChildren: 0.2,
+                },
+              },
+            }}
+          >
+            <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
+              Cara Kerja
+            </Button>
+          </ChakraBox>
           <Box>
             <Icon
               as={Arrow}

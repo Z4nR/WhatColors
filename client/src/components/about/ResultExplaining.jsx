@@ -5,7 +5,15 @@ import {
   Text,
   Heading,
   SimpleGrid,
+  chakra,
+  shouldForwardProp,
 } from "@chakra-ui/react";
+import { isValidMotionProp, motion } from "framer-motion";
+
+const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+});
 
 export default function ResultExplaining() {
   return (
@@ -15,48 +23,128 @@ export default function ResultExplaining() {
           <Stack direction={{ base: "column", lg: "row" }}>
             <Stack flex={1} justify={{ lg: "center" }} py={4}>
               <Box mb={{ base: 8, md: 20 }}>
-                <Text
-                  fontFamily={"heading"}
-                  fontWeight={700}
-                  textTransform={"uppercase"}
-                  mb={3}
-                  fontSize={{ base: "md", md: "xl" }}
-                  color={"orange.300"}
+                <ChakraBox
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true }}
+                  variants={{
+                    offscreen: {
+                      scale: 0,
+                      opacity: 0,
+                    },
+                    onscreen: {
+                      scale: 1,
+                      opacity: 1,
+                      transition: {
+                        ease: "easeInOut",
+                        duration: 0.5,
+                      },
+                    },
+                  }}
                 >
-                  Rincian Hasil
-                </Text>
-                <Heading
-                  color={"white"}
-                  mb={5}
-                  fontSize={{ base: "md", sm: "xl", md: "5xl" }}
+                  <Text
+                    fontFamily={"heading"}
+                    fontWeight={700}
+                    textTransform={"uppercase"}
+                    mb={3}
+                    fontSize={{ base: "md", md: "xl" }}
+                    color={"orange.300"}
+                  >
+                    Rincian Hasil
+                  </Text>
+                  <Heading
+                    color={"white"}
+                    mb={5}
+                    fontSize={{ base: "md", sm: "xl", md: "5xl" }}
+                  >
+                    Tampilan Data Terperinci dan Mudah Dipahami
+                  </Heading>
+                </ChakraBox>
+                <ChakraBox
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true }}
+                  variants={{
+                    offscreen: {
+                      scale: 0,
+                      opacity: 0,
+                    },
+                    onscreen: {
+                      scale: 1,
+                      opacity: 1,
+                      transition: {
+                        ease: "easeInOut",
+                        duration: 1,
+                      },
+                    },
+                  }}
                 >
-                  Tampilan Data Terperinci dan Mudah Dipahami
-                </Heading>
-                <Text fontSize={{ base: "md", md: "xl" }} color={"gray.200"}>
-                  WhatColors menampilkan data dengan rinci dan memiliki
-                  penyampaian yang mudah dipahami, membantu pengguna dalam
-                  memahami hasil dari tes yang telah dikerjakan serta daftar
-                  data peserta tes bagi para admin grup tes.
-                </Text>
+                  <Text fontSize={{ base: "md", md: "xl" }} color={"gray.200"}>
+                    WhatColors menampilkan data dengan rinci dan memiliki
+                    penyampaian yang mudah dipahami, membantu pengguna dalam
+                    memahami hasil dari tes yang telah dikerjakan serta daftar
+                    data peserta tes bagi para admin grup tes.
+                  </Text>
+                </ChakraBox>
               </Box>
 
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 {stats.map((stat) => (
                   <Box key={stat.title}>
-                    <Text
-                      fontFamily={"heading"}
-                      fontSize={{ base: "xl", md: "3xl" }}
-                      color={"orange.300"}
-                      mb={3}
+                    <ChakraBox
+                      initial="offscreen"
+                      whileInView="onscreen"
+                      viewport={{ once: true }}
+                      variants={{
+                        offscreen: {
+                          scale: 0,
+                          opacity: 0,
+                        },
+                        onscreen: {
+                          scale: 1,
+                          opacity: 1,
+                          transition: {
+                            ease: "easeInOut",
+                            duration: 0.5,
+                          },
+                        },
+                      }}
                     >
-                      {stat.title}
-                    </Text>
-                    <Text
-                      fontSize={{ base: "md", md: "xl" }}
-                      color={"gray.200"}
+                      <Text
+                        fontFamily={"heading"}
+                        fontSize={{ base: "xl", md: "3xl" }}
+                        color={"orange.300"}
+                        mb={3}
+                      >
+                        {stat.title}
+                      </Text>
+                    </ChakraBox>
+                    <ChakraBox
+                      initial="offscreen"
+                      whileInView="onscreen"
+                      viewport={{ once: true }}
+                      variants={{
+                        offscreen: {
+                          scale: 0,
+                          opacity: 0,
+                        },
+                        onscreen: {
+                          scale: 1,
+                          opacity: 1,
+                          transition: {
+                            ease: "easeInOut",
+                            duration: 1,
+                          },
+                        },
+                      }}
                     >
-                      {stat.content}
-                    </Text>
+                      <Text
+                        fontSize={{ base: "md", md: "xl" }}
+                        color={"gray.200"}
+                      >
+                        {stat.content}
+                      </Text>
+                    </ChakraBox>
                   </Box>
                 ))}
               </SimpleGrid>
