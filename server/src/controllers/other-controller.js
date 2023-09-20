@@ -96,6 +96,7 @@ module.exports = {
       });
 
       const group = await Group.find({ groupName: { $regex: name } }).sort({
+        name: 1,
         date: 1,
       });
 
