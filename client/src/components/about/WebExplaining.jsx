@@ -65,7 +65,7 @@ export default function WebExplaining() {
           whileInView="onscreen"
           variants={{
             offscreen: {
-              x: 200,
+              x: 10,
               opacity: 0,
             },
             onscreen: {
@@ -106,7 +106,7 @@ export default function WebExplaining() {
             whileInView="onscreen"
             variants={{
               offscreen: {
-                x: -100,
+                x: -10,
                 opacity: 0,
               },
               onscreen: {
@@ -140,7 +140,7 @@ export default function WebExplaining() {
             whileInView="onscreen"
             variants={{
               offscreen: {
-                x: -100,
+                x: -10,
                 opacity: 0,
               },
               onscreen: {
