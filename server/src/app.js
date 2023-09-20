@@ -26,7 +26,7 @@ const cronConfig = {
 };
 
 const deleteSchedule = cron.schedule(
-  "0 0 * * 6",
+  "59 23 * * 6",
   deleteAllTestData,
   cronConfig
 );
