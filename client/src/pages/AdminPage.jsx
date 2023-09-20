@@ -119,8 +119,8 @@ export default function AdminPage() {
             <Tr>
               <Th textAlign={{ md: "center" }}>#</Th>
               <Th textAlign={{ md: "center" }}>Nama</Th>
-              <Th textAlign={{ md: "center" }}>Waktu</Th>
               <Th textAlign={{ md: "center" }}>Skor Tes</Th>
+              <Th textAlign={{ md: "center" }}>Waktu</Th>
               <Th textAlign={{ md: "center" }}>Status</Th>
               <Th textAlign={{ md: "center" }}>Perangkat</Th>
             </Tr>
@@ -130,8 +130,8 @@ export default function AdminPage() {
               <Tr key={data._id}>
                 <Td textAlign={{ md: "center" }}>{index + 1}</Td>
                 <Td textAlign={{ md: "center" }}>{data.name}</Td>
-                <Td textAlign={"center"}>{data.time}</Td>
                 <Td textAlign={"center"}>{data.totalErrorScore}</Td>
+                <Td textAlign={"center"}>{data.time}</Td>
                 <Td textAlign={"center"}>{data.status}</Td>
                 <Td textAlign={"center"}>{data.device}</Td>
               </Tr>

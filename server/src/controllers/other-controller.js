@@ -53,7 +53,6 @@ module.exports = {
 
       const client = await Client.find({ name: { $regex: name } }).sort({
         totalErrorScore: 1,
-        time: 1,
       });
 
       const clientSearchResult = client.map((key) => {
@@ -77,7 +76,6 @@ module.exports = {
         name: { $regex: name },
       }).sort({
         totalErrorScore: 1,
-        time: 1,
       });
 
       const individualSearchResult = individual.map((key) => {
@@ -96,8 +94,7 @@ module.exports = {
       });
 
       const group = await Group.find({ groupName: { $regex: name } }).sort({
-        name: 1,
-        date: 1,
+        groupName: 1,
       });
 
       const groupSearchResult = group.map((key) => {
