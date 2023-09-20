@@ -2,17 +2,6 @@ import { useEffect, useState } from "react";
 import { shuffleColor } from "./methods/method-loader";
 import storage from "@/utils/storage";
 import { useToast } from "@chakra-ui/react";
-import { io } from "socket.io-client";
-
-let socket;
-const useSocket = () => {
-  if (socket) {
-    return socket;
-  }
-
-  socket = io("https://zulham.ahlitani.com/");
-  return socket;
-};
 
 const useTestData = () => {
   const [getTestData, setTestData] = useState(null);
@@ -173,7 +162,6 @@ const useDownloadData = (data) => {
 };
 
 export {
-  useSocket,
   useTestData,
   useShuffle,
   useDiagramDiscriminant,

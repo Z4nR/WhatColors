@@ -21,8 +21,8 @@ import { useNavigate } from "react-router-dom";
 export default function VerifyAdmin() {
   const navigate = useNavigate();
   const toast = useToastMsg();
-  const id = storage.getJSON("id");
   const { countDown, start } = useCountDown();
+  const id = storage.getJSON("id");
 
   const emailMutation = useMutation({
     mutationFn: sendEmail,

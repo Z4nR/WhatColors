@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Sortable from "./Sortable";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { useSocket, useToastMsg } from "@/utils/customHooks";
+import { useToastMsg } from "@/utils/customHooks";
 
 const MAX_MINUTES = 12;
 const formatTime = (time) =>
@@ -17,7 +17,6 @@ const formatTime = (time) =>
 
 export default function TestSheet({ test, user, init, isClient }) {
   const navigate = useNavigate();
-  const socket = useSocket();
   const toast = useToastMsg();
   const id = storage.getJSON("id");
   const [getTestResult, setTestResult] = useState(null);
@@ -104,12 +103,9 @@ export default function TestSheet({ test, user, init, isClient }) {
   };
 
   const onSubmit = () => {
-    if (isClient) {
-      client.mutateAsync({ id, clientData: getFinalData });
-      socket.emit("client-join", id);
-    } else {
-      individual.mutateAsync(getFinalData);
-    }
+    isClient
+      ? client.mutateAsync({ id, clientData: getFinalData })
+      : individual.mutateAsync(getFinalData);
   };
 
   return (

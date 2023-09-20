@@ -1,9 +1,13 @@
 import Loading from "@/components/utils/Loading";
 import NotFound from "@/components/utils/NotFound";
 import { deleteGroupById, getClientData, getGroupById } from "@/utils/call-api";
-import { useDownloadData, useSocket, useToastMsg } from "@/utils/customHooks";
+import {
+  useCountDown,
+  useDownloadData,
+  useToastMsg,
+} from "@/utils/customHooks";
 import storage from "@/utils/storage";
-import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
+import { DeleteIcon, DownloadIcon, RepeatClockIcon } from "@chakra-ui/icons";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -28,14 +32,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { CSVLink } from "react-csv";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
   const navigate = useNavigate();
-  const socket = useSocket();
   const toast = useToastMsg();
+  const { countDown, start } = useCountDown();
   const id = storage.getJSON("id");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
@@ -65,19 +69,10 @@ export default function AdminPage() {
     queryFn: async () => await getClientData(id),
   });
 
-  useEffect(() => {
-    socket.on("refresh-list", (data) => {
-      if (data === id) {
-        client();
-      }
-    });
-
-    socket.emit("client-join", id);
-
-    return () => {
-      socket.close();
-    };
-  }, [client, id, socket]);
+  const reloadData = () => {
+    start(60);
+    client();
+  };
 
   const [csv] = useDownloadData(client.data);
 
@@ -160,6 +155,25 @@ export default function AdminPage() {
         bottom={{ base: 24, xs: 40 }}
         right={{ base: 5, xs: 10 }}
       >
+        {countDown > 0 ? (
+          <Button
+            variant={"outline"}
+            aria-label="Reload Data"
+            size={{ base: "md", md: "lg" }}
+            colorScheme="linkedin"
+          >
+            {countDown}
+          </Button>
+        ) : (
+          <IconButton
+            aria-label="Reload Data"
+            size={{ base: "md", md: "lg" }}
+            colorScheme="linkedin"
+            icon={<RepeatClockIcon />}
+            onClick={reloadData}
+          />
+        )}
+
         {csv ? (
           <CSVLink
             data={csv}
@@ -189,7 +203,7 @@ export default function AdminPage() {
           />
         )}
         <IconButton
-          aria-label="Download table"
+          aria-label="Delete group"
           size={{ base: "md", md: "lg" }}
           colorScheme="red"
           sx={{
