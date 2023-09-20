@@ -1,7 +1,7 @@
 import Loading from "@/components/utils/Loading";
 import NotFound from "@/components/utils/NotFound";
 import { deleteGroupById, getClientData, getGroupById } from "@/utils/call-api";
-import { useDownloadData, useToastMsg } from "@/utils/customHooks";
+import { useDownloadData, useSocket, useToastMsg } from "@/utils/customHooks";
 import storage from "@/utils/storage";
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import {
@@ -28,12 +28,13 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { CSVLink } from "react-csv";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
   const navigate = useNavigate();
+  const socket = useSocket();
   const toast = useToastMsg();
   const id = storage.getJSON("id");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,6 +64,20 @@ export default function AdminPage() {
     queryKey: ["clients", id],
     queryFn: async () => await getClientData(id),
   });
+
+  useEffect(() => {
+    socket.on("refresh-list", (data) => {
+      if (data === id) {
+        client();
+      }
+    });
+
+    socket.emit("client-join", id);
+
+    return () => {
+      socket.close();
+    };
+  }, [client, id, socket]);
 
   const [csv] = useDownloadData(client.data);
 

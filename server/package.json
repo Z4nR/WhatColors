@@ -21,7 +21,8 @@
     "mongoose": "^7.4.5",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.5",
-    "nodemailer-smtp-transport": "^2.4.2"
+    "nodemailer-smtp-transport": "^2.4.2",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
