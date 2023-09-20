@@ -145,11 +145,11 @@ export default function ResponsiveExplaining() {
           viewport={{ once: true }}
           variants={{
             offscreen: {
-              x: 100,
+              y: 50,
               opacity: 0,
             },
             onscreen: {
-              x: 0,
+              y: 0,
               opacity: 1,
               transition: {
                 type: "spring",
