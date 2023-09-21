@@ -3,6 +3,7 @@ const Client = require("../models/client");
 const Individual = require("../models/individual");
 const Article = require("../models/article");
 const { articleValidate } = require("../utils/validate");
+const mongoose = require("mongoose");
 
 module.exports = {
   //Article Controller
@@ -44,6 +45,43 @@ module.exports = {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
     }
+  },
+
+  //Delete All Client Data by Group
+  deleteClientInGroup: (req, res) => {
+    const { id } = req.params;
+
+    mongoose.startSession().then(async (session) => {
+      try {
+        session.startTransaction();
+
+        const data = await Group.findById(id);
+
+        if (data.clients.length === 0)
+          return res
+            .status(404)
+            .send({ message: "Data Peserta tidak ditemukan dalam Grup" });
+
+        await Group.updateOne(
+          { _id: id },
+          { $pullAll: { clients: data.clients } }
+        );
+
+        await Client.deleteMany({
+          _id: { $in: data.clients },
+        });
+
+        await session.commitTransaction();
+
+        res.status(200).json({ message: "Data Peserta berhasil dihapus" });
+      } catch (error) {
+        await session.abortTransaction();
+        console.log(error);
+        res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      } finally {
+        session.endSession();
+      }
+    });
   },
 
   //Search Data Controller

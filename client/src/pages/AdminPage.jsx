@@ -1,6 +1,11 @@
 import Loading from "@/components/utils/Loading";
 import NotFound from "@/components/utils/NotFound";
-import { deleteGroupById, getClientData, getGroupById } from "@/utils/call-api";
+import {
+  deleteClientByGroup,
+  deleteGroupById,
+  getClientData,
+  getGroupById,
+} from "@/utils/call-api";
 import { useDownloadData, useToastMsg } from "@/utils/customHooks";
 import storage from "@/utils/storage";
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
@@ -39,7 +44,18 @@ export default function AdminPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
-  const { mutateAsync, isLoading } = useMutation({
+  const clientDelete = useMutation({
+    mutationFn: deleteClientByGroup,
+    onSuccess: (data) => {
+      navigate("/");
+      toast("Berhasil Dihapus", `${data.message}`, "info");
+    },
+    onError: (error) => {
+      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+    },
+  });
+
+  const groupDelete = useMutation({
     mutationFn: deleteGroupById,
     onSuccess: (data) => {
       navigate("/");
@@ -51,7 +67,8 @@ export default function AdminPage() {
   });
 
   const deleteGroup = () => {
-    mutateAsync(id);
+    groupDelete.mutateAsync(id);
+    clientDelete.mutateAsync(id);
   };
 
   const group = useQuery({
@@ -97,7 +114,7 @@ export default function AdminPage() {
               colorScheme="red"
               ml={3}
               loadingText="Menghapus"
-              isLoading={isLoading}
+              isLoading={groupDelete.isLoading}
               onClick={deleteGroup}
             >
               Hapus Grup
