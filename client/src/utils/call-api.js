@@ -57,7 +57,7 @@ const getGroupById = async (id) => {
 };
 
 const deleteGroupById = async (id) => {
-  return axios.delete(`${Server_URL}/group/${id}/delete`).then((response) => {
+  return axios.post(`${Server_URL}/group/${id}/delete`).then((response) => {
     const data = response.data;
     return data;
   });
@@ -90,15 +90,6 @@ const getClientById = async (id) => {
   });
 };
 
-const deleteClientByGroup = async (id) => {
-  return axios
-    .post(`${Server_URL}/group/${id}/delete/client`)
-    .then((response) => {
-      const data = response.data;
-      return data;
-    });
-};
-
 const getTestSearch = async (name) => {
   return axios.post(`${Server_URL}/search?name=${name}`).then((response) => {
     const data = response.data;
@@ -124,7 +115,6 @@ export {
   getClientData,
   newClient,
   getClientById,
-  deleteClientByGroup,
   getTestSearch,
   getArticle,
 };

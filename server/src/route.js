@@ -15,10 +15,8 @@ router.route("/group/:id/code").post(groupController.sendEmailCode); //send emai
 router.route("/group/:codeVerify/verify").post(groupController.verifyRole); //verification code
 router.route("/group/:id/data").get(groupController.getGroupById); //get group data by Id
 router.route("/group/:id/clients").get(groupController.getClientByGroup); //get data client for group using group Id
-router.route("/group/:id/delete").delete(groupController.deleteGroupById); //delete group using group Id
-router
-  .route("/group/:id/delete/client")
-  .post(otherController.deleteClientInGroup);
+//router.route("/group/:id/delete").delete(groupController.deleteGroupById); //delete group using group Id
+router.route("/group/:id/delete").post(otherController.deleteGroupById);
 
 //Client
 router.route("/client/:id/new").post(clientConntroller.newClient); //add new client by group Id

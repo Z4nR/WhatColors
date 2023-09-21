@@ -48,12 +48,15 @@ module.exports = {
   },
 
   //Delete All Client Data by Group
-  deleteClientInGroup: (req, res) => {
+  deleteGroupById: (req, res) => {
     const { id } = req.params;
 
     mongoose.startSession().then(async (session) => {
       try {
         session.startTransaction();
+
+        if (!id)
+          return res.status(404).send({ message: "Grup tidak ditemukan" });
 
         const data = await Group.findById(id);
 
@@ -71,9 +74,13 @@ module.exports = {
           _id: { $in: data.clients },
         });
 
+        await Group.findByIdAndDelete(id);
+
         await session.commitTransaction();
 
-        res.status(200).json({ message: "Data Peserta berhasil dihapus" });
+        res
+          .status(200)
+          .json({ message: "Grup dan Data Peserta berhasil dihapus" });
       } catch (error) {
         await session.abortTransaction();
         console.log(error);
