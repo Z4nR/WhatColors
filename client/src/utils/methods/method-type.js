@@ -288,6 +288,7 @@ const fm40 = [
   },
 ];
 
+//Load three above array of color into one array
 const testTypes = [
   {
     type: "Mudah (32 Warna)",
@@ -303,6 +304,7 @@ const testTypes = [
   },
 ];
 
+//Object contain the list of color blind type area
 const colorBlindRange = {
   type100: {
     blue: { min: 46, max: 52 },
@@ -317,12 +319,14 @@ const colorBlindRange = {
   },
 };
 
+//To explain what category of user color blindness
 const colorBlindName = {
   blue: "Tritan",
   green: "Deutan",
   red: "Protan",
 };
 
+//To inform user color blindness type
 const infoBlind = {
   Normal: `Memiliki kemampuan penglihatan normal terhadap warna merah, biru, hijau dan kombinasi ketiga warna tersebut`,
   Protan: `Kemungkinan memiliki gangguan dalam melihat warna merah dan kombinasi yang mengandung warna tersebut`,

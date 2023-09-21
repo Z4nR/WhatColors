@@ -1,11 +1,13 @@
 import { testTypes } from "./method-type";
 
+//Create an Array of Color basically using what kind of type it's choose
 const createArray = (type) => {
   const test = testTypes.find((test) => test.type === type);
   const value = test.value;
   return value;
 };
 
+//Function to shuffle an color randomly in one array
 const shuffleColor = (array) => {
   let nowArray = array.length;
 
@@ -21,6 +23,7 @@ const shuffleColor = (array) => {
   return array;
 };
 
+//Function to merge the array user arrange and the other indicator in one complete array result
 const reunitedColor = (array) => {
   const reunite = array?.map((item) => {
     return {

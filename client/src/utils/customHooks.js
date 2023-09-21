@@ -3,6 +3,7 @@ import { shuffleColor } from "./methods/method-loader";
 import storage from "@/utils/storage";
 import { useToast } from "@chakra-ui/react";
 
+//Load User Data in Test Page
 const useTestData = () => {
   const [getTestData, setTestData] = useState(null);
 
@@ -14,6 +15,7 @@ const useTestData = () => {
   return [getTestData];
 };
 
+//To Handle Shuffle Color Position Process
 const useShuffle = (data) => {
   const [getShuffle, setShuffle] = useState(null);
 
@@ -40,7 +42,8 @@ const useShuffle = (data) => {
   return [getShuffle];
 };
 
-const useDiagramDiscriminant = () => {
+//Display Discriminant Chart
+const useChartDiscriminant = () => {
   const [getDiscriminant, setDiscriminant] = useState(null);
 
   useEffect(() => {
@@ -51,7 +54,8 @@ const useDiagramDiscriminant = () => {
   return [getDiscriminant];
 };
 
-const useDiagramComparison = () => {
+//Display Comparison Chart
+const useChartComparison = () => {
   const [getComparison, setComparison] = useState(null);
 
   useEffect(() => {
@@ -62,6 +66,7 @@ const useDiagramComparison = () => {
   return [getComparison];
 };
 
+//Display Toast Message
 const useToastMsg = () => {
   const toast = useToast();
 
@@ -77,6 +82,7 @@ const useToastMsg = () => {
     });
 };
 
+//Add Count Down When Already Run Some Func
 const useCountDown = () => {
   const [countDown, setCountDown] = useState(0);
 
@@ -97,6 +103,7 @@ const useCountDown = () => {
   return { countDown, start };
 };
 
+//Handle Data to Download in Group Page
 const useDownloadData = (data) => {
   const [csv, setCsv] = useState(null);
 
@@ -164,8 +171,8 @@ const useDownloadData = (data) => {
 export {
   useTestData,
   useShuffle,
-  useDiagramDiscriminant,
-  useDiagramComparison,
+  useChartDiscriminant,
+  useChartComparison,
   useToastMsg,
   useCountDown,
   useDownloadData,

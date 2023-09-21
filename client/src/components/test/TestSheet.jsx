@@ -28,6 +28,7 @@ export default function TestSheet({ test, user, init, isClient }) {
 
   const reunited = reunitedColor(getTestResult);
 
+  //Funcction to handle the final arrange of the block
   const handleTestResult = (row, newState) => {
     const newRemovable = test.map((removable) => {
       if (removable.row === row) {
@@ -40,11 +41,13 @@ export default function TestSheet({ test, user, init, isClient }) {
     setTestResult(newRemovable);
   };
 
+  //Function to stop timer
   const stopTime = useCallback(() => {
     clearTimeout(interval.current);
     interval.current = null;
   }, []);
 
+  //Function to update the timer when timer touch the limit, time is stopped
   const updateTimer = useCallback(() => {
     if (getTimelapse.getMinutes() >= MAX_MINUTES) {
       onFinish();

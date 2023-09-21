@@ -1,4 +1,4 @@
-import { useDiagramDiscriminant } from "@/utils/customHooks";
+import { useChartDiscriminant } from "@/utils/customHooks";
 import {
   Box,
   Flex,
@@ -17,7 +17,7 @@ import Chart from "chart.js/auto";
 import { useEffect, useMemo } from "react";
 
 export default function DiscriminantResult({ data }) {
-  const [getDiscriminant] = useDiagramDiscriminant();
+  const [getDiscriminant] = useChartDiscriminant();
   const [isDesktop] = useMediaQuery("(min-width: 550px)");
 
   const maxResult = useMemo(() => {

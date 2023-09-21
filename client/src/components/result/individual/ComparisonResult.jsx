@@ -1,4 +1,4 @@
-import { useDiagramComparison } from "@/utils/customHooks";
+import { useChartComparison } from "@/utils/customHooks";
 import {
   Box,
   Flex,
@@ -17,7 +17,7 @@ import Chart from "chart.js/auto";
 import { useEffect } from "react";
 
 export default function ComparisonResult({ data }) {
-  const [getComparison] = useDiagramComparison();
+  const [getComparison] = useChartComparison();
   const [isDesktop] = useMediaQuery("(min-width: 550px)");
 
   useEffect(() => {

@@ -24,11 +24,13 @@ export default function StatementResult({ data }) {
     },
   };
 
+  //To get desrciption using infoBlind and blindCheck on data
   let selectedBlindness = infoBlind["Normal"];
   if (infoBlind[data?.blindCheck]) {
     selectedBlindness = infoBlind[data?.blindCheck];
   }
 
+  //To get desrciption using infoResult and errorScoreStatus on data
   let selectedInfo = infoResult["Rerata"];
   if (infoResult[data?.errorScoreStatus]) {
     selectedInfo = infoResult[data?.errorScoreStatus];

@@ -32,7 +32,7 @@ const blindStatus = (totalScore) => {
   let type;
   if (totalScore <= 16) {
     type = "Bagus";
-  } else if (totalScore >= 10 && totalScore <= 100) {
+  } else if (totalScore >= 16 && totalScore <= 100) {
     type = "Rerata";
   } else {
     type = "Lemah";
@@ -41,6 +41,7 @@ const blindStatus = (totalScore) => {
   return type;
 };
 
+//Func to compare the result and the initiator array
 const compareValue = (result, initiate) => {
   const compare = result?.map((item, rowIndex) => {
     const res = [];
@@ -75,6 +76,7 @@ const compareValue = (result, initiate) => {
   return { value: value, result: comparisonResult };
 };
 
+//Func to get how far away the color of the result from the color of the initiator array must be place
 const discriminantValue = (result, initiate) => {
   const discriminant = result?.map((item, rowIndex) => {
     const res = [];
@@ -124,6 +126,7 @@ const discriminantValue = (result, initiate) => {
   };
 };
 
+//To calculate the result using Farnworth Munsell Method
 const methodCalculate = (result) => {
   const method = result?.map((item) => {
     const res = [];
@@ -162,6 +165,7 @@ const methodCalculate = (result) => {
   return totalErrorScore;
 };
 
+//To know blind type base on comparasion result when it match withrange of colorBlindRange object
 const blindType = (type, compareResult) => {
   const blindRange = colorBlindRange[type];
   const resultColor = {};
@@ -188,6 +192,7 @@ const blindType = (type, compareResult) => {
   return result;
 };
 
+//To know user are hae normal or color blind eye
 const colorBlindType = (t, compare) => {
   let type;
   if (t === "Menengah (80 Warna)") {
