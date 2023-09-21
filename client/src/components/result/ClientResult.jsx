@@ -16,7 +16,7 @@ import NotFound from "../utils/NotFound";
 export default function ClientResult() {
   const id = storage.getJSON("id");
   const { data, error, isLoading, isError } = useQuery({
-    queryKey: ["individual", id],
+    queryKey: ["client", id],
     queryFn: async () => await getClientById(id),
   });
 

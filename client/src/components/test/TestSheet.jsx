@@ -6,8 +6,10 @@ import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sortable from "./Sortable";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 import { useToastMsg } from "@/utils/customHooks";
+
+const queryClient = new QueryClient();
 
 const MAX_MINUTES = 12;
 const formatTime = (time) =>
@@ -83,6 +85,7 @@ export default function TestSheet({ test, user, init, isClient }) {
   const client = useMutation({
     mutationFn: newClient,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["clients"], exact: true });
       storage.setJSON("id", data);
       navigate("/result");
       toast(

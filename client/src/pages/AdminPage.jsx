@@ -1,13 +1,9 @@
 import Loading from "@/components/utils/Loading";
 import NotFound from "@/components/utils/NotFound";
 import { deleteGroupById, getClientData, getGroupById } from "@/utils/call-api";
-import {
-  useCountDown,
-  useDownloadData,
-  useToastMsg,
-} from "@/utils/customHooks";
+import { useDownloadData, useToastMsg } from "@/utils/customHooks";
 import storage from "@/utils/storage";
-import { DeleteIcon, DownloadIcon, RepeatClockIcon } from "@chakra-ui/icons";
+import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -39,7 +35,6 @@ import { useNavigate } from "react-router-dom";
 export default function AdminPage() {
   const navigate = useNavigate();
   const toast = useToastMsg();
-  const { countDown, start } = useCountDown();
   const id = storage.getJSON("id");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
@@ -67,12 +62,9 @@ export default function AdminPage() {
   const client = useQuery({
     queryKey: ["clients", id],
     queryFn: async () => await getClientData(id),
+    refetchIntervalInBackground: true,
+    refetchInterval: 60000,
   });
-
-  const reloadData = () => {
-    start(60);
-    client();
-  };
 
   const [csv] = useDownloadData(client.data);
 
@@ -118,6 +110,9 @@ export default function AdminPage() {
           {group.data.name} ({group.data.initial})
         </Heading>
         <Text>Dibuat pada {group.data.date}</Text>
+        <Text mt={2} color={"gray.500"} fontSize={"xs"}>
+          Data akan diperbarui otomatis setiap 60 detik
+        </Text>
       </Box>
       <TableContainer
         mt={6}
@@ -155,25 +150,6 @@ export default function AdminPage() {
         bottom={{ base: 24, xs: 40 }}
         right={{ base: 5, xs: 10 }}
       >
-        {countDown > 0 ? (
-          <Button
-            variant={"outline"}
-            aria-label="Reload Data"
-            size={{ base: "md", md: "lg" }}
-            colorScheme="linkedin"
-          >
-            {countDown}
-          </Button>
-        ) : (
-          <IconButton
-            aria-label="Reload Data"
-            size={{ base: "md", md: "lg" }}
-            colorScheme="linkedin"
-            icon={<RepeatClockIcon />}
-            onClick={reloadData}
-          />
-        )}
-
         {csv ? (
           <CSVLink
             data={csv}
