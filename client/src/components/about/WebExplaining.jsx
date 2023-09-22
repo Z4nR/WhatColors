@@ -2,26 +2,158 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Heading,
   Icon,
+  ListItem,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  OrderedList,
   Stack,
   Text,
   chakra,
   createIcon,
   shouldForwardProp,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { isValidMotionProp, motion } from "framer-motion";
+import { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
+import { ReactSortable } from "react-sortablejs";
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) =>
     isValidMotionProp(prop) || shouldForwardProp(prop),
 });
 
+const HowTo = ({ isOpen, onClose }) => {
+  const [list, setList] = useState([
+    { color: "#b07464" },
+    { color: "#a87456" },
+    { color: "#a77c4e" },
+    { color: "#a48546" },
+  ]);
+  return (
+    <Modal
+      size={{ base: "xs", sm: "md", md: "2xl" }}
+      closeOnOverlayClick={false}
+      isOpen={isOpen}
+      scrollBehavior={"inside"}
+      isCentered
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Cara Kerja</ModalHeader>
+        <ModalBody>
+          <Flex
+            flexWrap={"wrap"}
+            flexDirection={"row"}
+            margin={"8px auto"}
+            justifyContent={"center"}
+          >
+            <Box margin={"4px 8px 4px 1px"}>
+              <Box
+                key={"#b2766f"}
+                backgroundColor={"#b2766f"}
+                width={10}
+                height={10}
+              >
+                <Text
+                  textAlign={"center"}
+                  fontSize={"small"}
+                  fontWeight={"bold"}
+                  color={"white"}
+                >
+                  Awal
+                </Text>
+              </Box>
+            </Box>
+            <ReactSortable
+              className="row-box"
+              group={{ name: "valueByRow", put: false }}
+              animation={200}
+              ghostClass="ghostbox"
+              list={list}
+              setList={setList}
+            >
+              {list.map((item) => (
+                <Box
+                  key={item.color}
+                  backgroundColor={item.color}
+                  margin={"4px 1px"}
+                  border={"1px solid #252525"}
+                  cursor={"pointer"}
+                  width={10}
+                  height={10}
+                />
+              ))}
+            </ReactSortable>
+            <Box margin={"4px 1px 4px 8px"}>
+              <Box
+                key={"#9b8f49"}
+                backgroundColor={"#9b8f49"}
+                width={10}
+                height={10}
+              >
+                <Text
+                  textAlign={"center"}
+                  fontSize={"small"}
+                  fontWeight={"bold"}
+                  color={"white"}
+                >
+                  Akhir
+                </Text>
+              </Box>
+            </Box>
+          </Flex>
+          <OrderedList
+            textAlign={"justify"}
+            fontSize={{ base: "sm", md: "md" }}
+            mt={8}
+          >
+            <ListItem>
+              Maksimalkan kecerahan layar perangkat yang akan digunakan dalam
+              pengetesan
+            </ListItem>
+            <ListItem>
+              Pastikan sumber cahaya seperti lampu berwarna putih dan
+              pencahayaan merata
+            </ListItem>
+            <ListItem>
+              Jangan gunakan mode baca atau anti sinar biru pada pengaturan
+              layar perangkat pengetesan
+            </ListItem>
+            <ListItem>
+              Lepaskan atau jangan gunakan alat bantu lihat jenis apapun,
+              kecuali kacamata minus, plus atau silinder
+            </ListItem>
+            <ListItem>Waktu pengetesan optimal : pukul 11:00 -13:00</ListItem>
+            <ListItem>
+              Gunakan Monitor dengan ukuran maksimal 17 inci dengan resolusi
+              Full HD
+            </ListItem>
+          </OrderedList>
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="red" onClick={onClose}>
+            Keluar
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+};
+
 export default function WebExplaining() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Container maxW={"5xl"}>
+      <HowTo isOpen={isOpen} onClose={onClose} />
       <Stack
         as={Box}
         textAlign={"center"}
@@ -156,7 +288,12 @@ export default function WebExplaining() {
               },
             }}
           >
-            <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
+            <Button
+              variant={"link"}
+              colorScheme={"blue"}
+              size={"sm"}
+              onClick={onOpen}
+            >
               Cara Kerja
             </Button>
           </ChakraBox>
