@@ -146,7 +146,7 @@ module.exports = {
       const group = await Group.findById(id).populate({
         path: "clients",
         options: {
-          sort: { status: 1, totalErrorScore: 1 },
+          sort: { status: 1, totalErrorScore: 1, time: 1 },
         },
       });
       if (!group)
