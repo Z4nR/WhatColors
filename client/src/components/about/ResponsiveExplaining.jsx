@@ -161,7 +161,6 @@ export default function ResponsiveExplaining() {
         >
           <Flex flexDirection={"column"} alignItems={"center"}>
             <Image
-              loading="lazy"
               rounded={"md"}
               alt={"Device Size"}
               src={

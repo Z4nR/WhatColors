@@ -1,8 +1,8 @@
-const { deleteAllTestData } = require("./controllers/other-controller");
 const express = require("express"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
   cron = require("node-cron");
+const { deleteAllTestData } = require("./controllers/data-controller");
 (app = express()), ((db = require("./db")), (route = require("./route")));
 
 require("dotenv").config();

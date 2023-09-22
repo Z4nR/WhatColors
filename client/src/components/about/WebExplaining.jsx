@@ -33,7 +33,7 @@ export default function WebExplaining() {
           whileInView="onscreen"
           variants={{
             offscreen: {
-              y: 20,
+              y: -100,
               scale: 0,
               opacity: 0,
             },
@@ -42,9 +42,9 @@ export default function WebExplaining() {
               scale: 1,
               opacity: 1,
               transition: {
-                ease: "easeInOut",
-                delayChildren: 0.3,
-                staggerChildren: 0.2,
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
               },
             },
           }}
@@ -65,16 +65,18 @@ export default function WebExplaining() {
           whileInView="onscreen"
           variants={{
             offscreen: {
-              x: 20,
+              y: 100,
+              scale: 0,
               opacity: 0,
             },
             onscreen: {
-              x: 0,
+              y: 0,
+              scale: 1,
               opacity: 1,
               transition: {
                 type: "spring",
                 bounce: 0.4,
-                duration: 1,
+                duration: 0.8,
               },
             },
           }}
@@ -106,16 +108,16 @@ export default function WebExplaining() {
             whileInView="onscreen"
             variants={{
               offscreen: {
-                x: -20,
+                x: -50,
                 opacity: 0,
               },
               onscreen: {
                 x: 0,
                 opacity: 1,
                 transition: {
-                  ease: "easeInOut",
-                  delayChildren: 0.3,
-                  staggerChildren: 0.2,
+                  type: "spring",
+                  bounce: 0.4,
+                  duration: 0.8,
                 },
               },
             }}
@@ -140,16 +142,16 @@ export default function WebExplaining() {
             whileInView="onscreen"
             variants={{
               offscreen: {
-                x: -20,
+                x: -50,
                 opacity: 0,
               },
               onscreen: {
                 x: 0,
                 opacity: 1,
                 transition: {
-                  ease: "easeInOut",
-                  delayChildren: 0.3,
-                  staggerChildren: 0.2,
+                  type: "spring",
+                  bounce: 0.4,
+                  duration: 0.8,
                 },
               },
             }}

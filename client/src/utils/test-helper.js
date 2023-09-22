@@ -9,10 +9,13 @@ const date = new Date().toLocaleDateString("id-ID", {
 });
 
 const inisial = storage.getJSON("inisial");
-const max = storage.getJSON("max");
+const max = storage.getJSON("score");
 
 const userData = (data, isClient) => {
-  const name = isClient ? `${inisial} ${data?.fullName}` : data?.fullName;
+  const name =
+    isClient && inisial !== null
+      ? `${inisial} ${data?.fullName}`
+      : data?.fullName;
   const age = data?.age;
   const gender = data?.gender;
   const device = data?.device;
@@ -215,7 +218,9 @@ const testResult = (result, initiate, user, isClient) => {
   const blindType = colorBlindType(user.type, comparison.result);
   const blindCheck = !blindType ? "Normal" : blindType;
   const errorScoreStatus = blindStatus(totalErrorScore);
-  const status = totalErrorScore < max ? "Lolos" : "Tidak Lolos";
+  const status = totalErrorScore <= max ? "Lolos" : "Tidak Lolos";
+
+  console.log(status, totalErrorScore, max);
 
   const comparisonResult = comparison.value;
   const discriminantResult = discriminant.value;

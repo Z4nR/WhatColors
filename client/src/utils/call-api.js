@@ -57,7 +57,7 @@ const getGroupById = async (id) => {
 };
 
 const deleteGroupById = async (id) => {
-  return axios.post(`${Server_URL}/group/${id}/delete`).then((response) => {
+  return axios.delete(`${Server_URL}/group/${id}/delete`).then((response) => {
     const data = response.data;
     return data;
   });

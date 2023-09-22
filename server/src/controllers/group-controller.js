@@ -146,7 +146,7 @@ module.exports = {
       const group = await Group.findById(id).populate({
         path: "clients",
         options: {
-          sort: { totalErrorScore: 1 },
+          sort: { status: 1, totalErrorScore: 1 },
         },
       });
       if (!group)
@@ -155,21 +155,6 @@ module.exports = {
       const data = group.clients;
 
       res.status(202).send(data);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
-    }
-  },
-
-  deleteGroupById: async (req, res) => {
-    try {
-      const { id } = req.params;
-
-      if (!id) return res.status(404).send({ message: "Grup tidak ditemukan" });
-
-      await Group.findByIdAndDelete(id);
-
-      res.status(200).send({ message: "Grup berhasil dihapus" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan pada Server" });

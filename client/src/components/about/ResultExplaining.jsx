@@ -26,7 +26,6 @@ export default function ResultExplaining() {
                 <ChakraBox
                   initial="offscreen"
                   whileInView="onscreen"
-                  viewport={{ once: true }}
                   variants={{
                     offscreen: {
                       scale: 0,
@@ -63,7 +62,6 @@ export default function ResultExplaining() {
                 <ChakraBox
                   initial="offscreen"
                   whileInView="onscreen"
-                  viewport={{ once: true }}
                   variants={{
                     offscreen: {
                       scale: 0,
@@ -94,7 +92,6 @@ export default function ResultExplaining() {
                     <ChakraBox
                       initial="offscreen"
                       whileInView="onscreen"
-                      viewport={{ once: true }}
                       variants={{
                         offscreen: {
                           scale: 0,
@@ -122,7 +119,6 @@ export default function ResultExplaining() {
                     <ChakraBox
                       initial="offscreen"
                       whileInView="onscreen"
-                      viewport={{ once: true }}
                       variants={{
                         offscreen: {
                           scale: 0,
@@ -229,11 +225,9 @@ const stats = [
           Akses Data
         </Text>
         <br />
-        Seluruh data yang merupakan data hasil tes dan data grup tersimpan
-        didalam penyimpanan kami hanya dalam kurun waktu tujuh hari saja dan
-        akan terhapus otomatis pada hari Sabtu setiap minggunya. Kalian dapat
-        langsung mengunduh data hasil tes kalian atau mencarinya melalui fitur
-        pencarian selama data belum terhapus dari penyimmpanan kami.
+        Seluruh ringkasan data hasil tes dan data grup dapat kalian cari data
+        hasil tes kalian melalui fitur pencarian selama data belum terhapus
+        setiap minggunya dari penyimpanan kami.
       </>
     ),
   },
