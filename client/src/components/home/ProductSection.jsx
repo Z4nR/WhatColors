@@ -7,7 +7,6 @@ import {
   Icon,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   FcCalculator,
@@ -33,193 +32,76 @@ export default function ProductSection() {
 
       <Container px={0} maxW={"5xl"} mt={12}>
         <Flex flexWrap="wrap" gridGap={6} justify="center">
-          <Box
-            maxW={{ base: "full", md: "275px" }}
-            w={"full"}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={5}
-          >
-            <Stack align={"start"} spacing={2}>
-              <Flex
-                w={16}
-                h={16}
-                align={"center"}
-                justify={"center"}
-                color={"white"}
-                rounded={"full"}
-                bg={useColorModeValue("gray.100", "gray.700")}
-              >
-                <Icon as={FcSmartphoneTablet} w={10} h={10} />
-              </Flex>
-              <Box mt={2}>
-                <Heading size="md">Responsif</Heading>
-                <Text mt={1} fontSize={"sm"}>
-                  Dapat berjalan diberbagai jenis perangkat
-                </Text>
-              </Box>
-              <Button
-                as={ReactRouterLink}
-                to="/about"
-                variant={"link"}
-                colorScheme={"orange"}
-                size={"sm"}
-              >
-                Selengkapnya
-              </Button>
-            </Stack>
-          </Box>
-          <Box
-            maxW={{ base: "full", md: "275px" }}
-            w={"full"}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={5}
-          >
-            <Stack align={"start"} spacing={2}>
-              <Flex
-                w={16}
-                h={16}
-                align={"center"}
-                justify={"center"}
-                color={"white"}
-                rounded={"full"}
-                bg={useColorModeValue("gray.100", "gray.700")}
-              >
-                <Icon as={FcViewDetails} w={10} h={10} />
-              </Flex>
-              <Box mt={2}>
-                <Heading size="md">Rincian Hasil</Heading>
-                <Text mt={1} fontSize={"sm"}>
-                  Mengetahui semua informasi hasil tes.
-                </Text>
-              </Box>
-              <Button
-                as={ReactRouterLink}
-                to="/about"
-                variant={"link"}
-                colorScheme={"orange"}
-                size={"sm"}
-              >
-                Selengkapnya
-              </Button>
-            </Stack>
-          </Box>
-          <Box
-            maxW={{ base: "full", md: "275px" }}
-            w={"full"}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={5}
-          >
-            <Stack align={"start"} spacing={2}>
-              <Flex
-                w={16}
-                h={16}
-                align={"center"}
-                justify={"center"}
-                color={"white"}
-                rounded={"full"}
-                bg={useColorModeValue("gray.100", "gray.700")}
-              >
-                <Icon as={FcRadarPlot} w={10} h={10} />
-              </Flex>
-              <Box mt={2}>
-                <Heading size="md">Visual</Heading>
-                <Text mt={1} fontSize={"sm"}>
-                  Ketahui hasil melalui visual yang sesuai
-                </Text>
-              </Box>
-              <Button
-                as={ReactRouterLink}
-                to="/about"
-                variant={"link"}
-                colorScheme={"orange"}
-                size={"sm"}
-              >
-                Selengkapnya
-              </Button>
-            </Stack>
-          </Box>
-          <Box
-            maxW={{ base: "full", md: "275px" }}
-            w={"full"}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={5}
-          >
-            <Stack align={"start"} spacing={2}>
-              <Flex
-                w={16}
-                h={16}
-                align={"center"}
-                justify={"center"}
-                color={"white"}
-                rounded={"full"}
-                bg={useColorModeValue("gray.100", "gray.700")}
-              >
-                <Icon as={FcCollaboration} w={10} h={10} />
-              </Flex>
-              <Box mt={2}>
-                <Heading size="md">Individu</Heading>
-                <Text mt={1} fontSize={"sm"}>
-                  Meminimalisir terjadinya kecurangan dalam tes.
-                </Text>
-              </Box>
-              <Button
-                as={ReactRouterLink}
-                to="/about"
-                variant={"link"}
-                colorScheme={"orange"}
-                size={"sm"}
-              >
-                Selengkapnya
-              </Button>
-            </Stack>
-          </Box>
-          <Box
-            maxW={{ base: "full", md: "275px" }}
-            w={"full"}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={5}
-          >
-            <Stack align={"start"} spacing={2}>
-              <Flex
-                w={16}
-                h={16}
-                align={"center"}
-                justify={"center"}
-                color={"white"}
-                rounded={"full"}
-                bg={useColorModeValue("gray.100", "gray.700")}
-              >
-                <Icon as={FcCalculator} w={10} h={10} />
-              </Flex>
-              <Box mt={2}>
-                <Heading size="md">Akurat</Heading>
-                <Text mt={1} fontSize={"sm"}>
-                  Menggunakan Metode Farnsworth-Munsell untuk menghitung hasil
-                </Text>
-              </Box>
-              <Button
-                as={ReactRouterLink}
-                to="/about"
-                variant={"link"}
-                colorScheme={"orange"}
-                size={"sm"}
-              >
-                Selengkapnya
-              </Button>
-            </Stack>
-          </Box>
+          {stats.map((stat) => (
+            <Box
+              key={stat.num}
+              maxW={{ base: "full", md: "275px" }}
+              w={"full"}
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              p={5}
+            >
+              <Stack align={"start"} spacing={2}>
+                <Flex
+                  w={16}
+                  h={16}
+                  align={"center"}
+                  justify={"center"}
+                  color={"white"}
+                  rounded={"full"}
+                  bg={"gray.100"}
+                >
+                  <Icon as={stat.icon} w={10} h={10} />
+                </Flex>
+                <Box mt={2}>
+                  <Heading size="md">Responsif</Heading>
+                  <Text mt={1} fontSize={"sm"}>
+                    {stat.desc}
+                  </Text>
+                </Box>
+                <Button
+                  as={ReactRouterLink}
+                  to="/about"
+                  variant={"link"}
+                  colorScheme={"orange"}
+                  size={"sm"}
+                >
+                  Selengkapnya
+                </Button>
+              </Stack>
+            </Box>
+          ))}
         </Flex>
       </Container>
     </Box>
   );
 }
+
+const stats = [
+  {
+    num: 1,
+    icon: FcSmartphoneTablet,
+    desc: "Dapat berjalan diberbagai jenis perangkat",
+  },
+  {
+    num: 2,
+    icon: FcViewDetails,
+    desc: "Mengetahui semua informasi hasil tes.",
+  },
+  {
+    num: 3,
+    icon: FcRadarPlot,
+    desc: "Ketahui hasil melalui visual yang sesuai",
+  },
+  {
+    num: 4,
+    icon: FcCollaboration,
+    desc: "Meminimalisir terjadinya kecurangan dalam tes.",
+  },
+  {
+    num: 5,
+    icon: FcCalculator,
+    desc: "Menggunakan Metode Farnsworth-Munsell untuk menghitung hasil",
+  },
+];
