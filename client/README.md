@@ -1,8 +1,13 @@
-# React + Vite
+# WhatColors Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Environment Variables
 
-Currently, two official plugins are available:
+To run this project, you will need to add the following environment variables to your .env file
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Env Name          | Description                                             |
+| :---------------- | :------------------------------------------------------ |
+| `VITE_SERVER_URL` | This env contain connection to server in local or cloud |
+
+## Bug
+
+When you try the test page using join modal as client, if `Nama` isn't load Group Initial as well. Reload the tab and it doing really well. In another way if you not reload it, that okay the data will already send to group but without group initial in front of client name. If you know to fix it to doing more well. please fork this repository and create PR. I will appreciate it. Thanks
