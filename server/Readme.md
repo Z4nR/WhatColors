@@ -127,9 +127,9 @@ To run this project, you will need to add the following environment variables to
 ### For Search Test Data
 
 ```bash
-  POST /search?name=${query}
+  POST /search
 ```
 
-| Query   | Type     |
-| :------ | :------- |
-| `query` | `string` |
+| Query            | Type     |
+| :--------------- | :------- |
+| `?name=${query}` | `string` |
