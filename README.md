@@ -40,6 +40,11 @@
 
 <br/>
 
+## Information
+
+- [Information about Server](https://github.com/Z4nR/WhatColors/tree/main/server)
+- [Information about Client](https://github.com/Z4nR/WhatColors/tree/main/client)
+
 ## Acknowledgements
 
 This project is using for simulating color blind test using Farnsworth-Munsell Method

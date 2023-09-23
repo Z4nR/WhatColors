@@ -1,7 +1,6 @@
 const clientConntroller = require("./controllers/client-controller");
 const groupController = require("./controllers/group-controller");
 const individualController = require("./controllers/individual-controller");
-const otherController = require("./controllers/article-controller");
 const dataController = require("./controllers/data-controller");
 const articleController = require("./controllers/article-controller");
 
