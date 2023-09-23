@@ -145,7 +145,7 @@ export default function ResponsiveExplaining() {
           viewport={{ once: true }}
           variants={{
             offscreen: {
-              y: 50,
+              y: 100,
               opacity: 0,
             },
             onscreen: {
@@ -154,7 +154,7 @@ export default function ResponsiveExplaining() {
               transition: {
                 type: "spring",
                 bounce: 0.4,
-                duration: 1,
+                duration: 0.8,
               },
             },
           }}

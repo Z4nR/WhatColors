@@ -49,7 +49,8 @@ const HowTo = ({ isOpen, onClose }) => {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Cara Kerja</ModalHeader>
-        <ModalBody>
+        <ModalBody fontSize={{ base: "sm", md: "md" }}>
+          <Text>Susun dan pindahkan blok warna yang berada ditengah</Text>
           <Flex
             flexWrap={"wrap"}
             flexDirection={"row"}
@@ -111,28 +112,29 @@ const HowTo = ({ isOpen, onClose }) => {
               </Box>
             </Box>
           </Flex>
-          <OrderedList
-            textAlign={"justify"}
-            fontSize={{ base: "sm", md: "md" }}
-            mt={8}
-          >
+          <OrderedList textAlign={"justify"} mt={8}>
+            <Text mb={2}>
+              Untuk hasil yang maksimal silahkan ikuti saran berikut :
+            </Text>
             <ListItem>
               Maksimalkan kecerahan layar perangkat yang akan digunakan dalam
               pengetesan
             </ListItem>
+            <ListItem>Pastikan pengujian dilakukan dalam ruangan</ListItem>
             <ListItem>
-              Pastikan sumber cahaya seperti lampu berwarna putih dan
-              pencahayaan merata
+              Gunakan lampu bertipe D65 pada ruangan tes secara merata
             </ListItem>
             <ListItem>
-              Jangan gunakan mode baca atau anti sinar biru pada pengaturan
+              Jangan gunakan mode baca atau mode anti sinar biru pada pengaturan
               layar perangkat pengetesan
             </ListItem>
             <ListItem>
-              Lepaskan atau jangan gunakan alat bantu lihat jenis apapun,
-              kecuali kacamata minus, plus atau silinder
+              Jangan gunakan kacamata atau soft-lens khusus buta warna.
             </ListItem>
-            <ListItem>Waktu pengetesan optimal : pukul 11:00 -13:00</ListItem>
+            <ListItem>
+              Waktu pengetesan optimal : pukul 11:00 -13:00{" "}
+              <b>(Maks. Pengerjaan 12 Menit</b> )
+            </ListItem>
             <ListItem>
               Gunakan Monitor dengan ukuran maksimal 17 inci dengan resolusi
               Full HD
