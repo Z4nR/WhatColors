@@ -99,9 +99,9 @@ You can see the link for demo in About of Repository
 
 Learn to using ReactSortable to reshuffle an color to right place and Code Correction when Verificate the code
 
-## Related
+## Resources
 
-Here are some related projects
+This is other repository resources to help me to build this project
 
 [Farnsworth Munsell via Processing](https://github.com/rpigu-i/processing-farnsworth-munsell) and
 [Farnsworth Munsell Shuffling Step in HTML](https://github.com/chaturatbs/FM100)
