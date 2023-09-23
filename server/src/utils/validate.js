@@ -86,7 +86,7 @@ module.exports = {
       author: Joi.string().required().label("Penulis Artikel"),
       year: Joi.string().required().label("Tahun Publikasi"),
       category: Joi.string().required().label("Jenis Artikel"),
-      description: Joi.number().required().label("Penjelasan Singkat Artikel"),
+      description: Joi.string().required().label("Penjelasan Singkat Artikel"),
       url: Joi.string().required().label("Tautan Artikel"),
       urlPage: Joi.string().required().label("Penyedia Artikel"),
     });
