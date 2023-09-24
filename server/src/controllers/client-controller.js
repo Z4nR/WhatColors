@@ -23,7 +23,7 @@ module.exports = {
           .status(409)
           .send({ message: "Nama Peserta sudah digunakan!" });
 
-      const client = await new Client(req.body);
+      const client = new Client(req.body);
       const data = await client.save();
 
       group.clients.push(client);
