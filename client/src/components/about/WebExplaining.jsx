@@ -136,7 +136,7 @@ const HowTo = ({ isOpen, onClose }) => {
               <b>(Maks. Pengerjaan 12 Menit</b> )
             </ListItem>
             <ListItem>
-              Gunakan Monitor dengan ukuran maksimal 17 inci dengan resolusi
+              Gunakan layar dengan ukuran minimal 6,6 - 17 inci dengan resolusi
               Full HD
             </ListItem>
           </OrderedList>
@@ -167,7 +167,7 @@ export default function WebExplaining() {
           whileInView="onscreen"
           variants={{
             offscreen: {
-              y: -100,
+              y: 100,
               scale: 0,
               opacity: 0,
             },

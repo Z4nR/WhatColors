@@ -1,5 +1,5 @@
 import { InfoOutlineIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
-import { Box, HStack, IconButton } from "@chakra-ui/react";
+import { Box, HStack, Button, Icon } from "@chakra-ui/react";
 import { FiFileText, FiHome } from "react-icons/fi";
 import { useLocation, Link as ReactRouterLink } from "react-router-dom";
 
@@ -19,71 +19,75 @@ export default function MobileNav() {
       zIndex={11}
       width={"full"}
     >
-      <HStack p={2} gap={"5"} justifyContent={"center"}>
-        <IconButton
-          size={"lg"}
-          fontSize="20px"
+      <HStack p={4} gap={"5"} justifyContent={"center"}>
+        <Button
+          size={"xs"}
+          fontSize="sm"
           as={ReactRouterLink}
           to="/"
-          variant={"outline"}
+          variant={"ghost"}
           aria-label="Home button"
           aria-current={urlPath === "/" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
-              color: "white",
-              bg: "teal",
+              color: "teal",
             },
           }}
-          icon={<FiHome />}
-        />
-        <IconButton
-          size={"lg"}
-          fontSize="20px"
+          leftIcon={<Icon as={FiHome} />}
+        >
+          Beranda
+        </Button>
+        <Button
+          size={"xs"}
+          fontSize="sm"
           as={ReactRouterLink}
           to="/about"
-          variant={"outline"}
+          variant={"ghost"}
           aria-label="About button"
           aria-current={urlPath === "/about" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
-              color: "white",
-              bg: "teal",
+              color: "teal",
             },
           }}
-          icon={<InfoOutlineIcon />}
-        />
-        <IconButton
-          size={"lg"}
-          fontSize="20px"
+          leftIcon={<Icon as={InfoOutlineIcon} />}
+        >
+          Tentang
+        </Button>
+        <Button
+          size={"xs"}
+          fontSize="sm"
           as={ReactRouterLink}
           to="/article"
-          variant={"outline"}
+          variant={"ghost"}
           aria-label="Article button"
           aria-current={urlPath === "/article" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
-              color: "white",
-              bg: "teal",
+              color: "teal",
             },
           }}
-          icon={<FiFileText />}
-        />
-        <IconButton
-          size={"lg"}
-          fontSize="20px"
+          leftIcon={<Icon as={FiFileText} />}
+        >
+          Artikel
+        </Button>
+        <Button
+          size={"xs"}
+          fontSize="sm"
           as={ReactRouterLink}
           to="/faq"
-          variant={"outline"}
+          variant={"ghost"}
           aria-label="FAQ button"
           aria-current={urlPath === "/faq" ? "page" : undefined}
           sx={{
             "&[aria-current=page]": {
-              color: "white",
-              bg: "teal",
+              color: "teal",
             },
           }}
-          icon={<QuestionOutlineIcon />}
-        />
+          leftIcon={<Icon as={QuestionOutlineIcon} />}
+        >
+          FAQ
+        </Button>
       </HStack>
     </Box>
   );
