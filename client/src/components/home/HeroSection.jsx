@@ -47,12 +47,13 @@ export default function HeroSection() {
             digunakan secara berkelompok. Apakah sudah siap untuk mencoba?
           </Text>
           <Stack
-            direction={{ base: "column", sm: "row" }}
-            spacing={{ base: 2, sm: 4 }}
+            direction={"row"}
+            justifyContent={{ base: "center", md: "flex-start" }}
+            spacing={4}
           >
             <Button
               sx={{
-                "@media screen and (max-width: 48em) and (min-width: 37em)": {
+                "@media screen and (max-width: 48em)": {
                   flex: 1,
                 },
               }}
@@ -69,7 +70,7 @@ export default function HeroSection() {
             </Button>
             <Button
               sx={{
-                "@media screen and (max-width: 48em) and (min-width: 37em)": {
+                "@media screen and (max-width: 48em)": {
                   flex: 1,
                 },
               }}
