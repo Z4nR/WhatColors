@@ -91,7 +91,7 @@ export default function ComparisonResult({ data }) {
               {data?.comparisonResult?.map((value) => (
                 <Tr key={value._id}>
                   <Td textAlign={"center"} maxWidth={75}>
-                    {value._id}
+                    {value.id}
                   </Td>
                   <Td textAlign={"center"}>{value.comparison}</Td>
                 </Tr>
