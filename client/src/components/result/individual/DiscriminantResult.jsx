@@ -116,7 +116,7 @@ export default function DiscriminantResult({ data }) {
               {data?.discriminantResult?.map((value) => (
                 <Tr key={value._id}>
                   <Td textAlign={"center"} maxWidth={75}>
-                    {value.id}
+                    {value._id}
                   </Td>
                   <Td textAlign={"center"}>{value.discriminant}</Td>
                 </Tr>
