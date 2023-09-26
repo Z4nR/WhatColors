@@ -34,9 +34,9 @@ jobs:
       - name: Setup environment
         working-directory: ./client
         env:
-          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
         run: |
-          echo "VITE_SERVER_URL=${VITE_SERVER_URL}" > .env.production
+          echo "VITE_BACKEND_URL=${VITE_BACKEND_URL}" > .env.production
 
       - name: Deploy Project
         working-directory: ./client
