@@ -220,8 +220,6 @@ const testResult = (result, initiate, user, isClient) => {
   const errorScoreStatus = blindStatus(totalErrorScore);
   const status = totalErrorScore <= max ? "Lolos" : "Tidak Lolos";
 
-  console.log(status, totalErrorScore, max);
-
   const comparisonResult = comparison.value;
   const discriminantResult = discriminant.value;
 
