@@ -64,13 +64,13 @@ module.exports = {
       blindCheck: Joi.string().required().label("Jenis Buta Warna"),
       comparisonResult: Joi.array().items(
         Joi.object({
-          id: Joi.string().required(),
+          _id: Joi.string().required(),
           comparison: Joi.string().required().label("Nilai Komparasi"),
         })
       ),
       discriminantResult: Joi.array().items(
         Joi.object({
-          id: Joi.string().required(),
+          _id: Joi.string().required(),
           discriminant: Joi.number().required().label("Nilai Perbedaan"),
         })
       ),
