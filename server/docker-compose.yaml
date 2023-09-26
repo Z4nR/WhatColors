@@ -1,6 +1,5 @@
 services:
   whatcolors:
     build: .
-    container_name: whatcolors-backend
     ports:
       - 3000:5000
