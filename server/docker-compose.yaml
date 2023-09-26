@@ -1,5 +1,5 @@
 services:
-  whatcolors:
+  backend:
     build: .
     ports:
       - 3000:5000
