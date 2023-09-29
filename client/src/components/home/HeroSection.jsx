@@ -88,12 +88,24 @@ export default function HeroSection() {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Image
-          alt={"Login Image"}
-          objectFit={"cover"}
-          src={colorBlindImg}
-          borderRadius={{ base: "2xl", md: "none" }}
-        />
+        <Flex flexDirection={"column"} alignItems={"center"}>
+          <Image
+            alt={"Hero Image"}
+            objectFit={"cover"}
+            src={colorBlindImg}
+            borderRadius={{ base: "2xl", md: "none" }}
+          />
+          <Text fontSize={"x-small"}>
+            Photo by{" "}
+            <a href="https://www.plainpicture.com/en/search?credit=plainpicture%2FBjanka+Kadic">
+              Bjanka Kadic
+            </a>{" "}
+            on{" "}
+            <a href="https://www.plainpicture.com/en/images/1356202">
+              plainpicture
+            </a>
+          </Text>
+        </Flex>
       </Flex>
     </Stack>
   );
