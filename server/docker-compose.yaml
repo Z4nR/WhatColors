@@ -1,5 +1,6 @@
 services:
   backend:
+    restart: always
     build: .
     ports:
       - 3000:5000
