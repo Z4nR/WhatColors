@@ -27,8 +27,8 @@ export default function App() {
 
   return (
     <Box>
-      <SkipNavContent />
       {isMobile ? <AppHeader /> : <WebHeader />}
+      <SkipNavContent id="main" />
       <Box
         as="main"
         width={"full"}

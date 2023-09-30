@@ -19,7 +19,7 @@ const theme = extendTheme({ breakpoints });
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter basename="/WhatColors">
     <ChakraProvider theme={theme}>
-      <SkipNavLink>Skip to content</SkipNavLink>
+      <SkipNavLink href="#main">Skip to content</SkipNavLink>
       <App />
     </ChakraProvider>
   </BrowserRouter>
