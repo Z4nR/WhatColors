@@ -2,6 +2,7 @@ import {
   Box,
   Container,
   SkipNavContent,
+  SkipNavLink,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
@@ -26,14 +27,15 @@ export default function App() {
   const [isMobile] = useMediaQuery("(max-width: 401px)");
 
   return (
-    <Box>
+    <>
+      <SkipNavLink zIndex={20}>Skip to content</SkipNavLink>
       {isMobile ? <AppHeader /> : <WebHeader />}
-      <SkipNavContent id="main" />
       <Box
         as="main"
         width={"full"}
         minHeight={{ base: "100vh", md: "75vh", "2xl": "80vh" }}
       >
+        <SkipNavContent />
         <Container maxW={"container.xl"} px={5}>
           <QueryClientProvider client={queryClient}>
             <Routes>
@@ -51,6 +53,6 @@ export default function App() {
         </Container>
       </Box>
       {isMobile ? <MobileNav /> : <Footer />}
-    </Box>
+    </>
   );
 }
