@@ -7,7 +7,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import colorBlindImg from "@/assets/img/colourblind.webp";
+import heroImg from "@/assets/img/colourblind.webp";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export default function HeroSection() {
@@ -92,7 +92,7 @@ export default function HeroSection() {
           <Image
             alt={"Hero Image"}
             objectFit={"cover"}
-            src={colorBlindImg}
+            src={heroImg}
             borderRadius={{ base: "2xl", md: "none" }}
           />
           <Text fontSize={"x-small"}>
