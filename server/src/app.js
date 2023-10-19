@@ -4,7 +4,7 @@ const express = require("express"),
   cron = require("node-cron");
 const app = express(),
   db = require("./db"),
-  route = require("./route");
+  route = require("./routes");
 const { deleteAllTestData } = require("./controllers/data-controller");
 
 require("dotenv").config();
