@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const Server_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -6,7 +6,7 @@ const newIndividual = async (userData) => {
   return axios
     .post(`${Server_URL}/user/new`, userData, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
     .then((response) => {
@@ -16,7 +16,7 @@ const newIndividual = async (userData) => {
 };
 
 const getIndividualById = async (id) => {
-  return axios.get(`${Server_URL}/user/${id}`).then((response) => {
+  return axios.get(`${Server_URL}/user/${id}/detail`).then((response) => {
     const data = response.data;
     return data;
   });
@@ -26,7 +26,7 @@ const newGroup = async (groupData) => {
   return axios
     .post(`${Server_URL}/group/new`, groupData, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
     .then((response) => {
@@ -74,7 +74,7 @@ const newClient = async ({ id, clientData }) => {
   return axios
     .post(`${Server_URL}/client/${id}/new`, clientData, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
     .then((response) => {
