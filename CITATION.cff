@@ -6,7 +6,8 @@ title: 'WhatColors: Colorblind Simulation Test'
 message: Hope it help you guys
 type: software
 authors:
-  - given-names: Zulham Ari Nur Ridhwan
+  - given-names: Zulham Ari
+    family-names: Nur Ridhwan
     email: ari.comunity1@gmail.com
 identifiers:
   - type: url
