@@ -7,8 +7,8 @@ message: Hope it help you guys
 type: software
 authors:
   - given-names: Zulham Ari
-    family-names: Nur Ridhwan
     email: ari.comunity1@gmail.com
+    family-names: Nur Ridhwan
 identifiers:
   - type: url
     value: 'https://github.com/Z4nR/WhatColors'
@@ -22,4 +22,5 @@ keywords:
   - simulation
   - web-app
 license: MIT
-version: v1.0.0
+version: v1.25.0
+date-released: '2023-11-02'
