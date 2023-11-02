@@ -1,0 +1,24 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'WhatColors: Colorblind Simulation Test'
+message: Hope it help you guys
+type: software
+authors:
+  - given-names: Zulham Ari Nur Ridhwan
+    email: ari.comunity1@gmail.com
+identifiers:
+  - type: url
+    value: 'https://github.com/Z4nR/WhatColors'
+    description: >-
+      Github Repository of WhatColors: Colorblind Simulation
+      Test
+url: 'https://z4nr.github.io/WhatColors/'
+keywords:
+  - colorblind
+  - fransworth-munsell
+  - simulation
+  - web-app
+license: MIT
+version: v1.0.0
