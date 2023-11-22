@@ -14,6 +14,8 @@
 ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
 ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
+![React Query](https://img.shields.io/badge/react_query-React_Query?style=for-the-badge&logo=react%20query&logoColor=white&color=%23FF4154) 
+![React Hook Form](https://img.shields.io/badge/react%20hook%20form-React%20Hook%20Form?style=for-the-badge&logo=react%20hook%20form&logoColor=white&color=%23EC5990)
 
 </td><td valign="top" width="33%">
 
@@ -23,6 +25,8 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/mongoose-Mongoose?style=for-the-badge&logo=mongoose&logoColor=white&color=%23880000)
+![Nodemon](https://img.shields.io/badge/nodemon-Nodemon?style=for-the-badge&logo=nodemon&logoColor=white&color=%2376D04B)
 
 </td><td valign="top" width="33%">
 
