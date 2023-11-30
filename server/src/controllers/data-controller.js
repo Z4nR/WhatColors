@@ -1,6 +1,7 @@
-const Group = require("../models/group-test");
-const Client = require("../models/client");
-const Individual = require("../models/individual");
+const Group = require('../models/group-test');
+const Client = require('../models/client');
+const Individual = require('../models/individual');
+const { startSession } = require('mongoose');
 
 module.exports = {
   searchAllTestData: async (req, res) => {
@@ -79,7 +80,7 @@ module.exports = {
       res.status(200).send(searchResult);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -90,7 +91,7 @@ module.exports = {
       await Individual.deleteMany({});
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -98,7 +99,10 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      if (!id) return res.status(404).send({ message: "Grup tidak ditemukan" });
+      if (!id) return res.status(404).send({ message: 'Grup tidak ditemukan' });
+
+      const session = await startSession();
+      session.startTransaction();
 
       const data = await Group.findById(id);
 
@@ -108,12 +112,15 @@ module.exports = {
 
       await Group.findByIdAndDelete(id);
 
+      await session.commitTransaction();
+      session.endSession();
+
       res
         .status(200)
-        .json({ message: "Grup dan Data Peserta berhasil dihapus" });
+        .json({ message: 'Grup dan Data Peserta berhasil dihapus' });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 };
