@@ -16,6 +16,7 @@
 ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
 ![React Query](https://img.shields.io/badge/react_query-React_Query?style=for-the-badge&logo=react%20query&logoColor=white&color=%23FF4154) 
 ![React Hook Form](https://img.shields.io/badge/react%20hook%20form-React%20Hook%20Form?style=for-the-badge&logo=react%20hook%20form&logoColor=white&color=%23EC5990)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-Framer_Motion?style=for-the-badge&logo=framer&color=%230055FF)
 
 </td><td valign="top" width="33%">
 
