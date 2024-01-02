@@ -5,7 +5,6 @@ import StatementResult from './individual/StatementResult';
 import storage from '@/utils/storage';
 import { useQuery } from '@tanstack/react-query';
 import { getIndividualById } from '@/utils/call-api';
-import Loading from '../utils/Loading';
 import NotFound from '../utils/NotFound';
 
 export default function ResultPage() {
@@ -16,7 +15,6 @@ export default function ResultPage() {
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) return <Loading />;
   if (isError) return <NotFound error={error} />;
 
   return (
@@ -34,7 +32,7 @@ export default function ResultPage() {
 
       <TabPanels>
         <TabPanel>
-          <StatementResult data={data} />
+          <StatementResult data={data} isLoading={isLoading} />
         </TabPanel>
         <TabPanel>
           <ComparisonResult data={data} />

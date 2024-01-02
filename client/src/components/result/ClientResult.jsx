@@ -6,11 +6,11 @@ import {
   Center,
   Divider,
   Heading,
+  Skeleton,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import Loading from '../utils/Loading';
 import NotFound from '../utils/NotFound';
 
 export default function ClientResult() {
@@ -21,7 +21,6 @@ export default function ClientResult() {
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) return <Loading />;
   if (isError) return <NotFound error={error} />;
 
   const infoResult = {
@@ -49,27 +48,37 @@ export default function ClientResult() {
       <Heading my={6} size={'lg'} textAlign={'center'}>
         Hasil Pengujian
       </Heading>
-      <Text textAlign={'justify'}>
-        Berdasarkan proses pengujian buta warna pada laman{' '}
-        <Text as={'span'} fontWeight={'medium'}>
-          WhatColors
-        </Text>{' '}
-        yang telah dilakukan pada{' '}
-        <Text as={'span'} fontWeight={'medium'}>
-          {data?.date}
-        </Text>{' '}
-        menggunakan Metode Farnsworth Munsell dengan jenis tes{' '}
-        <Text as={'span'} fontWeight={'medium'}>
-          {data?.type}
+      <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+        <Text textAlign={'justify'}>
+          Berdasarkan proses pengujian buta warna pada laman{' '}
+          <Text as={'span'} fontWeight={'medium'}>
+            WhatColors
+          </Text>{' '}
+          yang telah dilakukan pada{' '}
+          <Text as={'span'} fontWeight={'medium'}>
+            {data?.date}
+          </Text>{' '}
+          menggunakan Metode Farnsworth Munsell dengan jenis tes{' '}
+          <Text as={'span'} fontWeight={'medium'}>
+            {data?.type}
+          </Text>
+          . Dengan rincian data sebagai berikut:
         </Text>
-        . Dengan rincian data sebagai berikut:
-      </Text>
+      </Skeleton>
       <Center my={{ base: 4, md: 8 }}>
         <VStack alignItems={'flex-start'}>
-          <Text fontWeight={'medium'}>Nama : {data?.name}</Text>
-          <Text fontWeight={'medium'}>Umur : {data?.age}</Text>
-          <Text fontWeight={'medium'}>Perangkat : {data?.device}</Text>
-          <Text fontWeight={'medium'}>Waktu Tes : {data?.time}</Text>
+          <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+            <Text fontWeight={'medium'}>Nama : {data?.name}</Text>
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+            <Text fontWeight={'medium'}>Umur : {data?.age}</Text>
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+            <Text fontWeight={'medium'}>Perangkat : {data?.device}</Text>
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+            <Text fontWeight={'medium'}>Waktu Tes : {data?.time}</Text>
+          </Skeleton>
         </VStack>
       </Center>
       <Box position={'relative'} my={6}>
@@ -86,19 +95,24 @@ export default function ClientResult() {
           Hasil
         </AbsoluteCenter>
       </Box>
-      <Text textAlign={{ base: 'justify', sm: 'center' }}>
-        Setelah melalui proses perhitungan yang cukup kompleks dan panjang,
-        menghasilkan skor kesalahan sebesar <b>{data?.totalErrorScore}</b>.
-        Sehingga dengan hasil skor tersebut menyatakan bahwa pengguna dianggap:
-      </Text>
-      <Heading
-        mt={4}
-        textAlign={'center'}
-        size={{ base: 'md', md: 'lg' }}
-        fontWeight={'bold'}
-      >
-        {data.status} Tes Buta Warna
-      </Heading>
+      <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+        <Text textAlign={{ base: 'justify', sm: 'center' }}>
+          Setelah melalui proses perhitungan yang cukup kompleks dan panjang,
+          menghasilkan skor kesalahan sebesar <b>{data?.totalErrorScore}</b>.
+          Sehingga dengan hasil skor tersebut menyatakan bahwa pengguna
+          dianggap:
+        </Text>
+      </Skeleton>
+      <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+        <Heading
+          mt={4}
+          textAlign={'center'}
+          size={{ base: 'md', md: 'lg' }}
+          fontWeight={'bold'}
+        >
+          {data.status} Tes Buta Warna
+        </Heading>
+      </Skeleton>
       <Divider
         my={4}
         borderBottomWidth={{ base: 'medium', md: 'thick' }}
