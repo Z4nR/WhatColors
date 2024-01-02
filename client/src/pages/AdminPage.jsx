@@ -1,4 +1,4 @@
-import Loading from '@/components/utils/Loading';
+import AdminLoading from '@/components/utils/AdminLoading';
 import NotFound from '@/components/utils/NotFound';
 import { deleteGroupById, getClientData, getGroupById } from '@/utils/call-api';
 import { useDownloadData, useToastMsg } from '@/utils/customHooks';
@@ -16,6 +16,7 @@ import {
   Button,
   Heading,
   IconButton,
+  Skeleton,
   Table,
   TableContainer,
   Tbody,
@@ -69,7 +70,6 @@ export default function AdminPage() {
 
   const [csv] = useDownloadData(client.data);
 
-  if (group.isLoading || client.isLoading) return <Loading />;
   if (group.isError || client.isError)
     return <NotFound error={group.error || client.error} />;
 
@@ -107,44 +107,17 @@ export default function AdminPage() {
         </AlertDialogContent>
       </AlertDialog>
       <Box textAlign={'center'} fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}>
-        <Heading mt={{ base: 4, md: 2 }} size={{ base: 'sm', md: 'md' }}>
-          {group.data.name} ({group.data.initial})
-        </Heading>
-        <Text>Dibuat pada {group.data.date}</Text>
+        <Skeleton isLoaded={!group.isLoading} fadeDuration={1}>
+          <Heading mt={{ base: 4, md: 2 }} size={{ base: 'sm', md: 'md' }}>
+            {group.data?.name} ({group.data?.initial})
+          </Heading>
+          <Text>Dibuat pada {group.data?.date}</Text>
+        </Skeleton>
         <Text mt={2} color={'gray.500'} fontSize={'xs'}>
           Data akan diperbarui otomatis setiap 60 detik
         </Text>
       </Box>
-      <TableContainer
-        mt={6}
-        mb={2}
-        minHeight={{ base: '68vh', xs: '75vh', md: '58vh' }}
-      >
-        <Table size={'sm'}>
-          <Thead>
-            <Tr>
-              <Th textAlign={{ md: 'center' }}>#</Th>
-              <Th textAlign={{ md: 'center' }}>Nama</Th>
-              <Th textAlign={{ md: 'center' }}>Skor Tes</Th>
-              <Th textAlign={{ md: 'center' }}>Waktu</Th>
-              <Th textAlign={{ md: 'center' }}>Status</Th>
-              <Th textAlign={{ md: 'center' }}>Perangkat</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {client.data.map((data, index) => (
-              <Tr key={data._id}>
-                <Td textAlign={{ md: 'center' }}>{index + 1}</Td>
-                <Td textAlign={{ md: 'center' }}>{data.name}</Td>
-                <Td textAlign={'center'}>{data.totalErrorScore}</Td>
-                <Td textAlign={'center'}>{data.time}</Td>
-                <Td textAlign={'center'}>{data.status}</Td>
-                <Td textAlign={'center'}>{data.device}</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      {client.isLoading ? <AdminLoading /> : <AdminTable client={client} />}
       <VStack
         zIndex={10}
         position={'absolute'}
@@ -194,5 +167,40 @@ export default function AdminPage() {
         />
       </VStack>
     </Box>
+  );
+}
+
+function AdminTable({ client }) {
+  return (
+    <TableContainer
+      mt={6}
+      mb={2}
+      minHeight={{ base: '68vh', xs: '75vh', md: '58vh' }}
+    >
+      <Table size={'sm'}>
+        <Thead>
+          <Tr>
+            <Th textAlign={{ md: 'center' }}>#</Th>
+            <Th textAlign={{ md: 'center' }}>Nama</Th>
+            <Th textAlign={{ md: 'center' }}>Skor Tes</Th>
+            <Th textAlign={{ md: 'center' }}>Waktu</Th>
+            <Th textAlign={{ md: 'center' }}>Status</Th>
+            <Th textAlign={{ md: 'center' }}>Perangkat</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {client.data.map((data, index) => (
+            <Tr key={data._id}>
+              <Td textAlign={{ md: 'center' }}>{index + 1}</Td>
+              <Td textAlign={{ md: 'center' }}>{data.name}</Td>
+              <Td textAlign={'center'}>{data.totalErrorScore}</Td>
+              <Td textAlign={'center'}>{data.time}</Td>
+              <Td textAlign={'center'}>{data.status}</Td>
+              <Td textAlign={'center'}>{data.device}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
   );
 }
