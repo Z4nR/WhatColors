@@ -1,15 +1,19 @@
-const Group = require("../models/group-test");
-const Client = require("../models/client");
-const { clientValidate } = require("../utils/validate");
+const Group = require('../models/group-test');
+const Client = require('../models/client');
+const { clientValidate } = require('../utils/validate');
+const { startSession } = require('mongoose');
 
 module.exports = {
   newClient: async (req, res) => {
     try {
       const { id } = req.params;
 
+      const session = await startSession();
+      session.startTransaction();
+
       const group = await Group.findById(id);
       if (!group)
-        return res.status(404).send({ message: "Grup tidak ditemukan" });
+        return res.status(404).send({ message: 'Grup tidak ditemukan' });
 
       const { error } = clientValidate(req.body);
       if (error)
@@ -21,7 +25,7 @@ module.exports = {
       if (name)
         return res
           .status(409)
-          .send({ message: "Nama Peserta sudah digunakan!" });
+          .send({ message: 'Nama Peserta sudah digunakan!' });
 
       const client = new Client(req.body);
       const data = await client.save();
@@ -29,10 +33,13 @@ module.exports = {
       group.clients.push(client);
       await group.save();
 
+      await session.commitTransaction();
+      session.endSession();
+
       res.status(200).send({ id: data._id });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -43,12 +50,12 @@ module.exports = {
       const data = await Client.findById(id);
 
       if (!data)
-        return res.status(404).send({ message: "Data tidak ditemukan" });
+        return res.status(404).send({ message: 'Data tidak ditemukan' });
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 };

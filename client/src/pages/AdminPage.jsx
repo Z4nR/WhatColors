@@ -1,9 +1,9 @@
-import Loading from "@/components/utils/Loading";
-import NotFound from "@/components/utils/NotFound";
-import { deleteGroupById, getClientData, getGroupById } from "@/utils/call-api";
-import { useDownloadData, useToastMsg } from "@/utils/customHooks";
-import storage from "@/utils/storage";
-import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
+import AdminLoading from '@/components/utils/AdminLoading';
+import NotFound from '@/components/utils/NotFound';
+import { deleteGroupById, getClientData, getGroupById } from '@/utils/call-api';
+import { useDownloadData, useToastMsg } from '@/utils/customHooks';
+import storage from '@/utils/storage';
+import { DeleteIcon, DownloadIcon } from '@chakra-ui/icons';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -16,6 +16,7 @@ import {
   Button,
   Heading,
   IconButton,
+  Skeleton,
   Table,
   TableContainer,
   Tbody,
@@ -26,27 +27,27 @@ import {
   Tr,
   VStack,
   useDisclosure,
-} from "@chakra-ui/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRef } from "react";
-import { CSVLink } from "react-csv";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useRef } from 'react';
+import { CSVLink } from 'react-csv';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminPage() {
   const navigate = useNavigate();
   const toast = useToastMsg();
-  const id = storage.getJSON("id");
+  const id = storage.getJSON('id');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: deleteGroupById,
     onSuccess: (data) => {
-      navigate("/");
-      toast("Berhasil Dihapus", `${data.message}`, "info");
+      navigate('/');
+      toast('Berhasil Dihapus', `${data.message}`, 'info');
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -55,12 +56,13 @@ export default function AdminPage() {
   };
 
   const group = useQuery({
-    queryKey: ["group", id],
+    queryKey: ['group', id],
     queryFn: async () => await getGroupById(id),
+    refetchOnWindowFocus: false,
   });
 
   const client = useQuery({
-    queryKey: ["clients", id],
+    queryKey: ['clients', id],
     queryFn: async () => await getClientData(id),
     refetchIntervalInBackground: true,
     refetchInterval: 60000,
@@ -68,7 +70,6 @@ export default function AdminPage() {
 
   const [csv] = useDownloadData(client.data);
 
-  if (group.isLoading || client.isLoading) return <Loading />;
   if (group.isError || client.isError)
     return <NotFound error={group.error || client.error} />;
 
@@ -105,65 +106,38 @@ export default function AdminPage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <Box textAlign={"center"} fontSize={{ base: "xs", xs: "sm", md: "md" }}>
-        <Heading mt={{ base: 4, md: 2 }} size={{ base: "sm", md: "md" }}>
-          {group.data.name} ({group.data.initial})
-        </Heading>
-        <Text>Dibuat pada {group.data.date}</Text>
-        <Text mt={2} color={"gray.500"} fontSize={"xs"}>
+      <Box textAlign={'center'} fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}>
+        <Skeleton isLoaded={!group.isLoading} fadeDuration={1}>
+          <Heading mt={{ base: 4, md: 2 }} size={{ base: 'sm', md: 'md' }}>
+            {group.data?.name} ({group.data?.initial})
+          </Heading>
+          <Text>Dibuat pada {group.data?.date}</Text>
+        </Skeleton>
+        <Text mt={2} color={'gray.500'} fontSize={'xs'}>
           Data akan diperbarui otomatis setiap 60 detik
         </Text>
       </Box>
-      <TableContainer
-        mt={6}
-        mb={2}
-        minHeight={{ base: "68vh", xs: "75vh", md: "58vh" }}
-      >
-        <Table size={"sm"}>
-          <Thead>
-            <Tr>
-              <Th textAlign={{ md: "center" }}>#</Th>
-              <Th textAlign={{ md: "center" }}>Nama</Th>
-              <Th textAlign={{ md: "center" }}>Skor Tes</Th>
-              <Th textAlign={{ md: "center" }}>Waktu</Th>
-              <Th textAlign={{ md: "center" }}>Status</Th>
-              <Th textAlign={{ md: "center" }}>Perangkat</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {client.data.map((data, index) => (
-              <Tr key={data._id}>
-                <Td textAlign={{ md: "center" }}>{index + 1}</Td>
-                <Td textAlign={{ md: "center" }}>{data.name}</Td>
-                <Td textAlign={"center"}>{data.totalErrorScore}</Td>
-                <Td textAlign={"center"}>{data.time}</Td>
-                <Td textAlign={"center"}>{data.status}</Td>
-                <Td textAlign={"center"}>{data.device}</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      {client.isLoading ? <AdminLoading /> : <AdminTable client={client} />}
       <VStack
         zIndex={10}
-        position={"absolute"}
+        position={'absolute'}
         bottom={{ base: 24, xs: 40 }}
         right={{ base: 5, xs: 10 }}
       >
         {csv ? (
           <CSVLink
             data={csv}
-            separator={";"}
+            separator={';'}
             filename={`${group.data.name} ${group.data.initial}.csv`}
           >
             <IconButton
               aria-label="Download table"
-              size={{ base: "md", md: "lg" }}
+              size={{ base: 'md', md: 'lg' }}
               colorScheme="teal"
               sx={{
-                ":hover": {
-                  color: "black",
-                  bg: "teal.300",
+                ':hover': {
+                  color: 'black',
+                  bg: 'teal.300',
                 },
               }}
               icon={<DownloadIcon />}
@@ -172,20 +146,20 @@ export default function AdminPage() {
         ) : (
           <IconButton
             isDisabled
-            variant={"outline"}
+            variant={'outline'}
             aria-label="Download table"
-            size={{ base: "md", md: "lg" }}
+            size={{ base: 'md', md: 'lg' }}
             icon={<DownloadIcon />}
           />
         )}
         <IconButton
           aria-label="Delete group"
-          size={{ base: "md", md: "lg" }}
+          size={{ base: 'md', md: 'lg' }}
           colorScheme="red"
           sx={{
-            ":hover": {
-              color: "black",
-              bg: "red.300",
+            ':hover': {
+              color: 'black',
+              bg: 'red.300',
             },
           }}
           icon={<DeleteIcon />}
@@ -193,5 +167,40 @@ export default function AdminPage() {
         />
       </VStack>
     </Box>
+  );
+}
+
+function AdminTable({ client }) {
+  return (
+    <TableContainer
+      mt={6}
+      mb={2}
+      minHeight={{ base: '68vh', xs: '75vh', md: '58vh' }}
+    >
+      <Table size={'sm'}>
+        <Thead>
+          <Tr>
+            <Th textAlign={{ md: 'center' }}>#</Th>
+            <Th textAlign={{ md: 'center' }}>Nama</Th>
+            <Th textAlign={{ md: 'center' }}>Skor Tes</Th>
+            <Th textAlign={{ md: 'center' }}>Waktu</Th>
+            <Th textAlign={{ md: 'center' }}>Status</Th>
+            <Th textAlign={{ md: 'center' }}>Perangkat</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {client.data.map((data, index) => (
+            <Tr key={data._id}>
+              <Td textAlign={{ md: 'center' }}>{index + 1}</Td>
+              <Td textAlign={{ md: 'center' }}>{data.name}</Td>
+              <Td textAlign={'center'}>{data.totalErrorScore}</Td>
+              <Td textAlign={'center'}>{data.time}</Td>
+              <Td textAlign={'center'}>{data.status}</Td>
+              <Td textAlign={'center'}>{data.device}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
   );
 }
