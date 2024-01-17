@@ -1,24 +1,28 @@
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .row-box {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .ghostbox {
-    visibility: hidden;
-    cursor: none;
+  visibility: hidden;
+  cursor: none;
+}
+
+.project-icon > path {
+  stroke: white;
 }
