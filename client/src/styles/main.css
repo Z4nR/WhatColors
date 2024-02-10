@@ -22,7 +22,3 @@ html {
   visibility: hidden;
   cursor: none;
 }
-
-.project-icon > path {
-  stroke: white;
-}
