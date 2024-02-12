@@ -3,6 +3,8 @@ const Client = require('../models/client');
 const { clientValidate } = require('../utils/validate');
 const { startSession } = require('mongoose');
 
+// Push Client Controller 10 February
+
 module.exports = {
   newClient: async (req, res) => {
     try {
@@ -39,6 +41,8 @@ module.exports = {
       res.status(200).send({ id: data._id });
     } catch (error) {
       console.log(error);
+      await session.abortTransaction();
+      session.endSession();
       res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },

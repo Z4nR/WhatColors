@@ -3,6 +3,8 @@ const Client = require('../models/client');
 const Individual = require('../models/individual');
 const { startSession } = require('mongoose');
 
+// Push Data Controller 9 February
+
 module.exports = {
   searchAllTestData: async (req, res) => {
     try {
@@ -120,6 +122,8 @@ module.exports = {
         .json({ message: 'Grup dan Data Peserta berhasil dihapus' });
     } catch (error) {
       console.log(error);
+      await session.abortTransaction();
+      session.endSession();
       res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
