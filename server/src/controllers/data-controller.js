@@ -3,8 +3,6 @@ const Client = require('../models/client');
 const Individual = require('../models/individual');
 const { startSession } = require('mongoose');
 
-// Push Data Controller 9 February
-
 module.exports = {
   searchAllTestData: async (req, res) => {
     try {

@@ -3,8 +3,6 @@ const Client = require('../models/client');
 const { clientValidate } = require('../utils/validate');
 const { startSession } = require('mongoose');
 
-// Push Client Controller 10 February
-
 module.exports = {
   newClient: async (req, res) => {
     try {
