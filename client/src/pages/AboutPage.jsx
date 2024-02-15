@@ -1,8 +1,9 @@
-import QuoteMunsell from "@/components/about/QuoteMunsell";
-import ResponsiveExplaining from "@/components/about/ResponsiveExplaining";
-import ResultExplaining from "@/components/about/ResultExplaining";
-import WebExplaining from "@/components/about/WebExplaining";
-import { Box } from "@chakra-ui/react";
+import QuoteMunsell from '@/components/about/QuoteMunsell';
+import ReachMe from '@/components/about/ReachMe';
+import ResponsiveExplaining from '@/components/about/ResponsiveExplaining';
+import ResultExplaining from '@/components/about/ResultExplaining';
+import WebExplaining from '@/components/about/WebExplaining';
+import { Box } from '@chakra-ui/react';
 
 export default function AboutPage() {
   return (
@@ -11,6 +12,7 @@ export default function AboutPage() {
       <ResponsiveExplaining />
       <ResultExplaining />
       <QuoteMunsell />
+      <ReachMe />
     </Box>
   );
 }
