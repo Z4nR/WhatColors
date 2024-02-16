@@ -73,10 +73,12 @@ export default function StatementResult({ data, isLoading }) {
         </VStack>
       </Center>
       <Box position={'relative'} my={6}>
-        <Divider
-          borderBottomWidth={{ base: 'medium', md: 'thick' }}
-          borderColor={`${selectedInfo.bgColor}`}
-        />
+        <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+          <Divider
+            borderBottomWidth={{ base: 'medium', md: 'thick' }}
+            borderColor={`${selectedInfo.bgColor}`}
+          />
+        </Skeleton>
         <AbsoluteCenter
           bg="white"
           px="6"
@@ -106,11 +108,13 @@ export default function StatementResult({ data, isLoading }) {
           {selectedInfo.footerText}
         </Text>
       </Skeleton>
-      <Divider
-        mt={4}
-        borderBottomWidth={{ base: 'medium', md: 'thick' }}
-        borderColor={`${selectedInfo.bgColor}`}
-      />
+      <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+        <Divider
+          mt={4}
+          borderBottomWidth={{ base: 'medium', md: 'thick' }}
+          borderColor={`${selectedInfo.bgColor}`}
+        />
+      </Skeleton>
     </Box>
   );
 }
