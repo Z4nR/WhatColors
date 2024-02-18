@@ -82,10 +82,12 @@ export default function ClientResult() {
         </VStack>
       </Center>
       <Box position={'relative'} my={6}>
-        <Divider
-          borderBottomWidth={{ base: 'medium', md: 'thick' }}
-          borderColor={`${selectedInfo.bgColor}`}
-        />
+        <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+          <Divider
+            borderBottomWidth={{ base: 'medium', md: 'thick' }}
+            borderColor={`${selectedInfo.bgColor}`}
+          />
+        </Skeleton>
         <AbsoluteCenter
           bg="white"
           px="6"
@@ -113,11 +115,13 @@ export default function ClientResult() {
           {data.status} Tes Buta Warna
         </Heading>
       </Skeleton>
-      <Divider
-        my={4}
-        borderBottomWidth={{ base: 'medium', md: 'thick' }}
-        borderColor={`${selectedInfo.bgColor}`}
-      />
+      <Skeleton isLoaded={!isLoading} fadeDuration={1}>
+        <Divider
+          my={4}
+          borderBottomWidth={{ base: 'medium', md: 'thick' }}
+          borderColor={`${selectedInfo.bgColor}`}
+        />
+      </Skeleton>
     </Box>
   );
 }
