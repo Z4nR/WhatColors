@@ -14,8 +14,6 @@ export default function ArticleLoading() {
               <Text fontSize={{ base: 'xs', xs: 'sm' }}>
                 odio euismod lacinia at quis risus sed
               </Text>
-            </Skeleton>
-            <Skeleton>
               <Text fontSize={'sm'}>lorem</Text>
             </Skeleton>
             <Skeleton>
