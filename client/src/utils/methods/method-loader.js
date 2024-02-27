@@ -1,4 +1,4 @@
-import { testTypes } from "./method-type";
+import { testTypes } from './method-type';
 
 //Create an Array of Color basically using what kind of type it's choose
 const createArray = (type) => {

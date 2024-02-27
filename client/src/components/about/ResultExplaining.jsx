@@ -7,8 +7,8 @@ import {
   SimpleGrid,
   chakra,
   shouldForwardProp,
-} from "@chakra-ui/react";
-import { isValidMotionProp, motion } from "framer-motion";
+} from '@chakra-ui/react';
+import { isValidMotionProp, motion } from 'framer-motion';
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) =>
@@ -17,11 +17,11 @@ const ChakraBox = chakra(motion.div, {
 
 export default function ResultExplaining() {
   return (
-    <Box py={{ base: 5, xs: 16, sm: 20 }} textAlign={"justify"}>
-      <Box py={{ base: 5, xs: 8, sm: 16 }} bg={"teal"}>
-        <Container maxW={"7xl"} paddingInline={10}>
-          <Stack direction={{ base: "column", lg: "row" }}>
-            <Stack flex={1} justify={{ lg: "center" }} py={4}>
+    <Box py={{ base: 5, xs: 16, sm: 20 }} textAlign={'justify'}>
+      <Box py={{ base: 5, xs: 8, sm: 16 }} bg={'teal'}>
+        <Container maxW={'7xl'} paddingInline={10}>
+          <Stack direction={{ base: 'column', lg: 'row' }}>
+            <Stack flex={1} justify={{ lg: 'center' }} py={4}>
               <Box mb={{ base: 8, md: 20 }}>
                 <ChakraBox
                   initial="offscreen"
@@ -35,26 +35,26 @@ export default function ResultExplaining() {
                       scale: 1,
                       opacity: 1,
                       transition: {
-                        ease: "easeInOut",
+                        ease: 'easeInOut',
                         duration: 0.5,
                       },
                     },
                   }}
                 >
                   <Text
-                    fontFamily={"heading"}
+                    fontFamily={'heading'}
                     fontWeight={700}
-                    textTransform={"uppercase"}
+                    textTransform={'uppercase'}
                     mb={3}
-                    fontSize={{ base: "md", md: "xl" }}
-                    color={"orange.300"}
+                    fontSize={{ base: 'md', md: 'xl' }}
+                    color={'orange.300'}
                   >
                     Rincian Hasil
                   </Text>
                   <Heading
-                    color={"white"}
+                    color={'white'}
                     mb={5}
-                    fontSize={{ base: "md", sm: "xl", md: "5xl" }}
+                    fontSize={{ base: 'md', sm: 'xl', md: '5xl' }}
                   >
                     Tampilan Data Terperinci dan Mudah Dipahami
                   </Heading>
@@ -71,13 +71,13 @@ export default function ResultExplaining() {
                       scale: 1,
                       opacity: 1,
                       transition: {
-                        ease: "easeInOut",
+                        ease: 'easeInOut',
                         duration: 1,
                       },
                     },
                   }}
                 >
-                  <Text fontSize={{ base: "md", md: "xl" }} color={"gray.200"}>
+                  <Text fontSize={{ base: 'md', md: 'xl' }} color={'gray.200'}>
                     WhatColors menampilkan data dengan rinci dan memiliki
                     penyampaian yang mudah dipahami, membantu pengguna dalam
                     memahami hasil dari tes yang telah dikerjakan serta daftar
@@ -101,16 +101,16 @@ export default function ResultExplaining() {
                           scale: 1,
                           opacity: 1,
                           transition: {
-                            ease: "easeInOut",
+                            ease: 'easeInOut',
                             duration: 0.5,
                           },
                         },
                       }}
                     >
                       <Text
-                        fontFamily={"heading"}
-                        fontSize={{ base: "xl", md: "3xl" }}
-                        color={"orange.300"}
+                        fontFamily={'heading'}
+                        fontSize={{ base: 'xl', md: '3xl' }}
+                        color={'orange.300'}
                         mb={3}
                       >
                         {stat.title}
@@ -128,15 +128,15 @@ export default function ResultExplaining() {
                           scale: 1,
                           opacity: 1,
                           transition: {
-                            ease: "easeInOut",
+                            ease: 'easeInOut',
                             duration: 1,
                           },
                         },
                       }}
                     >
                       <Text
-                        fontSize={{ base: "md", md: "xl" }}
-                        color={"gray.200"}
+                        fontSize={{ base: 'md', md: 'xl' }}
+                        color={'gray.200'}
                       >
                         {stat.content}
                       </Text>
@@ -154,10 +154,10 @@ export default function ResultExplaining() {
 
 const stats = [
   {
-    title: "Pernyataan",
+    title: 'Pernyataan',
     content: (
       <>
-        <Text as={"span"} fontWeight={700} color={"white"}>
+        <Text as={'span'} fontWeight={700} color={'white'}>
           Ringkasan Hasil
         </Text>
         <br />
@@ -168,10 +168,10 @@ const stats = [
     ),
   },
   {
-    title: "Komparasi",
+    title: 'Komparasi',
     content: (
       <>
-        <Text as={"span"} fontWeight={700} color={"white"}>
+        <Text as={'span'} fontWeight={700} color={'white'}>
           Nilai Perbandingan
         </Text>
         <br />
@@ -185,10 +185,10 @@ const stats = [
     ),
   },
   {
-    title: "Diskriminan",
+    title: 'Diskriminan',
     content: (
       <>
-        <Text as={"span"} fontWeight={700} color={"white"}>
+        <Text as={'span'} fontWeight={700} color={'white'}>
           Nilai Perpindahan
         </Text>
         <br />
@@ -202,10 +202,10 @@ const stats = [
     ),
   },
   {
-    title: "Data Grup",
+    title: 'Data Grup',
     content: (
       <>
-        <Text as={"span"} fontWeight={700} color={"white"}>
+        <Text as={'span'} fontWeight={700} color={'white'}>
           Informasi Peserta
         </Text>
         <br />
@@ -218,10 +218,10 @@ const stats = [
     ),
   },
   {
-    title: "7 x 24",
+    title: '7 x 24',
     content: (
       <>
-        <Text as={"span"} fontWeight={700} color={"white"}>
+        <Text as={'span'} fontWeight={700} color={'white'}>
           Akses Data
         </Text>
         <br />

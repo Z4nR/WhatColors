@@ -1,12 +1,12 @@
-import { Box } from "@chakra-ui/react";
-import { ReactSortable } from "react-sortablejs";
+import { Box } from '@chakra-ui/react';
+import { ReactSortable } from 'react-sortablejs';
 
 export default function Sortable({ handle, data, testDone }) {
   if (testDone) {
     return (
       <ReactSortable
         className="row-box"
-        group={{ name: "valueByRow", put: false }}
+        group={{ name: 'valueByRow', put: false }}
         disabled={true}
         animation={200}
         ghostClass="ghostbox"
@@ -17,9 +17,9 @@ export default function Sortable({ handle, data, testDone }) {
           <Box
             key={item.color}
             backgroundColor={item.color}
-            margin={"4px 1px"}
-            border={"1px solid #252525"}
-            cursor={"pointer"}
+            margin={'4px 1px'}
+            border={'1px solid #252525'}
+            cursor={'pointer'}
             width={10}
             height={10}
           />
@@ -31,7 +31,7 @@ export default function Sortable({ handle, data, testDone }) {
   return (
     <ReactSortable
       className="row-box"
-      group={{ name: "valueByRow", put: false }}
+      group={{ name: 'valueByRow', put: false }}
       animation={200}
       ghostClass="ghostbox"
       list={data.value}
@@ -41,9 +41,9 @@ export default function Sortable({ handle, data, testDone }) {
         <Box
           key={item.color}
           backgroundColor={item.color}
-          margin={"4px 1px"}
-          border={"1px solid #252525"}
-          cursor={"pointer"}
+          margin={'4px 1px'}
+          border={'1px solid #252525'}
+          cursor={'pointer'}
           width={10}
           height={10}
         />

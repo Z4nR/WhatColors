@@ -1,54 +1,54 @@
-import { Box, Flex, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 
 export default function UserData({ user }) {
   return (
-    <Box as="section" margin={4} fontSize={{ base: "xs", xs: "sm", md: "md" }}>
-      <Flex direction={{ base: "column", md: "row" }}>
+    <Box as="section" margin={4} fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}>
+      <Flex direction={{ base: 'column', md: 'row' }}>
         <Flex flex={1}>
-          <VStack alignItems={"flex-start"}>
-            <Text as={"span"} fontWeight={"bold"}>
+          <VStack alignItems={'flex-start'}>
+            <Text as={'span'} fontWeight={'bold'}>
               Nama
             </Text>
-            <Text as={"span"} fontWeight={"bold"}>
+            <Text as={'span'} fontWeight={'bold'}>
               Umur
             </Text>
-            <Text as={"span"} fontWeight={"bold"}>
+            <Text as={'span'} fontWeight={'bold'}>
               Jenis Kelamin
             </Text>
           </VStack>
-          <VStack ml={2} alignItems={"flex-start"}>
+          <VStack ml={2} alignItems={'flex-start'}>
             <Box>
-              <Text>: {user.name}</Text>{" "}
+              <Text>: {user.name}</Text>{' '}
             </Box>
             <Box>
-              <Text>: {user.age}</Text>{" "}
+              <Text>: {user.age}</Text>{' '}
             </Box>
             <Box>
-              <Text>: {user.gender}</Text>{" "}
+              <Text>: {user.gender}</Text>{' '}
             </Box>
           </VStack>
         </Flex>
-        <Flex flex={1} mt={{ base: 2, md: "auto" }}>
-          <VStack alignItems={"flex-start"}>
-            <Text as={"span"} fontWeight={"bold"}>
+        <Flex flex={1} mt={{ base: 2, md: 'auto' }}>
+          <VStack alignItems={'flex-start'}>
+            <Text as={'span'} fontWeight={'bold'}>
               Perangkat Tes
             </Text>
-            <Text as={"span"} fontWeight={"bold"}>
+            <Text as={'span'} fontWeight={'bold'}>
               Jenis Tes
             </Text>
-            <Text as={"span"} fontWeight={"bold"}>
+            <Text as={'span'} fontWeight={'bold'}>
               Tanggal
             </Text>
           </VStack>
-          <VStack ml={1.5} alignItems={"flex-start"}>
+          <VStack ml={1.5} alignItems={'flex-start'}>
             <Box>
-              <Text>: {user.device}</Text>{" "}
+              <Text>: {user.device}</Text>{' '}
             </Box>
             <Box>
-              <Text>: {user.type}</Text>{" "}
+              <Text>: {user.type}</Text>{' '}
             </Box>
             <Box>
-              <Text>: {user.date}</Text>{" "}
+              <Text>: {user.date}</Text>{' '}
             </Box>
           </VStack>
         </Flex>

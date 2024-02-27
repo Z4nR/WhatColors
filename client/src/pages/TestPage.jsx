@@ -12,14 +12,14 @@ import {
   Heading,
   IconButton,
   useDisclosure,
-} from "@chakra-ui/react";
-import UserData from "@/components/test/UserData";
-import TestSheet from "@/components/test/TestSheet";
-import { useShuffle, useTestData } from "@/utils/customHooks";
-import { userData } from "@/utils/test-helper";
-import { useNavigate } from "react-router-dom";
-import { CloseIcon } from "@chakra-ui/icons";
-import { useRef } from "react";
+} from '@chakra-ui/react';
+import UserData from '@/components/test/UserData';
+import TestSheet from '@/components/test/TestSheet';
+import { useShuffle, useTestData } from '@/utils/customHooks';
+import { userData } from '@/utils/test-helper';
+import { useNavigate } from 'react-router-dom';
+import { CloseIcon } from '@chakra-ui/icons';
+import { useRef } from 'react';
 
 export default function TestPage() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export default function TestPage() {
   const initiate = getTestData?.value;
 
   const cancelTest = () => {
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -65,11 +65,11 @@ export default function TestPage() {
         </AlertDialogContent>
       </AlertDialog>
       <HStack mb={8}>
-        <Heading as={"h6"} fontSize={"lg"} textAlign={"center"} flex={1}>
+        <Heading as={'h6'} fontSize={'lg'} textAlign={'center'} flex={1}>
           Pengerjaan Tes Buta Warna <br /> Metode Farnsworth-Munsell
         </Heading>
         <IconButton
-          size={"sm"}
+          size={'sm'}
           colorScheme="red"
           icon={<CloseIcon />}
           onClick={onOpen}

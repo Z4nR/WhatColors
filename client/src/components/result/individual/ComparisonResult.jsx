@@ -1,4 +1,4 @@
-import { useChartComparison } from "@/utils/customHooks";
+import { useChartComparison } from '@/utils/customHooks';
 import {
   Box,
   Flex,
@@ -12,20 +12,20 @@ import {
   Thead,
   Tr,
   useMediaQuery,
-} from "@chakra-ui/react";
-import Chart from "chart.js/auto";
-import { useEffect } from "react";
+} from '@chakra-ui/react';
+import Chart from 'chart.js/auto';
+import { useEffect } from 'react';
 
 export default function ComparisonResult({ data }) {
   const [getComparison] = useChartComparison();
-  const [isDesktop] = useMediaQuery("(min-width: 550px)");
+  const [isDesktop] = useMediaQuery('(min-width: 550px)');
 
   useEffect(() => {
     let trueCount = 0;
     let falseCount = 0;
 
     for (let i = 0; i < getComparison?.length; i++) {
-      if (getComparison[i] === "Benar") {
+      if (getComparison[i] === 'Benar') {
         trueCount++;
       } else {
         falseCount++;
@@ -34,32 +34,32 @@ export default function ComparisonResult({ data }) {
 
     const count = [trueCount, falseCount];
 
-    const label = ["Benar", "Salah"];
+    const label = ['Benar', 'Salah'];
     const pieData = {
       labels: label,
       datasets: [
         {
-          label: "Jumlah Nilai",
+          label: 'Jumlah Nilai',
           data: count,
-          backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+          backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
           hoverOffset: 4,
         },
       ],
     };
     const config = {
-      type: "pie",
+      type: 'pie',
       data: pieData,
     };
 
     if (getComparison && isDesktop) {
-      new Chart("pie-chart", config);
+      new Chart('pie-chart', config);
     }
   }, [getComparison, isDesktop]);
 
   return (
-    <Box textAlign={"center"} py={{ lg: 4 }}>
-      <Heading size={{ base: "sm", sm: "md" }}>Hasil Komparasi Warna:</Heading>
-      <Text mt={2} fontSize={{ base: "xs", xs: "sm", md: "md" }}>
+    <Box textAlign={'center'} py={{ lg: 4 }}>
+      <Heading size={{ base: 'sm', sm: 'md' }}>Hasil Komparasi Warna:</Heading>
+      <Text mt={2} fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}>
         *Hasil komparasi diambil dari hasil tes yang kamu lakukan kemudian
         dibandingkan dengan nilai asli.
       </Text>
@@ -67,22 +67,22 @@ export default function ComparisonResult({ data }) {
         <Flex
           mt={6}
           mb={2}
-          mx={"auto"}
-          position={"relative"}
+          mx={'auto'}
+          position={'relative'}
           width={{ sm: 550, lg: 750 }}
-          justifyContent={"center"}
+          justifyContent={'center'}
         >
           <canvas id="pie-chart" />
         </Flex>
       ) : (
         <TableContainer my={4}>
-          <Table size={"sm"}>
+          <Table size={'sm'}>
             <Thead>
               <Tr>
-                <Th textAlign={"center"} maxWidth={75} color="teal">
+                <Th textAlign={'center'} maxWidth={75} color="teal">
                   Kode Warna
                 </Th>
-                <Th textAlign={"center"} color="teal">
+                <Th textAlign={'center'} color="teal">
                   Nilai
                 </Th>
               </Tr>
@@ -90,10 +90,10 @@ export default function ComparisonResult({ data }) {
             <Tbody>
               {data?.comparisonResult?.map((value) => (
                 <Tr key={value._id}>
-                  <Td textAlign={"center"} maxWidth={75}>
+                  <Td textAlign={'center'} maxWidth={75}>
                     {value._id}
                   </Td>
-                  <Td textAlign={"center"}>{value.comparison}</Td>
+                  <Td textAlign={'center'}>{value.comparison}</Td>
                 </Tr>
               ))}
             </Tbody>

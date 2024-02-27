@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { shuffleColor } from "./methods/method-loader";
-import storage from "@/utils/storage";
-import { useToast } from "@chakra-ui/react";
+import { useEffect, useState } from 'react';
+import { shuffleColor } from './methods/method-loader';
+import storage from '@/utils/storage';
+import { useToast } from '@chakra-ui/react';
 
 //Load User Data in Test Page
 const useTestData = () => {
   const [getTestData, setTestData] = useState(null);
 
   useEffect(() => {
-    const data = storage.getJSON("user");
+    const data = storage.getJSON('user');
     setTestData(data);
   }, []);
 
@@ -23,7 +23,7 @@ const useShuffle = (data) => {
     const shuffled = data?.value.map((item) => {
       const arrayValue = item.value;
       const filterRemovable = arrayValue.filter(
-        (val) => val.status === "removable"
+        (val) => val.status === 'removable'
       );
       const firstArray = arrayValue[0];
       const shuffle = shuffleColor(filterRemovable);
@@ -47,7 +47,7 @@ const useChartDiscriminant = () => {
   const [getDiscriminant, setDiscriminant] = useState(null);
 
   useEffect(() => {
-    const discriminant = storage.getJSON("discriminant");
+    const discriminant = storage.getJSON('discriminant');
     setDiscriminant(discriminant);
   }, []);
 
@@ -59,7 +59,7 @@ const useChartComparison = () => {
   const [getComparison, setComparison] = useState(null);
 
   useEffect(() => {
-    const comparison = storage.getJSON("comparison");
+    const comparison = storage.getJSON('comparison');
     setComparison(comparison);
   }, []);
 
@@ -77,7 +77,7 @@ const useToastMsg = () => {
       status: status,
       isClosable: true,
       containerStyle: {
-        padding: "15px 20px",
+        padding: '15px 20px',
       },
     });
 };
@@ -118,13 +118,13 @@ const useDownloadData = (data) => {
         .map((_, id) => `D${id + 1}`);
 
       const header = [
-        "Tanggal",
-        "Nama",
-        "Usia",
-        "Jumlah Nilai Kesalahan",
-        "Waktu Pengerjaan",
-        "Status",
-        "Perangkat",
+        'Tanggal',
+        'Nama',
+        'Usia',
+        'Jumlah Nilai Kesalahan',
+        'Waktu Pengerjaan',
+        'Status',
+        'Perangkat',
         ...comparisonId,
         ...discriminantId,
       ];

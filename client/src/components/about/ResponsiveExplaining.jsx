@@ -11,13 +11,13 @@ import {
   chakra,
   shouldForwardProp,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { isValidMotionProp, motion } from "framer-motion";
+} from '@chakra-ui/react';
+import { isValidMotionProp, motion } from 'framer-motion';
 import {
   IoLaptopOutline,
   IoPhonePortraitOutline,
   IoTabletPortrait,
-} from "react-icons/io5";
+} from 'react-icons/io5';
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) =>
@@ -40,7 +40,7 @@ export default function ResponsiveExplaining() {
               scale: 1,
               opacity: 1,
               transition: {
-                type: "spring",
+                type: 'spring',
                 bounce: 0.4,
                 duration: 1,
               },
@@ -49,24 +49,24 @@ export default function ResponsiveExplaining() {
         >
           <Stack spacing={4}>
             <Text
-              textTransform={"uppercase"}
-              color={"blue.400"}
+              textTransform={'uppercase'}
+              color={'blue.400'}
               fontWeight={600}
-              fontSize={"sm"}
-              bg={useColorModeValue("blue.50", "blue.900")}
+              fontSize={'sm'}
+              bg={useColorModeValue('blue.50', 'blue.900')}
               p={2}
-              alignSelf={"flex-start"}
-              rounded={"md"}
+              alignSelf={'flex-start'}
+              rounded={'md'}
             >
               Responsif
             </Text>
-            <Heading fontSize={{ base: "2xl", sm: "4xl" }}>
+            <Heading fontSize={{ base: '2xl', sm: '4xl' }}>
               Gunakan semua perangkat
             </Heading>
             <Text
-              textAlign={"justify"}
-              color={"gray.500"}
-              fontSize={{ base: "sm", sm: "md", md: "lg" }}
+              textAlign={'justify'}
+              color={'gray.500'}
+              fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
             >
               Website ini mendukung simulasi dengan menggunakan berbagai
               perangkat, baik menggunakan alat bantu maupun dengan tangan secara
@@ -77,62 +77,62 @@ export default function ResponsiveExplaining() {
               spacing={4}
               divider={
                 <StackDivider
-                  borderColor={useColorModeValue("gray.100", "gray.700")}
+                  borderColor={useColorModeValue('gray.100', 'gray.700')}
                 />
               }
             >
-              <Stack direction={"row"} align={"center"}>
+              <Stack direction={'row'} align={'center'}>
                 <Flex
                   w={8}
                   h={8}
-                  align={"center"}
-                  justify={"center"}
-                  rounded={"full"}
-                  bg={useColorModeValue("yellow.100", "yellow.900")}
+                  align={'center'}
+                  justify={'center'}
+                  rounded={'full'}
+                  bg={useColorModeValue('yellow.100', 'yellow.900')}
                 >
-                  <Icon as={IoLaptopOutline} color={"yellow.500"} w={5} h={5} />
+                  <Icon as={IoLaptopOutline} color={'yellow.500'} w={5} h={5} />
                 </Flex>
-                <Text fontSize={{ base: "xs", xs: "md" }} fontWeight={600}>
+                <Text fontSize={{ base: 'xs', xs: 'md' }} fontWeight={600}>
                   Laptop / Notebook / Komputer
                 </Text>
               </Stack>
-              <Stack direction={"row"} align={"center"}>
+              <Stack direction={'row'} align={'center'}>
                 <Flex
                   w={8}
                   h={8}
-                  align={"center"}
-                  justify={"center"}
-                  rounded={"full"}
-                  bg={useColorModeValue("purple.100", "purple.900")}
+                  align={'center'}
+                  justify={'center'}
+                  rounded={'full'}
+                  bg={useColorModeValue('purple.100', 'purple.900')}
                 >
                   <Icon
                     as={IoTabletPortrait}
-                    color={"purple.500"}
+                    color={'purple.500'}
                     w={5}
                     h={5}
                   />
                 </Flex>
-                <Text fontSize={{ base: "xs", xs: "md" }} fontWeight={600}>
+                <Text fontSize={{ base: 'xs', xs: 'md' }} fontWeight={600}>
                   Tablet ( Landscape / Potrait )
                 </Text>
               </Stack>
-              <Stack direction={"row"} align={"center"}>
+              <Stack direction={'row'} align={'center'}>
                 <Flex
                   w={8}
                   h={8}
-                  align={"center"}
-                  justify={"center"}
-                  rounded={"full"}
-                  bg={useColorModeValue("green.100", "green.900")}
+                  align={'center'}
+                  justify={'center'}
+                  rounded={'full'}
+                  bg={useColorModeValue('green.100', 'green.900')}
                 >
                   <Icon
                     as={IoPhonePortraitOutline}
-                    color={"green.500"}
+                    color={'green.500'}
                     w={5}
                     h={5}
                   />
                 </Flex>
-                <Text fontSize={{ base: "xs", xs: "md" }} fontWeight={600}>
+                <Text fontSize={{ base: 'xs', xs: 'md' }} fontWeight={600}>
                   Smartphone ( Landscape / Potrait )
                 </Text>
               </Stack>
@@ -152,28 +152,28 @@ export default function ResponsiveExplaining() {
               y: 0,
               opacity: 1,
               transition: {
-                type: "spring",
+                type: 'spring',
                 bounce: 0.4,
                 duration: 0.8,
               },
             },
           }}
         >
-          <Flex flexDirection={"column"} alignItems={"center"}>
+          <Flex flexDirection={'column'} alignItems={'center'}>
             <Image
-              rounded={"md"}
-              alt={"Device Size"}
+              rounded={'md'}
+              alt={'Device Size'}
               src={
-                "https://images.unsplash.com/photo-1426024084828-5da21e13f5dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80"
+                'https://images.unsplash.com/photo-1426024084828-5da21e13f5dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80'
               }
-              objectFit={"cover"}
+              objectFit={'cover'}
             />
-            <Text fontSize={"x-small"}>
-              Photo by{" "}
+            <Text fontSize={'x-small'}>
+              Photo by{' '}
               <a href="https://unsplash.com/@firmbee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
                 Firmbee.com
-              </a>{" "}
-              on{" "}
+              </a>{' '}
+              on{' '}
               <a href="https://unsplash.com/photos/2mc2B5iX6as?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
                 Unsplash
               </a>

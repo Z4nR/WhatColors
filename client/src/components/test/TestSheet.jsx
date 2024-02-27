@@ -1,13 +1,13 @@
-import { newClient, newIndividual } from "@/utils/call-api";
-import { reunitedColor } from "@/utils/methods/method-loader";
-import storage from "@/utils/storage";
-import { testResult } from "@/utils/test-helper";
-import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import Sortable from "./Sortable";
-import { useNavigate } from "react-router-dom";
-import { QueryClient, useMutation } from "@tanstack/react-query";
-import { useToastMsg } from "@/utils/customHooks";
+import { newClient, newIndividual } from '@/utils/call-api';
+import { reunitedColor } from '@/utils/methods/method-loader';
+import storage from '@/utils/storage';
+import { testResult } from '@/utils/test-helper';
+import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import Sortable from './Sortable';
+import { useNavigate } from 'react-router-dom';
+import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useToastMsg } from '@/utils/customHooks';
 
 const queryClient = new QueryClient();
 
@@ -15,12 +15,12 @@ const MAX_MINUTES = 12;
 const formatTime = (time) =>
   [time.getMinutes(), time.getSeconds()]
     .map((num) => `0${num}`.slice(-2))
-    .join(":");
+    .join(':');
 
 export default function TestSheet({ test, user, init, isClient }) {
   const navigate = useNavigate();
   const toast = useToastMsg();
-  const id = storage.getJSON("id");
+  const id = storage.getJSON('id');
   const [getTestResult, setTestResult] = useState(null);
   const [getTimelapse, setTimelapse] = useState(new Date(0));
   const [getTestDone, setTestDone] = useState(false);
@@ -67,37 +67,37 @@ export default function TestSheet({ test, user, init, isClient }) {
   const individual = useMutation({
     mutationFn: newIndividual,
     onSuccess: (data) => {
-      storage.setJSON("id", data);
-      navigate("/result");
+      storage.setJSON('id', data);
+      navigate('/result');
       toast(
-        "Data Berhasil Ditambahkan",
-        "Berikut hasil perhitungan data yang telah ditambahkan",
-        "success"
+        'Data Berhasil Ditambahkan',
+        'Berikut hasil perhitungan data yang telah ditambahkan',
+        'success'
       );
     },
     onError: (error) => {
       setTimelapse(new Date(0));
       setTestDone(false);
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
   const client = useMutation({
     mutationFn: newClient,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["clients"], exact: true });
-      storage.setJSON("id", data);
-      navigate("/result");
+      queryClient.invalidateQueries({ queryKey: ['clients'], exact: true });
+      storage.setJSON('id', data);
+      navigate('/result');
       toast(
-        "Data Berhasil Ditambahkan",
-        "Berikut hasil perhitungan data yang telah ditambahkan",
-        "success"
+        'Data Berhasil Ditambahkan',
+        'Berikut hasil perhitungan data yang telah ditambahkan',
+        'success'
       );
     },
     onError: (error) => {
       setTimelapse(new Date(0));
       setTestDone(false);
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -116,22 +116,22 @@ export default function TestSheet({ test, user, init, isClient }) {
 
   return (
     <Box pt={5}>
-      <Text textAlign={"center"} fontWeight={"medium"} mb={6} fontSize={"xl"}>
+      <Text textAlign={'center'} fontWeight={'medium'} mb={6} fontSize={'xl'}>
         {formatTime(getTimelapse)}
       </Text>
       {test?.map((data) => (
         <Flex
-          flexWrap={"wrap"}
-          flexDirection={"row"}
+          flexWrap={'wrap'}
+          flexDirection={'row'}
           key={data.row}
-          margin={"8px auto"}
-          width={{ xl: "5xl" }}
+          margin={'8px auto'}
+          width={{ xl: '5xl' }}
         >
           <Box
             flex={1}
-            display={"flex"}
-            justifyContent={"flex-start"}
-            margin={"4px 8px 4px 1px"}
+            display={'flex'}
+            justifyContent={'flex-start'}
+            margin={'4px 8px 4px 1px'}
           >
             <Box
               key={data.first}
@@ -140,10 +140,10 @@ export default function TestSheet({ test, user, init, isClient }) {
               height={10}
             >
               <Text
-                textAlign={"center"}
-                fontSize={"small"}
-                fontWeight={"bold"}
-                color={"white"}
+                textAlign={'center'}
+                fontSize={'small'}
+                fontWeight={'bold'}
+                color={'white'}
               >
                 Awal
               </Text>
@@ -156,9 +156,9 @@ export default function TestSheet({ test, user, init, isClient }) {
           />
           <Box
             flex={1}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            margin={"4px 1px 4px 8px"}
+            display={'flex'}
+            justifyContent={'flex-end'}
+            margin={'4px 1px 4px 8px'}
           >
             <Box
               key={data.last}
@@ -167,10 +167,10 @@ export default function TestSheet({ test, user, init, isClient }) {
               height={10}
             >
               <Text
-                textAlign={"center"}
-                fontSize={"small"}
-                fontWeight={"bold"}
-                color={"white"}
+                textAlign={'center'}
+                fontSize={'small'}
+                fontWeight={'bold'}
+                color={'white'}
               >
                 Akhir
               </Text>
@@ -181,7 +181,7 @@ export default function TestSheet({ test, user, init, isClient }) {
       <Center mt={8}>
         {getTestDone ? (
           <Button
-            size={{ base: "sm", sm: "md" }}
+            size={{ base: 'sm', sm: 'md' }}
             colorScheme="teal"
             onClick={onSubmit}
             loadingText="Mengirim Hasil"
@@ -191,7 +191,7 @@ export default function TestSheet({ test, user, init, isClient }) {
           </Button>
         ) : (
           <Button
-            size={{ base: "sm", sm: "md" }}
+            size={{ base: 'sm', sm: 'md' }}
             colorScheme="teal"
             onClick={onFinish}
           >

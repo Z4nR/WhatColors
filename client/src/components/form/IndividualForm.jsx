@@ -22,13 +22,13 @@ import {
   Radio,
   RadioGroup,
   Select,
-} from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { createArray } from "@/utils/methods/method-loader";
-import storage from "@/utils/storage";
-import { testTypes } from "@/utils/methods/method-type";
+} from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createArray } from '@/utils/methods/method-loader';
+import storage from '@/utils/storage';
+import { testTypes } from '@/utils/methods/method-type';
 
 export default function IndividualForm({ isOpen, onClose }) {
   const navigate = useNavigate();
@@ -42,24 +42,24 @@ export default function IndividualForm({ isOpen, onClose }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      fullName: "",
-      gender: "",
-      device: "",
-      testType: "Mudah (32 Warna)",
+      fullName: '',
+      gender: '',
+      device: '',
+      testType: 'Mudah (32 Warna)',
       value: {},
       isClient: false,
     },
   });
 
-  const testValue = watch("testType");
+  const testValue = watch('testType');
 
   useEffect(() => {
-    setValue("value", createArray(testValue));
+    setValue('value', createArray(testValue));
   }, [setValue, testValue]);
 
   const onSubmit = (data) => {
-    storage.setJSON("user", data);
-    navigate("/test");
+    storage.setJSON('user', data);
+    navigate('/test');
   };
 
   const resetData = () => {
@@ -73,11 +73,11 @@ export default function IndividualForm({ isOpen, onClose }) {
 
   return (
     <Modal
-      size={{ base: "xs", sm: "md", md: "2xl" }}
+      size={{ base: 'xs', sm: 'md', md: '2xl' }}
       closeOnOverlayClick={false}
       isOpen={isOpen}
       onClose={onClose}
-      scrollBehavior={"inside"}
+      scrollBehavior={'inside'}
       isCentered
     >
       <ModalOverlay />
@@ -93,22 +93,22 @@ export default function IndividualForm({ isOpen, onClose }) {
                 autoComplete="off"
                 focusBorderColor="teal.400"
                 placeholder="Masukkan Nama Lengkap"
-                {...register("fullName", {
-                  required: "Wajib Diisi",
+                {...register('fullName', {
+                  required: 'Wajib Diisi',
                   minLength: {
                     value: 4,
-                    message: "Min. 4 Huruf",
+                    message: 'Min. 4 Huruf',
                   },
                 })}
               />
-              <FormHelperText fontSize={"small"}>
+              <FormHelperText fontSize={'small'}>
                 Tuliskan Nama Lengkap Anda
               </FormHelperText>
               <FormErrorMessage>
                 {errors.fullName && errors.fullName.message}
               </FormErrorMessage>
             </FormControl>
-            <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
+            <Flex direction={{ base: 'column', md: 'row' }} gap={5} mt={5}>
               <FormControl isRequired isInvalid={errors.age}>
                 <FormLabel htmlFor="age">Umur Anda</FormLabel>
                 <NumberInput
@@ -120,8 +120,8 @@ export default function IndividualForm({ isOpen, onClose }) {
                   <NumberInputField
                     autoComplete="off"
                     placeholder="Masukkan Umur Anda"
-                    {...register("age", {
-                      required: "Wajib Diisi",
+                    {...register('age', {
+                      required: 'Wajib Diisi',
                     })}
                   />
                   <NumberInputStepper>
@@ -129,7 +129,7 @@ export default function IndividualForm({ isOpen, onClose }) {
                     <NumberDecrementStepper />
                   </NumberInputStepper>
                 </NumberInput>
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Rentang usia 10 sampai 50 tahun
                 </FormHelperText>
                 <FormErrorMessage>{errors.age}</FormErrorMessage>
@@ -139,21 +139,21 @@ export default function IndividualForm({ isOpen, onClose }) {
                 <RadioGroup id="gender">
                   <HStack
                     height={10}
-                    justifyContent={"space-around"}
+                    justifyContent={'space-around'}
                     spacing="24px"
                   >
                     <Radio
                       value="Pria"
-                      {...register("gender", {
-                        required: "Wajib Diisi",
+                      {...register('gender', {
+                        required: 'Wajib Diisi',
                       })}
                     >
                       Pria
                     </Radio>
                     <Radio
                       value="Wanita"
-                      {...register("gender", {
-                        required: "Wajib Diisi",
+                      {...register('gender', {
+                        required: 'Wajib Diisi',
                       })}
                     >
                       Wanita
@@ -161,13 +161,13 @@ export default function IndividualForm({ isOpen, onClose }) {
                   </HStack>
                 </RadioGroup>
 
-                <FormHelperText textAlign={"center"} fontSize={"small"}>
+                <FormHelperText textAlign={'center'} fontSize={'small'}>
                   Hanya ada 2 jenis kelamin
                 </FormHelperText>
                 <FormErrorMessage>{errors.gender}</FormErrorMessage>
               </FormControl>
             </Flex>
-            <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
+            <Flex direction={{ base: 'column', md: 'row' }} gap={5} mt={5}>
               <FormControl isRequired isInvalid={errors.device}>
                 <FormLabel htmlFor="device">Perangkat yang digunakan</FormLabel>
                 <Input
@@ -175,12 +175,12 @@ export default function IndividualForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Tipe Monitor/Gawai"
-                  {...register("device", {
-                    required: "Wajib Diisi",
+                  {...register('device', {
+                    required: 'Wajib Diisi',
                   })}
                 />
 
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Tuliskan merk atau tipe monitor atau gawai
                 </FormHelperText>
                 <FormErrorMessage>{errors.device}</FormErrorMessage>
@@ -189,8 +189,8 @@ export default function IndividualForm({ isOpen, onClose }) {
                 <FormLabel htmlFor="type">Tingkat Kesulitan</FormLabel>
                 <Select
                   id="type"
-                  {...register("testType", {
-                    required: "Wajib Diisi",
+                  {...register('testType', {
+                    required: 'Wajib Diisi',
                   })}
                   placeholder="Pilih Tingkat Kesulitan"
                 >
@@ -201,7 +201,7 @@ export default function IndividualForm({ isOpen, onClose }) {
                   ))}
                 </Select>
 
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Pilih tingkat kesulitan sesuai kemampuan
                 </FormHelperText>
                 <FormErrorMessage>{errors.testType}</FormErrorMessage>

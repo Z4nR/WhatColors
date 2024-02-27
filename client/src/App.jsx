@@ -4,27 +4,27 @@ import {
   SkipNavContent,
   SkipNavLink,
   useMediaQuery,
-} from "@chakra-ui/react";
-import { Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import WebHeader from "@/components/web/WebHeader";
-import Footer from "@/components/Footer";
-import MobileNav from "@/components/mobile/MobileNav";
-import AppHeader from "@/components/mobile/AppHeader";
-import VerifyAdmin from "@/components/utils/VerifyAdmin";
-import HomePage from "@/pages/HomePage";
-import TestPage from "@/pages/TestPage";
-import AboutPage from "@/pages/AboutPage";
-import ArticlePage from "@/pages/ArticlePage";
-import AdminPage from "@/pages/AdminPage";
-import FAQPage from "@/pages/FAQPage";
-import ResultPage from "@/pages/ResultPage";
-import SearchPage from "@/pages/SearchPage";
+} from '@chakra-ui/react';
+import { Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import WebHeader from '@/components/web/WebHeader';
+import Footer from '@/components/Footer';
+import MobileNav from '@/components/mobile/MobileNav';
+import AppHeader from '@/components/mobile/AppHeader';
+import VerifyAdmin from '@/components/utils/VerifyAdmin';
+import HomePage from '@/pages/HomePage';
+import TestPage from '@/pages/TestPage';
+import AboutPage from '@/pages/AboutPage';
+import ArticlePage from '@/pages/ArticlePage';
+import AdminPage from '@/pages/AdminPage';
+import FAQPage from '@/pages/FAQPage';
+import ResultPage from '@/pages/ResultPage';
+import SearchPage from '@/pages/SearchPage';
 
 const queryClient = new QueryClient();
 
 export default function App() {
-  const [isMobile] = useMediaQuery("(max-width: 401px)");
+  const [isMobile] = useMediaQuery('(max-width: 401px)');
 
   return (
     <>
@@ -32,11 +32,11 @@ export default function App() {
       {isMobile ? <AppHeader /> : <WebHeader />}
       <Box
         as="main"
-        width={"full"}
-        minHeight={{ base: "100vh", md: "75vh", "2xl": "80vh" }}
+        width={'full'}
+        minHeight={{ base: '100vh', md: '75vh', '2xl': '80vh' }}
       >
         <SkipNavContent />
-        <Container maxW={"container.xl"} px={5}>
+        <Container maxW={'container.xl'} px={5}>
           <QueryClientProvider client={queryClient}>
             <Routes>
               <Route path="/" element={<HomePage />} />

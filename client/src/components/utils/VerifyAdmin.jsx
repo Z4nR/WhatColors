@@ -1,6 +1,6 @@
-import { sendEmail, verifyRole } from "@/utils/call-api";
-import { useCountDown, useToastMsg } from "@/utils/customHooks";
-import storage from "@/utils/storage";
+import { sendEmail, verifyRole } from '@/utils/call-api';
+import { useCountDown, useToastMsg } from '@/utils/customHooks';
+import storage from '@/utils/storage';
 import {
   Button,
   Flex,
@@ -13,24 +13,24 @@ import {
   PinInputField,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export default function VerifyAdmin() {
   const navigate = useNavigate();
   const toast = useToastMsg();
   const { countDown, start } = useCountDown();
-  const id = storage.getJSON("id");
+  const id = storage.getJSON('id');
 
   const emailMutation = useMutation({
     mutationFn: sendEmail,
     onSuccess: (data) => {
-      toast("Email Berhasil Dikirim", `${data}`, "info");
+      toast('Email Berhasil Dikirim', `${data}`, 'info');
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -38,15 +38,15 @@ export default function VerifyAdmin() {
     mutationFn: verifyRole,
     onSuccess: (data) => {
       data.admin === true
-        ? navigate("/admin")
+        ? navigate('/admin')
         : toast(
-            "Kode Verifikasi Salah",
-            "Silahkan Masukan Kode Yang Benar",
-            "warning"
+            'Kode Verifikasi Salah',
+            'Silahkan Masukan Kode Yang Benar',
+            'warning'
           );
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -56,7 +56,7 @@ export default function VerifyAdmin() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      code: "",
+      code: '',
     },
   });
 
@@ -71,13 +71,13 @@ export default function VerifyAdmin() {
 
   return (
     <Flex
-      minHeight={"60vh"}
+      minHeight={'60vh'}
       my={10}
-      flexDirection={"column"}
-      justifyContent={"space-around"}
-      alignItems={"center"}
+      flexDirection={'column'}
+      justifyContent={'space-around'}
+      alignItems={'center'}
     >
-      <Heading size={"md"}>Verifikasikan Diri Anda</Heading>
+      <Heading size={'md'}>Verifikasikan Diri Anda</Heading>
       <form onSubmit={handleSubmit(onVerify)}>
         <VStack py={10} px={6}>
           <FormControl isRequired isInvalid={errors.code}>
@@ -100,7 +100,7 @@ export default function VerifyAdmin() {
                 )}
               />
             </HStack>
-            <FormHelperText textAlign="center" fontSize={"small"}>
+            <FormHelperText textAlign="center" fontSize={'small'}>
               Harap masukkan kode yang sesuai
             </FormHelperText>
             <FormErrorMessage>{errors.code}</FormErrorMessage>
@@ -118,18 +118,18 @@ export default function VerifyAdmin() {
       </form>
       {countDown > 0 ? (
         <Text
-          fontSize={"small"}
-          as={"span"}
-          color={"gray.400"}
-          fontWeight={"medium"}
+          fontSize={'small'}
+          as={'span'}
+          color={'gray.400'}
+          fontWeight={'medium'}
         >
           Kirim Ulang Kode Dalam {countDown}
         </Text>
       ) : (
         <Button
-          fontSize={"small"}
-          color={"facebook.300"}
-          variant={"outline"}
+          fontSize={'small'}
+          color={'facebook.300'}
+          variant={'outline'}
           onClick={resendEmail}
         >
           Kirim Ulang Kode

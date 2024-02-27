@@ -20,11 +20,11 @@ import {
   shouldForwardProp,
   useColorModeValue,
   useDisclosure,
-} from "@chakra-ui/react";
-import { isValidMotionProp, motion } from "framer-motion";
-import { useState } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
-import { ReactSortable } from "react-sortablejs";
+} from '@chakra-ui/react';
+import { isValidMotionProp, motion } from 'framer-motion';
+import { useState } from 'react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import { ReactSortable } from 'react-sortablejs';
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) =>
@@ -33,42 +33,42 @@ const ChakraBox = chakra(motion.div, {
 
 const HowTo = ({ isOpen, onClose }) => {
   const [list, setList] = useState([
-    { color: "#b07464" },
-    { color: "#a87456" },
-    { color: "#a77c4e" },
-    { color: "#a48546" },
+    { color: '#b07464' },
+    { color: '#a87456' },
+    { color: '#a77c4e' },
+    { color: '#a48546' },
   ]);
   return (
     <Modal
-      size={{ base: "xs", sm: "md", md: "2xl" }}
+      size={{ base: 'xs', sm: 'md', md: '2xl' }}
       closeOnOverlayClick={false}
       isOpen={isOpen}
-      scrollBehavior={"inside"}
+      scrollBehavior={'inside'}
       isCentered
     >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Cara Kerja</ModalHeader>
-        <ModalBody fontSize={{ base: "sm", md: "md" }}>
+        <ModalBody fontSize={{ base: 'sm', md: 'md' }}>
           <Text>Susun dan pindahkan blok warna yang berada ditengah</Text>
           <Flex
-            flexWrap={"wrap"}
-            flexDirection={"row"}
-            margin={"8px auto"}
-            justifyContent={"center"}
+            flexWrap={'wrap'}
+            flexDirection={'row'}
+            margin={'8px auto'}
+            justifyContent={'center'}
           >
-            <Box margin={"4px 8px 4px 1px"}>
+            <Box margin={'4px 8px 4px 1px'}>
               <Box
-                key={"#b2766f"}
-                backgroundColor={"#b2766f"}
+                key={'#b2766f'}
+                backgroundColor={'#b2766f'}
                 width={10}
                 height={10}
               >
                 <Text
-                  textAlign={"center"}
-                  fontSize={"small"}
-                  fontWeight={"bold"}
-                  color={"white"}
+                  textAlign={'center'}
+                  fontSize={'small'}
+                  fontWeight={'bold'}
+                  color={'white'}
                 >
                   Awal
                 </Text>
@@ -76,7 +76,7 @@ const HowTo = ({ isOpen, onClose }) => {
             </Box>
             <ReactSortable
               className="row-box"
-              group={{ name: "valueByRow", put: false }}
+              group={{ name: 'valueByRow', put: false }}
               animation={200}
               ghostClass="ghostbox"
               list={list}
@@ -86,33 +86,33 @@ const HowTo = ({ isOpen, onClose }) => {
                 <Box
                   key={item.color}
                   backgroundColor={item.color}
-                  margin={"4px 1px"}
-                  border={"1px solid #252525"}
-                  cursor={"pointer"}
+                  margin={'4px 1px'}
+                  border={'1px solid #252525'}
+                  cursor={'pointer'}
                   width={10}
                   height={10}
                 />
               ))}
             </ReactSortable>
-            <Box margin={"4px 1px 4px 8px"}>
+            <Box margin={'4px 1px 4px 8px'}>
               <Box
-                key={"#9b8f49"}
-                backgroundColor={"#9b8f49"}
+                key={'#9b8f49'}
+                backgroundColor={'#9b8f49'}
                 width={10}
                 height={10}
               >
                 <Text
-                  textAlign={"center"}
-                  fontSize={"small"}
-                  fontWeight={"bold"}
-                  color={"white"}
+                  textAlign={'center'}
+                  fontSize={'small'}
+                  fontWeight={'bold'}
+                  color={'white'}
                 >
                   Akhir
                 </Text>
               </Box>
             </Box>
           </Flex>
-          <OrderedList textAlign={"justify"} mt={8}>
+          <OrderedList textAlign={'justify'} mt={8}>
             <Text mb={2}>
               Untuk hasil yang maksimal silahkan ikuti saran berikut :
             </Text>
@@ -132,7 +132,7 @@ const HowTo = ({ isOpen, onClose }) => {
               Jangan gunakan kacamata atau soft-lens khusus buta warna.
             </ListItem>
             <ListItem>
-              Waktu pengetesan optimal : pukul 11:00 -13:00{" "}
+              Waktu pengetesan optimal : pukul 11:00 -13:00{' '}
               <b>(Maks. Pengerjaan 12 Menit</b> )
             </ListItem>
             <ListItem>
@@ -154,11 +154,11 @@ const HowTo = ({ isOpen, onClose }) => {
 export default function WebExplaining() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Container maxW={"5xl"}>
+    <Container maxW={'5xl'}>
       <HowTo isOpen={isOpen} onClose={onClose} />
       <Stack
         as={Box}
-        textAlign={"center"}
+        textAlign={'center'}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 5, xs: 16, sm: 20 }}
       >
@@ -176,7 +176,7 @@ export default function WebExplaining() {
               scale: 1,
               opacity: 1,
               transition: {
-                type: "spring",
+                type: 'spring',
                 bounce: 0.4,
                 duration: 0.8,
               },
@@ -185,11 +185,11 @@ export default function WebExplaining() {
         >
           <Heading
             fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-            lineHeight={"110%"}
+            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+            lineHeight={'110%'}
           >
             Tentang <br />
-            <Text as={"span"} color={"green.400"}>
+            <Text as={'span'} color={'green.400'}>
               WhatColors
             </Text>
           </Heading>
@@ -208,7 +208,7 @@ export default function WebExplaining() {
               scale: 1,
               opacity: 1,
               transition: {
-                type: "spring",
+                type: 'spring',
                 bounce: 0.4,
                 duration: 0.8,
               },
@@ -216,9 +216,9 @@ export default function WebExplaining() {
           }}
         >
           <Text
-            textAlign={{ base: "justify", sm: "center" }}
-            fontSize={{ base: "sm", sm: "md" }}
-            color={"gray.500"}
+            textAlign={{ base: 'justify', sm: 'center' }}
+            fontSize={{ base: 'sm', sm: 'md' }}
+            color={'gray.500'}
           >
             Website ini ditunjukkan bagi masyarakat secara luas dapat melakukan
             simulasi tes buta warna secara virtual dan gratis. Pada website ini
@@ -231,11 +231,11 @@ export default function WebExplaining() {
           </Text>
         </ChakraBox>
         <Stack
-          direction={"column"}
+          direction={'column'}
           spacing={3}
-          align={"center"}
-          alignSelf={"center"}
-          position={"relative"}
+          align={'center'}
+          alignSelf={'center'}
+          position={'relative'}
         >
           <ChakraBox
             initial="offscreen"
@@ -249,7 +249,7 @@ export default function WebExplaining() {
                 x: 0,
                 opacity: 1,
                 transition: {
-                  type: "spring",
+                  type: 'spring',
                   bounce: 0.4,
                   duration: 0.8,
                 },
@@ -257,13 +257,13 @@ export default function WebExplaining() {
             }}
           >
             <Button
-              size={{ base: "sm", sm: "md" }}
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
+              size={{ base: 'sm', sm: 'md' }}
+              colorScheme={'green'}
+              bg={'green.400'}
+              rounded={'full'}
               px={6}
               _hover={{
-                bg: "green.500",
+                bg: 'green.500',
               }}
               as={ReactRouterLink}
               to="/"
@@ -283,7 +283,7 @@ export default function WebExplaining() {
                 x: 0,
                 opacity: 1,
                 transition: {
-                  type: "spring",
+                  type: 'spring',
                   bounce: 0.4,
                   duration: 0.8,
                 },
@@ -291,9 +291,9 @@ export default function WebExplaining() {
             }}
           >
             <Button
-              variant={"link"}
-              colorScheme={"blue"}
-              size={"sm"}
+              variant={'link'}
+              colorScheme={'blue'}
+              size={'sm'}
               onClick={onOpen}
             >
               Cara Kerja
@@ -302,19 +302,19 @@ export default function WebExplaining() {
           <Box>
             <Icon
               as={Arrow}
-              color={useColorModeValue("gray.800", "gray.300")}
+              color={useColorModeValue('gray.800', 'gray.300')}
               w={{ base: 30, xs: 71 }}
-              position={"absolute"}
+              position={'absolute'}
               right={{ base: -35, xs: -71 }}
-              top={"10px"}
+              top={'10px'}
             />
             <Text
-              fontSize={{ base: "xs", xs: "lg" }}
-              fontFamily={"Caveat"}
-              position={"absolute"}
-              right={{ base: "-80px", xs: "-125px" }}
-              top={"-15px"}
-              transform={"rotate(10deg)"}
+              fontSize={{ base: 'xs', xs: 'lg' }}
+              fontFamily={'Caveat'}
+              position={'absolute'}
+              right={{ base: '-80px', xs: '-125px' }}
+              top={'-15px'}
+              transform={'rotate(10deg)'}
             >
               Yuk coba tesnya
             </Text>
@@ -326,8 +326,8 @@ export default function WebExplaining() {
 }
 
 const Arrow = createIcon({
-  displayName: "Arrow",
-  viewBox: "0 0 72 24",
+  displayName: 'Arrow',
+  viewBox: '0 0 72 24',
   path: (
     <path
       fillRule="evenodd"

@@ -19,15 +19,15 @@ import {
   NumberInputField,
   NumberInputStepper,
   Select,
-} from "@chakra-ui/react";
-import { testTypes } from "@/utils/methods/method-type";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { date } from "@/utils/test-helper";
-import { useMutation } from "@tanstack/react-query";
-import { newGroup, sendEmail } from "@/utils/call-api";
-import storage from "@/utils/storage";
-import { useToastMsg } from "@/utils/customHooks";
+} from '@chakra-ui/react';
+import { testTypes } from '@/utils/methods/method-type';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { date } from '@/utils/test-helper';
+import { useMutation } from '@tanstack/react-query';
+import { newGroup, sendEmail } from '@/utils/call-api';
+import storage from '@/utils/storage';
+import { useToastMsg } from '@/utils/customHooks';
 
 export default function GroupForm({ isOpen, onClose }) {
   const navigate = useNavigate();
@@ -36,23 +36,23 @@ export default function GroupForm({ isOpen, onClose }) {
   const emailMutation = useMutation({
     mutationFn: sendEmail,
     onSuccess: (data) => {
-      toast("Email Berhasil Dikirim", `${data}`, "info");
+      toast('Email Berhasil Dikirim', `${data}`, 'info');
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
   const groupMutation = useMutation({
     mutationFn: newGroup,
     onSuccess: (data) => {
-      storage.setJSON("id", data);
+      storage.setJSON('id', data);
       emailMutation.mutateAsync(data);
-      navigate("/verify-admin");
-      toast("Grup Berhasil Dibuat", "Masukan Kode Verifikasi", "success");
+      navigate('/verify-admin');
+      toast('Grup Berhasil Dibuat', 'Masukan Kode Verifikasi', 'success');
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -63,11 +63,11 @@ export default function GroupForm({ isOpen, onClose }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      groupName: "",
-      groupInitial: "",
-      email: "",
-      type: "Mudah (32 Warna)",
-      device: "",
+      groupName: '',
+      groupInitial: '',
+      email: '',
+      type: 'Mudah (32 Warna)',
+      device: '',
     },
   });
 
@@ -83,7 +83,7 @@ export default function GroupForm({ isOpen, onClose }) {
 
   return (
     <Modal
-      size={{ base: "xs", sm: "md", md: "2xl" }}
+      size={{ base: 'xs', sm: 'md', md: '2xl' }}
       closeOnOverlayClick={false}
       isOpen={isOpen}
       onClose={onClose}
@@ -96,7 +96,7 @@ export default function GroupForm({ isOpen, onClose }) {
           <ModalHeader>Buat Grup Tes</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Flex direction={{ base: "column", sm: "row" }} gap={5}>
+            <Flex direction={{ base: 'column', sm: 'row' }} gap={5}>
               <FormControl isRequired isInvalid={errors.groupName}>
                 <FormLabel htmlFor="roomName">Nama Grup</FormLabel>
                 <Input
@@ -104,19 +104,19 @@ export default function GroupForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Nama Grup"
-                  {...register("groupName", {
-                    required: "Wajib Diisi",
+                  {...register('groupName', {
+                    required: 'Wajib Diisi',
                     minLength: {
                       value: 4,
-                      message: "Masukkan Minimal 4 Suku Kata",
+                      message: 'Masukkan Minimal 4 Suku Kata',
                     },
                     maxLength: {
                       value: 20,
-                      message: "Masukkan Maksimal 20 Suku Kata",
+                      message: 'Masukkan Maksimal 20 Suku Kata',
                     },
                   })}
                 />
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Masukkan Nama Grup
                 </FormHelperText>
                 <FormErrorMessage>
@@ -126,7 +126,7 @@ export default function GroupForm({ isOpen, onClose }) {
               <FormControl
                 isRequired
                 isInvalid={errors.groupInitial}
-                width={{ base: "auto", sm: "12em" }}
+                width={{ base: 'auto', sm: '12em' }}
               >
                 <FormLabel htmlFor="roomInitial">Inisial Grup</FormLabel>
                 <Input
@@ -134,15 +134,15 @@ export default function GroupForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Inisial Grup"
-                  {...register("groupInitial", {
-                    required: "Wajib Diisi",
+                  {...register('groupInitial', {
+                    required: 'Wajib Diisi',
                     maxLength: {
                       value: 5,
-                      message: "Maks. 5 Huruf",
+                      message: 'Maks. 5 Huruf',
                     },
                   })}
                 />
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Beri Inisial Grup
                 </FormHelperText>
                 <FormErrorMessage>
@@ -150,7 +150,7 @@ export default function GroupForm({ isOpen, onClose }) {
                 </FormErrorMessage>
               </FormControl>
             </Flex>
-            <Flex direction={{ base: "column", md: "row" }} gap={5} mt={4}>
+            <Flex direction={{ base: 'column', md: 'row' }} gap={5} mt={4}>
               <FormControl isRequired isInvalid={errors.email}>
                 <FormLabel htmlFor="adminEmail">Email Admin</FormLabel>
                 <Input
@@ -159,11 +159,11 @@ export default function GroupForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Email Admin"
-                  {...register("email", {
-                    required: "Wajib Diisi",
+                  {...register('email', {
+                    required: 'Wajib Diisi',
                   })}
                 />
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Masukkan Email Admin Grup
                 </FormHelperText>
                 <FormErrorMessage>{errors.email}</FormErrorMessage>
@@ -175,20 +175,20 @@ export default function GroupForm({ isOpen, onClose }) {
                   autoComplete="off"
                   focusBorderColor="teal.400"
                   placeholder="Masukkan Tipe Monitor/Gawai"
-                  {...register("device")}
+                  {...register('device')}
                 />
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Tuliskan merk atau tipe monitor atau gawai
                 </FormHelperText>
               </FormControl>
             </Flex>
-            <Flex direction={{ base: "column", md: "row" }} gap={5} mt={4}>
+            <Flex direction={{ base: 'column', md: 'row' }} gap={5} mt={4}>
               <FormControl isRequired isInvalid={errors.type}>
                 <FormLabel htmlFor="type">Tingkat Kesulitan</FormLabel>
                 <Select
                   id="type"
-                  {...register("type", {
-                    required: "Wajib Diisi",
+                  {...register('type', {
+                    required: 'Wajib Diisi',
                   })}
                   placeholder="Pilih Tingkat Kesulitan"
                 >
@@ -198,7 +198,7 @@ export default function GroupForm({ isOpen, onClose }) {
                     </option>
                   ))}
                 </Select>
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Pilih tingkat kesulitan sesuai kemampuan
                 </FormHelperText>
                 <FormErrorMessage>{errors.type}</FormErrorMessage>
@@ -211,8 +211,8 @@ export default function GroupForm({ isOpen, onClose }) {
                   focusBorderColor="teal.400"
                   max={100}
                   min={0}
-                  {...register("maxScore", {
-                    required: "Wajib Diisi",
+                  {...register('maxScore', {
+                    required: 'Wajib Diisi',
                   })}
                 >
                   <NumberInputField
@@ -225,7 +225,7 @@ export default function GroupForm({ isOpen, onClose }) {
                   </NumberInputStepper>
                 </NumberInput>
 
-                <FormHelperText fontSize={"small"}>
+                <FormHelperText fontSize={'small'}>
                   Rentang nilai terendah 0 - 100
                 </FormHelperText>
                 <FormErrorMessage>{errors.maxScore}</FormErrorMessage>

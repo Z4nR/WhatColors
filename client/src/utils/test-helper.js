@@ -1,18 +1,17 @@
-import { colorBlindName, colorBlindRange } from "./methods/method-type";
-import storage from "./storage";
+import { colorBlindName, colorBlindRange } from './methods/method-type';
+import storage from './storage';
 
-const date = new Date().toLocaleDateString("id-ID", {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+const date = new Date().toLocaleDateString('id-ID', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 });
 
-const getInisial = () => storage.getJSON("inisial");
-const getMax = () => storage.getJSON("score");
+const getInisial = () => storage.getJSON('inisial');
+const getMax = () => storage.getJSON('score');
 
 const userData = (data, isClient) => {
-
   const name =
     isClient && getInisial() !== null
       ? `${getInisial()} ${data?.fullName}`
@@ -35,11 +34,11 @@ const userData = (data, isClient) => {
 const blindStatus = (totalScore) => {
   let type;
   if (totalScore <= 16) {
-    type = "Bagus";
+    type = 'Bagus';
   } else if (totalScore >= 16 && totalScore <= 100) {
-    type = "Rerata";
+    type = 'Rerata';
   } else {
-    type = "Lemah";
+    type = 'Lemah';
   }
 
   return type;
@@ -53,15 +52,15 @@ const compareValue = (result, initiate) => {
 
     for (let i = 0; i < item.value.length; i++) {
       const resultValue = item.value[i];
-      if (resultValue.status !== "removable") {
+      if (resultValue.status !== 'removable') {
         continue;
       }
 
       const initialValue = initialRow.value[i];
       if (resultValue === initialValue) {
-        res.push("Benar");
+        res.push('Benar');
       } else {
-        res.push("Salah");
+        res.push('Salah');
       }
     }
 
@@ -90,7 +89,7 @@ const discriminantValue = (result, initiate) => {
       const resultValue = item.value[i];
       const resultNumber = resultValue.number;
 
-      if (resultValue.status !== "removable") {
+      if (resultValue.status !== 'removable') {
         continue;
       }
 
@@ -137,7 +136,7 @@ const methodCalculate = (result) => {
 
     for (let i = 0; i < item.value.length; i++) {
       const iCap = item.value[i];
-      if (iCap.status !== "removable") {
+      if (iCap.status !== 'removable') {
         continue;
       }
       const capNumber = iCap.number;
@@ -199,10 +198,10 @@ const blindType = (type, compareResult) => {
 //To know user are hae normal or color blind eye
 const colorBlindType = (t, compare) => {
   let type;
-  if (t === "Menengah (80 Warna)") {
-    type = "type85";
-  } else if (t === "Sulit (85 Warna)") {
-    type = "type100";
+  if (t === 'Menengah (80 Warna)') {
+    type = 'type85';
+  } else if (t === 'Sulit (85 Warna)') {
+    type = 'type100';
   } else {
     return null;
   }
@@ -217,15 +216,15 @@ const testResult = (result, initiate, user, isClient) => {
   const discriminant = discriminantValue(result, initiate);
   const totalErrorScore = methodCalculate(result);
   const blindType = colorBlindType(user.type, comparison.result);
-  const blindCheck = !blindType ? "Normal" : blindType;
+  const blindCheck = !blindType ? 'Normal' : blindType;
   const errorScoreStatus = blindStatus(totalErrorScore);
-  const status = totalErrorScore <= getMax() ? "Lolos" : "Tidak Lolos";
+  const status = totalErrorScore <= getMax() ? 'Lolos' : 'Tidak Lolos';
 
   const comparisonResult = comparison.value;
   const discriminantResult = discriminant.value;
 
-  storage.setJSON("discriminant", discriminant);
-  storage.setJSON("comparison", comparison.result);
+  storage.setJSON('discriminant', discriminant);
+  storage.setJSON('comparison', comparison.result);
 
   if (isClient) {
     return {

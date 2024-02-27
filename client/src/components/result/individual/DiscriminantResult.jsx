@@ -1,4 +1,4 @@
-import { useChartDiscriminant } from "@/utils/customHooks";
+import { useChartDiscriminant } from '@/utils/customHooks';
 import {
   Box,
   Flex,
@@ -12,13 +12,13 @@ import {
   Thead,
   Tr,
   useMediaQuery,
-} from "@chakra-ui/react";
-import Chart from "chart.js/auto";
-import { useEffect, useMemo } from "react";
+} from '@chakra-ui/react';
+import Chart from 'chart.js/auto';
+import { useEffect, useMemo } from 'react';
 
 export default function DiscriminantResult({ data }) {
   const [getDiscriminant] = useChartDiscriminant();
-  const [isDesktop] = useMediaQuery("(min-width: 550px)");
+  const [isDesktop] = useMediaQuery('(min-width: 550px)');
 
   const maxResult = useMemo(() => {
     if (getDiscriminant !== null) {
@@ -34,21 +34,21 @@ export default function DiscriminantResult({ data }) {
       labels: label,
       datasets: [
         {
-          label: "Nilai Diskriminasi",
+          label: 'Nilai Diskriminasi',
           data: data,
           fill: true,
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgb(255, 99, 132)",
-          pointBackgroundColor: "rgb(255, 99, 132)",
-          pointBorderColor: "#fff",
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgb(255, 99, 132)",
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          pointBackgroundColor: 'rgb(255, 99, 132)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(255, 99, 132)',
         },
       ],
     };
 
     const config = {
-      type: "radar",
+      type: 'radar',
       data: chartData,
       options: {
         elements: {
@@ -59,12 +59,12 @@ export default function DiscriminantResult({ data }) {
         scales: {
           r: {
             pointLabels: {
-              color: "black",
+              color: 'black',
             },
             suggestedMin: 0,
             suggestedMax: maxResult,
             ticks: {
-              color: "blue",
+              color: 'blue',
               stepSize: 2,
             },
           },
@@ -75,16 +75,16 @@ export default function DiscriminantResult({ data }) {
     };
 
     if (getDiscriminant && isDesktop) {
-      new Chart("radar-chart", config);
+      new Chart('radar-chart', config);
     }
   }, [getDiscriminant, maxResult, isDesktop]);
 
   return (
-    <Box textAlign={"center"} py={{ lg: 4 }}>
-      <Heading size={{ base: "sm", sm: "md" }}>
+    <Box textAlign={'center'} py={{ lg: 4 }}>
+      <Heading size={{ base: 'sm', sm: 'md' }}>
         Hasil Diskriminasi Warna:
       </Heading>
-      <Text mt={2} fontSize={{ base: "xs", xs: "sm", md: "md" }}>
+      <Text mt={2} fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}>
         *Hasil diskriminasi diambil dari seberapa jauh kesalahan peletakan warna
         hasil tes yang kamu lakukan dengan posisi aslinya.
       </Text>
@@ -92,22 +92,22 @@ export default function DiscriminantResult({ data }) {
         <Flex
           mt={6}
           mb={2}
-          mx={"auto"}
-          position={"relative"}
+          mx={'auto'}
+          position={'relative'}
           width={{ sm: 550, lg: 750 }}
-          justifyContent={"center"}
+          justifyContent={'center'}
         >
           <canvas id="radar-chart" />
         </Flex>
       ) : (
         <TableContainer my={4}>
-          <Table size={"sm"}>
+          <Table size={'sm'}>
             <Thead>
               <Tr>
-                <Th textAlign={"center"} maxWidth={75} color="teal">
+                <Th textAlign={'center'} maxWidth={75} color="teal">
                   Kode Warna
                 </Th>
-                <Th textAlign={"center"} color="teal">
+                <Th textAlign={'center'} color="teal">
                   Nilai
                 </Th>
               </Tr>
@@ -115,10 +115,10 @@ export default function DiscriminantResult({ data }) {
             <Tbody>
               {data?.discriminantResult?.map((value) => (
                 <Tr key={value._id}>
-                  <Td textAlign={"center"} maxWidth={75}>
+                  <Td textAlign={'center'} maxWidth={75}>
                     {value._id}
                   </Td>
-                  <Td textAlign={"center"}>{value.discriminant}</Td>
+                  <Td textAlign={'center'}>{value.discriminant}</Td>
                 </Tr>
               ))}
             </Tbody>

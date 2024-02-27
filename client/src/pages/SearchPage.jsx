@@ -1,8 +1,8 @@
-import ClientSearch from "@/components/search/ClientSearch";
-import GroupSearch from "@/components/search/GroupSearch";
-import IndividualSearch from "@/components/search/IndividualSearch";
-import { getTestSearch } from "@/utils/call-api";
-import { useToastMsg } from "@/utils/customHooks";
+import ClientSearch from '@/components/search/ClientSearch';
+import GroupSearch from '@/components/search/GroupSearch';
+import IndividualSearch from '@/components/search/IndividualSearch';
+import { getTestSearch } from '@/utils/call-api';
+import { useToastMsg } from '@/utils/customHooks';
 import {
   Box,
   Button,
@@ -15,9 +15,9 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-} from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+} from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 
 export default function SearchPage() {
   const toast = useToastMsg();
@@ -30,10 +30,10 @@ export default function SearchPage() {
   const { mutateAsync, isLoading, data } = useMutation({
     mutationFn: getTestSearch,
     onSuccess: () => {
-      toast("Pencarian Berhasil", "Data berhasil ditampilkan", "success");
+      toast('Pencarian Berhasil', 'Data berhasil ditampilkan', 'success');
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -44,14 +44,14 @@ export default function SearchPage() {
   return (
     <Box mt={{ base: 4, lg: 8 }}>
       <form onSubmit={handleSubmit(onSearch)}>
-        <HStack gap={15} justifyContent={"center"} alignItems={"center"}>
-          <FormControl maxWidth={"400px"}>
+        <HStack gap={15} justifyContent={'center'} alignItems={'center'}>
+          <FormControl maxWidth={'400px'}>
             <Input
               id="name"
               autoComplete="off"
               focusBorderColor="teal.400"
               placeholder="Masukan Data Yang Ingin Dicari"
-              {...register("name")}
+              {...register('name')}
             />
           </FormControl>
           <FormErrorMessage>
@@ -69,9 +69,9 @@ export default function SearchPage() {
         colorScheme="orange"
       >
         <TabList>
-          <Tab fontSize={{ base: "sm", lg: "md" }}>Individu</Tab>
-          <Tab fontSize={{ base: "sm", lg: "md" }}>Peserta</Tab>
-          <Tab fontSize={{ base: "sm", lg: "md" }}>Grup Tes</Tab>
+          <Tab fontSize={{ base: 'sm', lg: 'md' }}>Individu</Tab>
+          <Tab fontSize={{ base: 'sm', lg: 'md' }}>Peserta</Tab>
+          <Tab fontSize={{ base: 'sm', lg: 'md' }}>Grup Tes</Tab>
         </TabList>
 
         <TabPanels>
