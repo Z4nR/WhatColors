@@ -1,10 +1,10 @@
-const Group = require("../models/group-test");
-const { generateCode } = require("../utils/group-helper");
-const { groupValidate } = require("../utils/validate");
-const mailer = require("nodemailer");
-const handlebars = require("handlebars");
-const path = require("path");
-const fs = require("fs");
+const Group = require('../models/group-test');
+const { generateCode } = require('../utils/group-helper');
+const { groupValidate } = require('../utils/validate');
+const mailer = require('nodemailer');
+const handlebars = require('handlebars');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = {
   newGroup: async (req, res) => {
@@ -19,7 +19,7 @@ module.exports = {
       if (initial)
         return res
           .status(409)
-          .send({ message: "Inisial Grup sudah digunakan!" });
+          .send({ message: 'Inisial Grup sudah digunakan!' });
 
       const generate = generateCode(5);
       const group = { ...req.body, code: generate };
@@ -28,7 +28,7 @@ module.exports = {
       res.status(201).send({ id: data._id });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -37,8 +37,8 @@ module.exports = {
       const { id } = req.params;
       const group = await Group.findById(id);
 
-      const filePath = path.join(__dirname, "../utils/email-template.html");
-      const source = fs.readFileSync(filePath, "utf-8").toString();
+      const filePath = path.join(__dirname, '../utils/email-template.html');
+      const source = fs.readFileSync(filePath, 'utf-8').toString();
 
       const template = handlebars.compile(source);
       const replacements = {
@@ -48,7 +48,7 @@ module.exports = {
       const htmlMsg = template(replacements);
 
       const smtpTransport = mailer.createTransport({
-        service: "Gmail",
+        service: 'Gmail',
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASS,
@@ -57,7 +57,7 @@ module.exports = {
       const mailOptions = {
         from: process.env.EMAIL,
         to: group.email,
-        subject: "Verifikasi Kode " + group.groupInitial,
+        subject: 'Verifikasi Kode ' + group.groupInitial,
         html: htmlMsg,
       };
       smtpTransport.sendMail(mailOptions, function (error, info) {
@@ -69,10 +69,10 @@ module.exports = {
         }
       });
 
-      res.status(200).send({ message: "Kode Email Berhasil Dikirim" });
+      res.status(200).send({ message: 'Kode Email Berhasil Dikirim' });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -84,13 +84,13 @@ module.exports = {
         $or: [
           {
             code: {
-              _id: "01",
+              _id: '01',
               key: codeVerify,
             },
           },
           {
             code: {
-              _id: "11",
+              _id: '11',
               key: codeVerify,
             },
           },
@@ -98,7 +98,7 @@ module.exports = {
       });
 
       if (findCode.length === 0)
-        return res.status(409).send({ message: "Kode Tidak Ditemukan" });
+        return res.status(409).send({ message: 'Kode Tidak Ditemukan' });
 
       const data = { ...findCode };
       const admin = data[0].code[0].key;
@@ -110,7 +110,7 @@ module.exports = {
       res.status(200).send({ admin: isAdmin, id: id });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -121,7 +121,7 @@ module.exports = {
       const group = await Group.findById(id);
 
       if (!group)
-        return res.status(404).send({ message: "Grup tidak ditemukan" });
+        return res.status(404).send({ message: 'Grup tidak ditemukan' });
 
       const data = {
         name: group.groupName,
@@ -135,7 +135,7 @@ module.exports = {
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -144,20 +144,20 @@ module.exports = {
       const { id } = req.params;
 
       const group = await Group.findById(id).populate({
-        path: "clients",
+        path: 'clients',
         options: {
           sort: { status: 1, totalErrorScore: 1, time: 1 },
         },
       });
       if (!group)
-        return res.status(404).send({ message: "Grup tidak ditemukan" });
+        return res.status(404).send({ message: 'Grup tidak ditemukan' });
 
       const data = group.clients;
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 };

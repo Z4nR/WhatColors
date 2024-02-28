@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ArticleSchema = new Schema({
@@ -11,6 +11,6 @@ const ArticleSchema = new Schema({
   urlPage: String,
 });
 
-const articlewebsite = mongoose.model("article", ArticleSchema, "Article");
+const articlewebsite = mongoose.model('article', ArticleSchema, 'Article');
 
 module.exports = articlewebsite;

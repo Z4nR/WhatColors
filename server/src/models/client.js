@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ClientSchema = new Schema({
@@ -17,6 +17,6 @@ const ClientSchema = new Schema({
   status: String,
 });
 
-const clientuser = mongoose.model("client", ClientSchema, "Client");
+const clientuser = mongoose.model('client', ClientSchema, 'Client');
 
 module.exports = clientuser;

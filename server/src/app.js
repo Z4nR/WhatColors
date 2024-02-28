@@ -1,34 +1,34 @@
-const express = require("express"),
-  cors = require("cors"),
-  bodyParser = require("body-parser"),
-  cron = require("node-cron");
+const express = require('express'),
+  cors = require('cors'),
+  bodyParser = require('body-parser'),
+  cron = require('node-cron');
 const app = express(),
-  db = require("./db"),
-  route = require("./routes");
-const { deleteAllTestData } = require("./controllers/data-controller");
+  db = require('./db'),
+  route = require('./routes');
+const { deleteAllTestData } = require('./controllers/data-controller');
 
-require("dotenv").config();
+require('dotenv').config();
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT || 5000;
 
 //Handling Console.log
-if (env === "development") {
+if (env === 'development') {
   console.log = function () {};
 }
 
 //Middleware
 app.use(bodyParser.json());
-app.use(cors({ origin: "*", methods: ["GET", "POST", "DELETE"] }));
+app.use(cors({ origin: '*', methods: ['GET', 'POST', 'DELETE'] }));
 
 //Delete Daily Schedule
 const cronConfig = {
   scheduled: true,
-  timezone: "Asia/Jakarta",
+  timezone: 'Asia/Jakarta',
 };
 
 const deleteSchedule = cron.schedule(
-  "59 23 * * 6",
+  '59 23 * * 6',
   deleteAllTestData,
   cronConfig
 );
@@ -36,7 +36,7 @@ const deleteSchedule = cron.schedule(
 deleteSchedule.start();
 
 //Route
-app.use("/v1", route);
+app.use('/v1', route);
 
 //DB Connection
 db();

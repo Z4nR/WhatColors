@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const IndividualSchema = new Schema({
@@ -17,9 +17,9 @@ const IndividualSchema = new Schema({
 });
 
 const individualuser = mongoose.model(
-  "individual",
+  'individual',
   IndividualSchema,
-  "Individual"
+  'Individual'
 );
 
 module.exports = individualuser;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const TestGroupSchema = new Schema({
@@ -13,11 +13,11 @@ const TestGroupSchema = new Schema({
   clients: [
     {
       type: Schema.Types.ObjectId,
-      ref: "client",
+      ref: 'client',
     },
   ],
 });
 
-const testgroup = mongoose.model("testgroup", TestGroupSchema, "TestGroup");
+const testgroup = mongoose.model('testgroup', TestGroupSchema, 'TestGroup');
 
 module.exports = testgroup;

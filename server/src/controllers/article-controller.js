@@ -1,5 +1,5 @@
-const Article = require("../models/article");
-const { articleValidate } = require("../utils/validate");
+const Article = require('../models/article');
+const { articleValidate } = require('../utils/validate');
 
 module.exports = {
   newArticle: async (req, res) => {
@@ -9,10 +9,10 @@ module.exports = {
         return res.status(400).send({ message: error.details[0].message });
 
       await new Article(req.body).save();
-      res.status(201).send({ message: "Artikel Baru Berhasil Ditambahkan" });
+      res.status(201).send({ message: 'Artikel Baru Berhasil Ditambahkan' });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 
@@ -26,7 +26,7 @@ module.exports = {
       res.status(200).send(article);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
     }
   },
 };
