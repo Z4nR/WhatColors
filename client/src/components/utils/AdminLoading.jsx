@@ -31,7 +31,9 @@ export default function AdminLoading() {
           {[...Array(10)].map((_, index) => (
             <Tr key={index}>
               <Td textAlign={{ md: 'center' }}>
-                <p>{index + 1}</p>
+                <Skeleton>
+                  <p>Lorem</p>
+                </Skeleton>
               </Td>
               <Td textAlign={{ md: 'center' }}>
                 <Skeleton>
