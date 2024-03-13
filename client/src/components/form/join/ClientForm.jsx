@@ -1,6 +1,6 @@
-import { getGroupById } from "@/utils/call-api";
-import { createArray } from "@/utils/methods/method-loader";
-import storage from "@/utils/storage";
+import { getGroupById } from '@/utils/call-api';
+import { createArray } from '@/utils/methods/method-loader';
+import storage from '@/utils/storage';
 import {
   Button,
   Flex,
@@ -22,10 +22,10 @@ import {
   NumberInputStepper,
   Radio,
   RadioGroup,
-} from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export default function ClientForm({ setPage, onClose }) {
   const navigate = useNavigate();
@@ -38,29 +38,29 @@ export default function ClientForm({ setPage, onClose }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      fullName: "",
-      gender: "",
-      device: "",
-      testType: "",
+      fullName: '',
+      gender: '',
+      device: '',
+      testType: '',
       value: {},
       isClient: true,
     },
   });
 
   useEffect(() => {
-    const id = storage.getJSON("id");
+    const id = storage.getJSON('id');
     getGroupById(id).then((data) => {
-      storage.setJSON("inisial", data.initial);
-      storage.setJSON("score", data.max);
-      setValue("device", data.device);
-      setValue("testType", data.type);
-      setValue("value", createArray(data.type));
+      storage.setJSON('inisial', data.initial);
+      storage.setJSON('score', data.max);
+      setValue('device', data.device);
+      setValue('testType', data.type);
+      setValue('value', createArray(data.type));
     });
   }, [setValue]);
 
   const onSubmit = (data) => {
-    storage.setJSON("user", data);
-    navigate("/test");
+    storage.setJSON('user', data);
+    navigate('/test');
   };
 
   const resetData = () => {
@@ -76,7 +76,7 @@ export default function ClientForm({ setPage, onClose }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ModalContent>
-        <ModalHeader>Buat Tes Individu</ModalHeader>
+        <ModalHeader>Gabung Tes Grup</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <FormControl isRequired isInvalid={errors.fullName}>
@@ -86,22 +86,22 @@ export default function ClientForm({ setPage, onClose }) {
               autoComplete="off"
               focusBorderColor="teal.400"
               placeholder="Masukkan Nama Lengkap"
-              {...register("fullName", {
-                required: "Wajib Diisi",
+              {...register('fullName', {
+                required: 'Wajib Diisi',
                 minLength: {
                   value: 4,
-                  message: "Min. 4 Huruf",
+                  message: 'Min. 4 Huruf',
                 },
               })}
             />
-            <FormHelperText fontSize={"small"}>
+            <FormHelperText fontSize={'small'}>
               Tuliskan Nama Lengkap Anda
             </FormHelperText>
             <FormErrorMessage>
               {errors.fullName && errors.fullName.message}
             </FormErrorMessage>
           </FormControl>
-          <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
+          <Flex direction={{ base: 'column', md: 'row' }} gap={5} mt={5}>
             <FormControl isRequired isInvalid={errors.age}>
               <FormLabel htmlFor="age">Umur Anda</FormLabel>
               <NumberInput
@@ -113,8 +113,8 @@ export default function ClientForm({ setPage, onClose }) {
                 <NumberInputField
                   autoComplete="off"
                   placeholder="Masukkan Umur Anda"
-                  {...register("age", {
-                    required: "Wajib Diisi",
+                  {...register('age', {
+                    required: 'Wajib Diisi',
                   })}
                 />
                 <NumberInputStepper>
@@ -122,7 +122,7 @@ export default function ClientForm({ setPage, onClose }) {
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-              <FormHelperText fontSize={"small"}>
+              <FormHelperText fontSize={'small'}>
                 Rentang usia 10 sampai 50 tahun
               </FormHelperText>
               <FormErrorMessage>{errors.age}</FormErrorMessage>
@@ -132,21 +132,21 @@ export default function ClientForm({ setPage, onClose }) {
               <RadioGroup id="gender">
                 <HStack
                   height={10}
-                  justifyContent={"space-around"}
+                  justifyContent={'space-around'}
                   spacing="24px"
                 >
                   <Radio
                     value="Pria"
-                    {...register("gender", {
-                      required: "Wajib Diisi",
+                    {...register('gender', {
+                      required: 'Wajib Diisi',
                     })}
                   >
                     Pria
                   </Radio>
                   <Radio
                     value="Wanita"
-                    {...register("gender", {
-                      required: "Wajib Diisi",
+                    {...register('gender', {
+                      required: 'Wajib Diisi',
                     })}
                   >
                     Wanita
@@ -154,13 +154,13 @@ export default function ClientForm({ setPage, onClose }) {
                 </HStack>
               </RadioGroup>
 
-              <FormHelperText textAlign={"center"} fontSize={"small"}>
+              <FormHelperText textAlign={'center'} fontSize={'small'}>
                 Hanya ada 2 jenis kelamin
               </FormHelperText>
               <FormErrorMessage>{errors.gender}</FormErrorMessage>
             </FormControl>
           </Flex>
-          <Flex direction={{ base: "column", md: "row" }} gap={5} mt={5}>
+          <Flex direction={{ base: 'column', md: 'row' }} gap={5} mt={5}>
             <FormControl isRequired isInvalid={errors.device}>
               <FormLabel htmlFor="device">Perangkat</FormLabel>
               <Input
@@ -168,12 +168,12 @@ export default function ClientForm({ setPage, onClose }) {
                 autoComplete="off"
                 focusBorderColor="teal.400"
                 placeholder="Masukkan Tipe Monitor/Gawai"
-                {...register("device", {
-                  required: "Wajib Diisi",
+                {...register('device', {
+                  required: 'Wajib Diisi',
                 })}
               />
 
-              <FormHelperText fontSize={"small"}>
+              <FormHelperText fontSize={'small'}>
                 Tuliskan merk atau tipe monitor atau gawai
               </FormHelperText>
               <FormErrorMessage>{errors.device}</FormErrorMessage>
@@ -184,8 +184,8 @@ export default function ClientForm({ setPage, onClose }) {
                 id="type"
                 autoComplete="off"
                 focusBorderColor="teal.400"
-                {...register("testType", {
-                  required: "Wajib Diisi",
+                {...register('testType', {
+                  required: 'Wajib Diisi',
                 })}
               />
             </FormControl>
