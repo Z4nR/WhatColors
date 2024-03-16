@@ -1,6 +1,6 @@
-import { verifyRole } from "@/utils/call-api";
-import { useToastMsg } from "@/utils/customHooks";
-import storage from "@/utils/storage";
+import { verifyRole } from '@/utils/call-api';
+import { useToastMsg } from '@/utils/customHooks';
+import storage from '@/utils/storage';
 import {
   Button,
   FormControl,
@@ -15,10 +15,10 @@ import {
   ModalHeader,
   PinInput,
   PinInputField,
-} from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export default function VerifyForm({ setPage, onClose }) {
   const navigate = useNavigate();
@@ -27,11 +27,12 @@ export default function VerifyForm({ setPage, onClose }) {
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: verifyRole,
     onSuccess: (data) => {
-      storage.setJSON("id", data.id);
-      data.admin === true ? navigate("/admin") : setPage(true);
+      const admin = data.admin;
+      storage.setJSON('id', data.id);
+      admin ? navigate('/admin') : setPage(true);
     },
     onError: (error) => {
-      toast("Terjadi Kesalahan", `${error.response.data.message}`, "error");
+      toast('Terjadi Kesalahan', `${error.response.data.message}`, 'error');
     },
   });
 
@@ -41,7 +42,7 @@ export default function VerifyForm({ setPage, onClose }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      code: "",
+      code: '',
     },
   });
 
@@ -54,7 +55,7 @@ export default function VerifyForm({ setPage, onClose }) {
       <ModalContent>
         <ModalHeader>Bergabung Grup</ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6} margin={"0 auto"}>
+        <ModalBody pb={6} margin={'0 auto'}>
           <FormControl isRequired isInvalid={errors.code}>
             <FormLabel>Masukkan Kode</FormLabel>
             <HStack>
@@ -76,7 +77,7 @@ export default function VerifyForm({ setPage, onClose }) {
                 )}
               />
             </HStack>
-            <FormHelperText fontSize={"small"}>
+            <FormHelperText fontSize={'small'}>
               Harap masukkan kode yang sesuai
             </FormHelperText>
             <FormErrorMessage>{errors.code}</FormErrorMessage>
