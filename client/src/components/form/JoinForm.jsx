@@ -15,7 +15,7 @@ export default function JoinForm({ isOpen, onClose }) {
       isCentered
     >
       <ModalOverlay />
-      {getPage === true ? (
+      {getPage ? (
         <ClientForm setPage={setPage} onClose={onClose} />
       ) : (
         <VerifyForm setPage={setPage} onClose={onClose} />
