@@ -44,7 +44,10 @@ export default function ClientResult() {
   }
 
   return (
-    <Box py={{ lg: 4 }} fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}>
+    <Box
+      py={{ base: 8, xs: 0, lg: 4 }}
+      fontSize={{ base: 'xs', xs: 'sm', md: 'md' }}
+    >
       <Heading my={6} size={'lg'} textAlign={'center'}>
         Hasil Pengujian
       </Heading>
@@ -112,7 +115,7 @@ export default function ClientResult() {
           size={{ base: 'md', md: 'lg' }}
           fontWeight={'bold'}
         >
-          {data.status} Tes Buta Warna
+          {data?.status} Tes Buta Warna
         </Heading>
       </Skeleton>
       <Skeleton isLoaded={!isLoading} fadeDuration={1}>
