@@ -37,7 +37,8 @@ export default function VerifyAdmin() {
   const verifyMutation = useMutation({
     mutationFn: verifyRole,
     onSuccess: (data) => {
-      data.admin === true
+      const admin = data.admin;
+      admin
         ? navigate('/admin')
         : toast(
             'Kode Verifikasi Salah',
