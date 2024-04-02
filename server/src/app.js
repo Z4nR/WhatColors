@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
@@ -6,8 +7,6 @@ const app = express(),
   db = require('./db'),
   route = require('./routes');
 const { deleteAllTestData } = require('./controllers/data-controller');
-
-require('dotenv').config();
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT || 5000;
@@ -19,7 +18,12 @@ if (env === 'development') {
 
 //Middleware
 app.use(bodyParser.json());
-app.use(cors({ origin: '*', methods: ['GET', 'POST', 'DELETE'] }));
+app.use(
+  cors({
+    origin: [process.env.URL_LOCAL, process.env.URL_ONLINE],
+    methods: ['GET', 'POST', 'DELETE'],
+  })
+);
 
 //Delete Daily Schedule
 const cronConfig = {
