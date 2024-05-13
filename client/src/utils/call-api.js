@@ -5,6 +5,7 @@ const Server_URL = import.meta.env.VITE_BACKEND_URL;
 const newIndividual = async (userData) => {
   return axios
     .post(`${Server_URL}/user/new`, userData, {
+      timeout: 90000,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -12,14 +13,45 @@ const newIndividual = async (userData) => {
     .then((response) => {
       const { id } = response.data;
       return id;
+    })
+    .catch((error) => {
+      if (
+        error.code === 'ECONNABORTED' &&
+        error.message.indexOf('timeout') !== -1
+      ) {
+        const customError = new Error('Request Timeout');
+        customError.response = {
+          data: { message: 'Proses Pengiriman Data Terlalu Lama', status: 408 },
+        };
+        throw customError;
+      } else {
+        return error;
+      }
     });
 };
 
 const getIndividualById = async (id) => {
-  return axios.get(`${Server_URL}/user/${id}/detail`).then((response) => {
-    const data = response.data;
-    return data;
-  });
+  return axios
+    .get(`${Server_URL}/user/${id}/detail`, { timeout: 90000 })
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch((error) => {
+      if (
+        error.code === 'ECONNABORTED' &&
+        error.message.indexOf('timeout') !== -1
+      ) {
+        const customError = new Error('Request Timeout');
+        customError.response = {
+          data: { message: 'Proses Penarikan Data Terlalu Lama', status: 408 },
+        };
+        throw customError;
+      } else {
+        const errorData = error.response;
+        return errorData;
+      }
+    });
 };
 
 const newGroup = async (groupData) => {
@@ -50,10 +82,27 @@ const verifyRole = async (code) => {
 };
 
 const getGroupById = async (id) => {
-  return axios.get(`${Server_URL}/group/${id}/data`).then((response) => {
-    const data = response.data;
-    return data;
-  });
+  return axios
+    .get(`${Server_URL}/group/${id}/data`, { timeout: 90000 })
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch((error) => {
+      if (
+        error.code === 'ECONNABORTED' &&
+        error.message.indexOf('timeout') !== -1
+      ) {
+        const customError = new Error('Request Timeout');
+        customError.response = {
+          data: { message: 'Proses Penarikan Data Terlalu Lama', status: 408 },
+        };
+        throw customError;
+      } else {
+        const errorData = error.response;
+        return errorData;
+      }
+    });
 };
 
 const deleteGroupById = async (id) => {
@@ -64,10 +113,27 @@ const deleteGroupById = async (id) => {
 };
 
 const getClientData = async (id) => {
-  return axios.get(`${Server_URL}/group/${id}/clients`).then((response) => {
-    const data = response.data;
-    return data;
-  });
+  return axios
+    .get(`${Server_URL}/group/${id}/clients`, { timeout: 90000 })
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch((error) => {
+      if (
+        error.code === 'ECONNABORTED' &&
+        error.message.indexOf('timeout') !== -1
+      ) {
+        const customError = new Error('Request Timeout');
+        customError.response = {
+          data: { message: 'Proses Penarikan Data Terlalu Lama', status: 408 },
+        };
+        throw customError;
+      } else {
+        const errorData = error.response;
+        return errorData;
+      }
+    });
 };
 
 const newClient = async ({ id, clientData }) => {
@@ -84,10 +150,27 @@ const newClient = async ({ id, clientData }) => {
 };
 
 const getClientById = async (id) => {
-  return axios.get(`${Server_URL}/client/${id}/data`).then((response) => {
-    const data = response.data;
-    return data;
-  });
+  return axios
+    .get(`${Server_URL}/client/${id}/data`, { timeout: 90000 })
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch((error) => {
+      if (
+        error.code === 'ECONNABORTED' &&
+        error.message.indexOf('timeout') !== -1
+      ) {
+        const customError = new Error('Request Timeout');
+        customError.response = {
+          data: { message: 'Proses Penarikan Data Terlalu Lama', status: 408 },
+        };
+        throw customError;
+      } else {
+        const errorData = error.response;
+        return errorData;
+      }
+    });
 };
 
 const getTestSearch = async (name) => {
@@ -98,10 +181,27 @@ const getTestSearch = async (name) => {
 };
 
 const getArticle = async () => {
-  return axios.get(`${Server_URL}/article/data`).then((response) => {
-    const data = response.data;
-    return data;
-  });
+  return axios
+    .get(`${Server_URL}/article/data`, { timeout: 90000 })
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch((error) => {
+      if (
+        error.code === 'ECONNABORTED' &&
+        error.message.indexOf('timeout') !== -1
+      ) {
+        const customError = new Error('Request Timeout');
+        customError.response = {
+          data: { message: 'Proses Penarikan Data Terlalu Lama', status: 408 },
+        };
+        throw customError;
+      } else {
+        const errorData = error.response;
+        return errorData;
+      }
+    });
 };
 
 export {
