@@ -57,7 +57,9 @@ module.exports = {
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
+      res
+        .status(500)
+        .send({ message: 'Terjadi Kesalahan pada Server', status: 500 });
     }
   },
 };
