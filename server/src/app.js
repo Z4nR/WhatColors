@@ -8,13 +8,7 @@ const app = express(),
   route = require('./routes');
 const { deleteAllTestData } = require('./controllers/data-controller');
 
-const env = process.env.NODE_ENV;
 const port = process.env.PORT || 5000;
-
-//Handling Console.log
-if (env === 'development') {
-  console.log = function () {};
-}
 
 //Middleware
 app.use(bodyParser.json());
