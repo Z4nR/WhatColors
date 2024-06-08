@@ -33,7 +33,13 @@ export default function App() {
       <Box
         as="main"
         width={'full'}
-        minHeight={{ base: '100vh', md: '75vh', '2xl': '80vh' }}
+        minHeight={{
+          base: '100dvh',
+          xs: '76vh',
+          sm: '74vh',
+          md: '77vh',
+          '2xl': '80vh',
+        }}
       >
         <SkipNavContent />
         <Container maxW={'container.xl'} px={5}>
