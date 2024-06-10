@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/swagger-file-generator/sw.js', { scope: '/swagger-file-generator/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/WhatColors/sw.js', { scope: '/WhatColors/' })})}
