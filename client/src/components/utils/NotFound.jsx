@@ -14,10 +14,15 @@ export default function NotFound({ error }) {
         >
           {error.response.data.status}
         </Heading>
-        <Text fontSize="18px" mt={3} mb={2}>
+        <Text
+          fontSize={{ base: '1rem', lg: '18px' }}
+          color={'gray.500'}
+          mt={3}
+          mb={2}
+        >
           Sepertinya ada yang tidak beres
         </Text>
-        <Text color={'gray.500'} mb={6}>
+        <Text fontSize={{ base: '2xl', lg: '3xl' }} lineHeight={'short'} mb={6}>
           {error.response.data.message}
         </Text>
 
