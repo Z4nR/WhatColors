@@ -18,7 +18,7 @@ console.log(origin);
 
 app.use(
   cors({
-    origin: [process.env.URL_LOCAL, process.env.URL_ONLINE],
+    origin: '*',
     methods: ['GET', 'POST', 'DELETE'],
   })
 );
