@@ -12,6 +12,10 @@ const port = process.env.PORT || 5000;
 
 //Middleware
 app.use(bodyParser.json());
+
+const origin = process.env.ORIGIN.split(', ');
+console.log(origin);
+
 app.use(
   cors({
     origin: [process.env.URL_LOCAL, process.env.URL_ONLINE],
