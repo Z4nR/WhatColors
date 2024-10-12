@@ -55,7 +55,7 @@ export default function ProductSection() {
                   <Icon as={stat.icon} w={10} h={10} />
                 </Flex>
                 <Box mt={2}>
-                  <Heading size="md">Responsif</Heading>
+                  <Heading size="md">{stat.title}</Heading>
                   <Text mt={1} fontSize={'sm'}>
                     {stat.desc}
                   </Text>
@@ -82,26 +82,31 @@ const stats = [
   {
     num: 1,
     icon: FcSmartphoneTablet,
+    title: 'Responsif',
     desc: 'Dapat berjalan diberbagai jenis perangkat',
   },
   {
     num: 2,
     icon: FcViewDetails,
+    title: 'Informatif',
     desc: 'Mengetahui semua informasi hasil tes.',
   },
   {
     num: 3,
     icon: FcRadarPlot,
+    title: 'Detail',
     desc: 'Ketahui hasil melalui visual yang sesuai',
   },
   {
     num: 4,
     icon: FcCollaboration,
+    title: 'Aman',
     desc: 'Meminimalisir terjadinya kecurangan dalam tes.',
   },
   {
     num: 5,
     icon: FcCalculator,
+    title: 'Akurat',
     desc: 'Menggunakan Metode Farnsworth-Munsell untuk menghitung hasil',
   },
 ];
