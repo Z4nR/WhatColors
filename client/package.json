@@ -2,7 +2,7 @@
   "name": "client",
   "private": true,
   "homepage": "https://z4nr.github.io/WhatColors/",
-  "version": "1.25.0",
+  "version": "1.25.10",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
