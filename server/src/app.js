@@ -13,12 +13,12 @@ const port = process.env.PORT || 5000;
 //Middleware
 app.use(bodyParser.json());
 
-const origin = process.env.ORIGIN.split(', ');
+const origin = process.env.ORIGIN.split(',');
 console.log(origin);
 
 app.use(
   cors({
-    origin: '*',
+    origin: origin,
     methods: ['GET', 'POST', 'DELETE'],
   })
 );
