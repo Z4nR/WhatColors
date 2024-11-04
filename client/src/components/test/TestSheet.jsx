@@ -57,6 +57,7 @@ export default function TestSheet({ test, user, init, isClient }) {
     }
 
     setTimelapse((prev) => new Date(prev.getTime() + 1000));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getTimelapse, setTimelapse]);
 
   useEffect(() => {
