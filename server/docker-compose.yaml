@@ -1,6 +1,11 @@
 services:
   backend:
     build: .
+    environment:
+      DB_CONNECTION: ${DB_CONNECTION}
+      EMAIL: ${EMAIL}
+      PASS: ${PASS}
+      ORIGIN: ${ORIGIN}
     ports:
       - 3000:5000
     restart: always
