@@ -5,6 +5,7 @@ import ProductSection from '@/components/home/ProductSection';
 
 export default function HomePage() {
   const [isMobile] = useMediaQuery('(max-width: 401px)');
+  const copyrightYear = new Date().getFullYear();
   return (
     <Box mt={{ base: 4, sm: 2, md: 0 }}>
       <HeroSection />
@@ -12,7 +13,7 @@ export default function HomePage() {
       <ProductSection />
       {isMobile ? (
         <Text pb={4} fontSize={12} textAlign={'center'} color={'gray'}>
-          Created by Zulham 👋 <br /> &copy; 2023
+          Created by Zulham 👋 <br /> &copy; {copyrightYear}
         </Text>
       ) : (
         ''
