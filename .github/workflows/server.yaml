@@ -2,27 +2,37 @@ name: WhatColors BackEnd
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Deploy to cloud server
-        uses: fifsky/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          command: |
-            git clone https://github.com/Z4nR/WhatColors
-            cd ~/WhatColors
-            git pull origin main
-            cd server
-            docker compose down --remove-orphans
-            docker compose --project-name whatcolors up --build -d
-            docker image prune -a
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p 22 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Test SSH connection
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -p 22 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
+        shell: bash
+
+      - name: Deploy to server
+        run: |
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+          git clone https://github.com/Z4nR/WhatColors
+          cd ~/WhatColors
+          git pull origin main
+          cd server
+          docker compose down --remove-orphans
+          docker compose --project-name whatcolors up --build -d
+          docker image prune -a
+          EOF
