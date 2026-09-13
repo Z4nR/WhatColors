@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const ClientSchema = new Schema({
@@ -17,6 +17,6 @@ const ClientSchema = new Schema({
   status: String,
 });
 
-const clientuser = mongoose.model('client', ClientSchema, 'Client');
+const clientuser = model('client', ClientSchema, 'Client');
 
-module.exports = clientuser;
+export default clientuser;

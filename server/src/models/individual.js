@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const IndividualSchema = new Schema({
@@ -16,10 +16,6 @@ const IndividualSchema = new Schema({
   discriminantResult: [{ _id: String, discriminant: Number }],
 });
 
-const individualuser = mongoose.model(
-  'individual',
-  IndividualSchema,
-  'Individual'
-);
+const individualuser = model('individual', IndividualSchema, 'Individual');
 
-module.exports = individualuser;
+export default individualuser;

@@ -1,42 +1,51 @@
-const express = require('express');
+import { Router } from 'express';
 
-const clientController = require('./controllers/client-controller');
-const groupController = require('./controllers/group-controller');
-const individualController = require('./controllers/individual-controller');
-const dataController = require('./controllers/data-controller');
-const articleController = require('./controllers/article-controller');
+import { newClient, getClientById } from './controllers/client-controller.js';
+import {
+  newGroup,
+  sendEmailCode,
+  verifyRole,
+  getGroupById,
+  getClientByGroup,
+} from './controllers/group-controller.js';
+import { newUser, getUserById } from './controllers/individual-controller.js';
+import {
+  deleteGroupById,
+  searchAllTestData,
+} from './controllers/data-controller.js';
+import { newArticle, getAllArticle } from './controllers/article-controller.js';
 
-const router = express.Router();
+const router = Router();
 
 // User
-router.route('/user/new').post(individualController.newUser);
+router.route('/user/new').post(newUser);
 
-router.route('/user/:id/detail').get(individualController.getUserById);
+router.route('/user/:id/detail').get(getUserById);
 
 // Group
-router.route('/group/new').post(groupController.newGroup);
+router.route('/group/new').post(newGroup);
 
-router.route('/group/:id/code').post(groupController.sendEmailCode);
+router.route('/group/:id/code').post(sendEmailCode);
 
-router.route('/group/:codeVerify/verify').post(groupController.verifyRole);
+router.route('/group/:codeVerify/verify').post(verifyRole);
 
-router.route('/group/:id/data').get(groupController.getGroupById);
+router.route('/group/:id/data').get(getGroupById);
 
-router.route('/group/:id/clients').get(groupController.getClientByGroup);
+router.route('/group/:id/clients').get(getClientByGroup);
 
-router.route('/group/:id/delete').delete(dataController.deleteGroupById);
+router.route('/group/:id/delete').delete(deleteGroupById);
 
 // Client
-router.route('/client/:id/new').post(clientController.newClient);
+router.route('/client/:id/new').post(newClient);
 
-router.route('/client/:id/data').get(clientController.getClientById);
+router.route('/client/:id/data').get(getClientById);
 
 // Search
-router.route('/search').post(dataController.searchAllTestData);
+router.route('/search').post(searchAllTestData);
 
 // Article
-router.route('/article/new').post(articleController.newArticle);
+router.route('/article/new').post(newArticle);
 
-router.route('/article/data').get(articleController.getAllArticle);
+router.route('/article/data').get(getAllArticle);
 
-module.exports = router;
+export default router;

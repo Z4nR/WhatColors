@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const TestGroupSchema = new Schema({
@@ -18,6 +18,6 @@ const TestGroupSchema = new Schema({
   ],
 });
 
-const testgroup = mongoose.model('testgroup', TestGroupSchema, 'TestGroup');
+const testgroup = model('testgroup', TestGroupSchema, 'TestGroup');
 
-module.exports = testgroup;
+export default testgroup;

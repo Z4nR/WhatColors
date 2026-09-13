@@ -1,49 +1,52 @@
-require('dotenv').config();
-const express = require('express'),
-  cors = require('cors'),
-  bodyParser = require('body-parser'),
-  cron = require('node-cron');
-const app = express(),
-  db = require('./db'),
-  route = require('./routes');
-const { deleteAllTestData } = require('./controllers/data-controller');
+import 'dotenv/config';
+
+import express from 'express';
+import cors from 'cors';
+import db from './db.js';
+import route from './routes.js';
+import { deleteAllTestData } from './controllers/data-controller.js';
+
+import nodeCron from 'node-cron';
+const { schedule } = nodeCron;
+
+import bodyParser from 'body-parser';
+const { json } = bodyParser;
+
+const app = express();
 
 const port = process.env.PORT || 5000;
 
-//Middleware
-app.use(bodyParser.json());
+// Middleware
+app.use(json());
 
 const origin = process.env.ORIGIN.split(',');
+
 console.log(origin);
 
 app.use(
   cors({
-    origin: origin,
+    origin,
     methods: ['GET', 'POST', 'DELETE'],
-  })
+  }),
 );
 
-//Delete Daily Schedule
+// Delete Daily Schedule
 const cronConfig = {
   scheduled: true,
   timezone: 'Asia/Jakarta',
 };
 
-const deleteSchedule = cron.schedule(
-  '59 23 * * 6',
-  deleteAllTestData,
-  cronConfig
-);
+const deleteSchedule = schedule('59 23 * * 6', deleteAllTestData, cronConfig);
 
 deleteSchedule.start();
 
-//Route
+// Route
 app.use('/v1', route);
 
-//DB Connection
+// DB Connection
 db();
 
-//Listen Port
+// Listen Port
 app.listen(port, () => {
-  console.log(`Litening on port ${port}...`);
+  console.log(`Listening on port ${port}...`);
 });

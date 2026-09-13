@@ -1,6 +1,7 @@
 {
   "name": "server",
   "version": "1.5.8",
+  "type": "module",
   "description": "",
   "main": "app.js",
   "scripts": {

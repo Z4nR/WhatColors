@@ -1,42 +1,38 @@
-const Individual = require('../models/individual');
-const { userValidate } = require('../utils/validate');
+import Individual from '../models/individual.js';
+import { userValidate } from '../utils/validate.js';
 
-module.exports = {
-  newUser: async (req, res) => {
-    try {
-      const { error } = userValidate(req.body);
-      if (error)
-        return res.status(400).send({ message: error.details[0].message });
+export async function newUser(req, res) {
+  try {
+    const { error } = userValidate(req.body);
+    if (error)
+      return res.status(400).send({ message: error.details[0].message });
 
-      const name = await Individual.findOne({
-        name: req.body.name,
-      });
-      if (name)
-        return res.status(409).send({ message: 'Nama sudah digunakan!' });
+    const name = await Individual.findOne({
+      name: req.body.name,
+    });
+    if (name) return res.status(409).send({ message: 'Nama sudah digunakan!' });
 
-      const data = await new Individual(req.body).save();
-      res.status(201).send({ id: data._id });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
-    }
-  },
+    const data = await new Individual(req.body).save();
+    res.status(201).send({ id: data._id });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan pada Server' });
+  }
+}
 
-  getUserById: async (req, res) => {
-    try {
-      const { id } = req.params;
+export async function getUserById(req, res) {
+  try {
+    const { id } = req.params;
 
-      const data = await Individual.findById(id);
+    const data = await Individual.findById(id);
 
-      if (!data)
-        return res.status(404).send({ message: 'Data tidak ditemukan' });
+    if (!data) return res.status(404).send({ message: 'Data tidak ditemukan' });
 
-      res.status(202).send(data);
-    } catch (error) {
-      console.log(error);
-      res
-        .status(500)
-        .send({ message: 'Terjadi Kesalahan pada Server', status: 500 });
-    }
-  },
-};
+    res.status(202).send(data);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .send({ message: 'Terjadi Kesalahan pada Server', status: 500 });
+  }
+}
