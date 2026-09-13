@@ -4,6 +4,8 @@ import storage from '@/utils/storage';
 
 export default function ResultPage() {
   const client = storage.getJSON('user');
+  console.log(client);
+
   if (client.isClient) return <ClientResult />;
 
   return <IndividualResult />;

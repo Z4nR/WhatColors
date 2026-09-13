@@ -59,6 +59,8 @@ export default function IndividualForm({ isOpen, onClose }) {
 
   const onSubmit = (data) => {
     storage.setJSON('user', data);
+    console.log(data);
+
     navigate('/test');
   };
 
